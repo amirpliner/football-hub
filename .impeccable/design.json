@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-22T15:00:00Z",
+  "title": "Design System: מגרש (Magrash)",
+  "extensions": {
+    "colorMeta": {
+      "ultramarine-shell": { "role": "primary", "displayName": "Ultramarine Shell", "canonical": "#1f3bd6", "tonalRamp": ["#0a1470", "#0f1fa0", "#1630c4", "#1f3bd6", "#4a62e0", "#7686e8", "#a3aff0", "#d3d8f8"] },
+      "foil-gold": { "role": "primary", "displayName": "Foil Gold", "canonical": "#f2c230", "tonalRamp": ["#5c4500", "#8a6800", "#b58a00", "#d9a90e", "#f2c230", "#f6d15f", "#f9e08f", "#fcf0cc"] },
+      "live-coral": { "role": "secondary", "displayName": "Live Coral", "canonical": "#ff6b5e", "tonalRamp": ["#5e0f08", "#8c1a10", "#c2271a", "#e84a3c", "#ff6b5e", "#ff8f85", "#ffb4ad", "#ffdad6"] },
+      "ink-navy-ground": { "role": "neutral", "displayName": "Ink-Navy Ground", "canonical": "#0c1440", "tonalRamp": ["#060a24", "#0c1440", "#131e5b", "#1a2776", "#3a4799", "#6673c4", "#a9b6ff", "#f2f4ff"] },
+      "panel-navy": { "role": "neutral", "displayName": "Panel Navy", "canonical": "#131e5b", "tonalRamp": ["#0c1440", "#131e5b", "#1a2776", "#243391", "#3a4799", "#6673c4", "#a9b6ff", "#e3e8ff"] },
+      "muted-periwinkle": { "role": "neutral", "displayName": "Muted Periwinkle", "canonical": "#a9b6ff", "tonalRamp": ["#1a2776", "#3a4799", "#5663b8", "#7886e0", "#a9b6ff", "#c3ccff", "#dce1ff", "#f2f4ff"] },
+      "light-ground": { "role": "neutral", "displayName": "Light Ground (light theme)", "canonical": "#eef1ff", "tonalRamp": ["#3a4799", "#6673c4", "#9aa6e8", "#c4ccf5", "#e3e8ff", "#eef1ff", "#f6f8ff", "#ffffff"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Site name in the shell (Secular One)." },
+      "headline": { "displayName": "Headline", "purpose": "Article titles and section headings (Secular One)." },
+      "title": { "displayName": "Title", "purpose": "Day dividers, tally count, panel sub-heads (Secular One)." },
+      "body": { "displayName": "Body", "purpose": "Running Hebrew and Latin text (Heebo)." },
+      "label": { "displayName": "Label", "purpose": "Meta lines, buttons, table headers, tabular figures (Heebo)." }
+    },
+    "shadows": [
+      { "name": "sticker-lift", "value": "0 3px 8px rgba(0,0,0,.4), 0 1px 1px rgba(0,0,0,.3)", "purpose": "Sticker thumbnails; light theme uses navy-tinted rgba(12,20,64,.3/.25)." },
+      { "name": "slot-lift", "value": "0 2px 4px rgba(0,0,0,.35)", "purpose": "Filled tally slots." },
+      { "name": "stick-landing", "value": "0 10px 18px rgba(0,0,0,.45)", "purpose": "Start frame of the stick animation." }
+    ],
+    "motion": [
+      { "name": "ease-out-expo", "value": "cubic-bezier(.16, 1, .3, 1)", "purpose": "The 0.5s stick animation when an item is read." }
+    ],
+    "breakpoints": [
+      { "name": "mobile-filters", "value": "700px" },
+      { "name": "compact", "value": "560px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "View Tab",
+      "kind": "nav",
+      "refersTo": "tab-view",
+      "description": "Pill tab in the ultramarine shell; white when active.",
+      "html": "<div class=\"ds-shell\"><button class=\"ds-view\">חדשות</button><button class=\"ds-view on\">משחקים</button></div>",
+      "css": ".ds-shell { background: #1f3bd6; padding: 12px; display: flex; gap: 4px; font-family: Heebo, sans-serif; } .ds-view { min-height: 38px; padding: 0 16px; border: 0; border-radius: 99px; background: transparent; color: rgba(255,255,255,.8); font: 500 16px Heebo, sans-serif; cursor: pointer; } .ds-view:hover { color: #fff; } .ds-view.on { background: #fff; color: #1f3bd6; font-weight: 700; } .ds-view:focus-visible { outline: 2px solid #f2c230; outline-offset: 2px; }"
+    },
+    {
+      "name": "League Chip",
+      "kind": "chip",
+      "refersTo": "chip-league",
+      "description": "League page tab with colour dot; gold when active.",
+      "html": "<button class=\"ds-chip\"><span class=\"ds-dot\"></span>פרמיירליג <span class=\"ds-ct\">12</span></button> <button class=\"ds-chip on\"><span class=\"ds-dot\"></span>לה ליגה <span class=\"ds-ct\">8</span></button>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 0 14px; background: #131e5b; border: 1px solid rgba(169,182,255,.22); border-radius: 10px; color: #f2f4ff; font: 500 16px Heebo, sans-serif; cursor: pointer; } .ds-dot { width: 10px; height: 10px; border-radius: 50%; background: #a259ff; border: 1.5px solid #fff; } .ds-ct { color: #a9b6ff; font-size: .8rem; } .ds-chip.on { background: #f2c230; border-color: #f2c230; color: #0c1440; font-weight: 700; } .ds-chip.on .ds-ct { color: #0c1440; } .ds-chip:focus-visible { outline: 2px solid #f2c230; outline-offset: 2px; }"
+    },
+    {
+      "name": "Action Button",
+      "kind": "button",
+      "refersTo": "button-action",
+      "description": "Quiet bordered action under an article; gold fill when on.",
+      "html": "<button class=\"ds-act\">שמור</button> <button class=\"ds-act on\">נשמר</button>",
+      "css": ".ds-act { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 11px; background: transparent; border: 1px solid rgba(169,182,255,.22); border-radius: 8px; color: #a9b6ff; font: 500 .84rem Heebo, sans-serif; cursor: pointer; } .ds-act:hover { color: #f2f4ff; border-color: #a9b6ff; } .ds-act.on { background: #f2c230; border-color: #f2c230; color: #0c1440; font-weight: 700; } .ds-act:focus-visible { outline: 2px solid #f2c230; outline-offset: 2px; }"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid foil-gold button for the main action in a panel.",
+      "html": "<button class=\"ds-btn\">פתח בציוץ</button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 0 14px; background: #f2c230; color: #0c1440; border: 0; border-radius: 8px; font: 700 .86rem Heebo, sans-serif; cursor: pointer; } .ds-btn:hover { filter: brightness(1.05); } .ds-btn:focus-visible { outline: 2px solid #f2c230; outline-offset: 2px; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Filter input on panel navy with hairline border.",
+      "html": "<input class=\"ds-input\" type=\"search\" placeholder=\"חיפוש\">",
+      "css": ".ds-input { min-height: 40px; background: #131e5b; color: #f2f4ff; border: 1px solid rgba(169,182,255,.22); border-radius: 10px; padding: 0 12px; font: 400 16px Heebo, sans-serif; caret-color: #f2c230; } .ds-input::placeholder { color: #a9b6ff; opacity: .85; } .ds-input:focus-visible { outline: 2px solid #f2c230; outline-offset: 2px; }"
+    },
+    {
+      "name": "Sticker",
+      "kind": "custom",
+      "refersTo": "sticker",
+      "description": "Die-cut article thumbnail: 3px white border, soft lift, play badge for video.",
+      "html": "<span class=\"ds-stk\"><span class=\"ds-plate\">BBC Sport</span></span>",
+      "css": ".ds-stk { position: relative; display: grid; place-items: center; width: 104px; height: 78px; background: #3a4799; border: 3px solid #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,.4), 0 1px 1px rgba(0,0,0,.3); } .ds-plate { background: rgba(12,20,64,.88); color: #fff; border-radius: 6px; padding: 3px 8px; font: 400 14px/1.15 'Secular One', sans-serif; }"
+    },
+    {
+      "name": "Album Tally",
+      "kind": "custom",
+      "refersTo": "album-slot",
+      "description": "Per-day row of dashed slots; read items stick in league-coloured mini stickers.",
+      "html": "<div class=\"ds-tally\"><span class=\"ds-count\">היום 3/8</span><div class=\"ds-slots\"><i class=\"ds-slot full\" style=\"--c:#a259ff\"></i><i class=\"ds-slot full\" style=\"--c:#19a35b\"></i><i class=\"ds-slot full\" style=\"--c:#3aa0ff\"></i><i class=\"ds-slot\"></i><i class=\"ds-slot\"></i><i class=\"ds-slot\"></i></div></div>",
+      "css": ".ds-tally { display: flex; align-items: center; gap: 12px; background: #1f3bd6; color: #fff; padding: 14px 12px; } .ds-count { font: 400 15px/1 'Secular One', sans-serif; min-width: 4.2em; } .ds-slots { display: flex; gap: 5px; } .ds-slot { width: 20px; height: 27px; border-radius: 4px; border: 1.5px dashed rgba(255,255,255,.55); } .ds-slot.full { border: 2px solid #fff; background: var(--c, #f2c230); box-shadow: 0 2px 4px rgba(0,0,0,.35); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Sticker Album",
+    "overview": "Reading is collecting. A saturated ultramarine shell holds the site name, view tabs and a per-day tally of dashed slots; below it an ink-navy ground carries a quiet, ruled list of articles. Each article owns a white-bordered, die-cut sticker thumbnail, and each item read fills one slot in the tally with a mini sticker in its league's colour. The loud colour lives in the shell, the stickers and the gold foil; the reading surface stays calm so Hebrew titles scan fast on a phone.\n\nThe system is dense but not cramped: hairline-ruled rows instead of cards-in-boxes, a single 860px reading column, 16px side padding. Gold foil is the only progress and active-state colour, so wherever gold appears it means \"you are here\" or \"this is done\". There are two themes, dark (default) and light, that share the shell, the gold and the stickers and swap only ground, panels, text and the two text-on-gold-sensitive tones.",
+    "keyCharacteristics": [
+      "Ultramarine shell over ink-navy ground; gold foil reserved for active, progress, primary action.",
+      "White 3px die-cut border on every sticker; league identity carried by a coloured dot with a white ring.",
+      "Secular One for titles, scores and numerals-as-display; Heebo for everything else; tabular figures on all numbers.",
+      "RTL by default; layout uses logical properties (inline-start/end).",
+      "Drawn SVG icons at one stroke weight (1.75) inheriting currentColor."
+    ],
+    "rules": [
+      { "name": "The Foil Rule", "body": "Gold means active, progress or primary action; nothing decorative is gold. Gold text on light panels uses the darker #7a5600.", "section": "colors" },
+      { "name": "The League Dot Rule", "body": "League identity is a small dot or sticker fill with a white ring, never a coloured card, border-left stripe or full-row tint.", "section": "colors" },
+      { "name": "The Tabular Rule", "body": "Every score, time, count and table number uses tabular figures.", "section": "typography" },
+      { "name": "The Two-Face Rule", "body": "Secular One only for titles, scores, counts and headings; Heebo for all interface text. No third family.", "section": "typography" },
+      { "name": "The Soft Lift Rule", "body": "Shadows are soft and blurred, only under stickers and slots; never a hard offset, never on rows or panels.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use foil gold (#f2c230) only for active, progress and primary-action states.",
+      "Do put league identity in a dot or sticker fill with a white ring.",
+      "Do keep rows flat with 1px hairlines; reserve soft shadows for stickers and tally slots.",
+      "Do set every number in tabular figures and every title in Secular One.",
+      "Do write new layout with logical properties for RTL, and keep the 2px gold focus ring.",
+      "Do test any new gold text in light theme against #7a5600."
+    ],
+    "donts": [
+      "Don't introduce a third typeface or a second accent colour for state.",
+      "Don't wrap rows in boxed cards or tint rows by league.",
+      "Don't use hard offset shadows, side-stripe borders, or gradient text.",
+      "Don't use emoji or glyph icons; icons are drawn SVG at stroke 1.75 in currentColor.",
+      "Don't place small headings or labels above titles as kickers."
+    ]
+  }
+}
