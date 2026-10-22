@@ -27,6 +27,14 @@ jobs:
       - name: Collect matches and tables
         run: python3 scripts/collect_matches.py
         continue-on-error: true   # ESPN לא רשמי: כשל שם לא יפיל את איסוף הכתבות
+      - name: Claude layer (summaries, previews, analysis)
+        # מושבת עד ש-ai.enabled=true בקובץ ההגדרות ויש סוד ANTHROPIC_API_KEY
+        run: |
+          pip install --quiet anthropic
+          python3 scripts/ai_layer.py
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       - name: Commit updated data
         run: |
           git config user.name "football-bot"

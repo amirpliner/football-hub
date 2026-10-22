@@ -21,6 +21,7 @@ const state = {
   items: [],
   matches: [],
   standings: {},
+  ai: { summaries: {}, previews: {}, analyses: {}, concepts: {} },
   leagues: {},     // id -> {name_he, teams}
   teamName: {},    // id -> שם
   teamLeague: {},  // id -> ליגה
@@ -62,6 +63,11 @@ async function load() {
       fetch("data/articles.json", { cache: "no-cache" }),
       fetch("data/matches.json", { cache: "no-cache" }).catch(() => null),
     ]);
+    // שכבת ה-AI אופציונלית: אם אין קובץ (עדיין לא הופעלה), האתר עובד כרגיל
+    fetch("data/ai.json", { cache: "no-cache" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((a) => { if (a) { state.ai = { summaries: {}, previews: {}, analyses: {}, concepts: {}, ...a }; render(); } })
+      .catch(() => {});
     if (matchRes && matchRes.ok) {  // נתוני משחקים הם בונוס: אם חסרים, שאר האתר ממשיך לעבוד
       try {
         const md = await matchRes.json();
@@ -255,6 +261,13 @@ function renderCard(it, rx) {
   h.append(a);
   card.append(h);
 
+  const he = state.ai.summaries[it.id];
+  if (he && it.lang !== "he") {
+    const hp = el("p", "sum-he");
+    hp.append(highlight(he.he, rx));
+    card.append(hp);
+  }
+
   if (it.summary) {
     const p = el("p", "sum");
     p.lang = it.lang;
@@ -375,6 +388,10 @@ function render() {
   const items = visibleItems();
   const list = $("list");
   list.textContent = "";
+  if (state.view === "all" && !state.filters.q) {
+    const cc = conceptCard();
+    if (cc) list.append(cc);
+  }
   let lastDay = "";
   for (const it of items.slice(0, state.shown)) {
     const label = dayLabel(it.date);
@@ -395,6 +412,58 @@ function render() {
 // ---------- משחקים וטבלאות ----------
 function updatedLabel() {
   return state.matchesAt ? `עודכן ${fmtDay.format(state.matchesAt)} ${fmtTime.format(state.matchesAt)} · נתוני ESPN, לא בזמן אמת` : "";
+}
+
+function aiPanel(m) {
+  const pv = state.ai.previews[m.id], an = state.ai.analyses[m.id];
+  if (!pv && !an) return null;
+  const wrap = el("div", "ai-wrap");
+  const btn = el("button", "ai-btn", an ? "✦ ניתוח המשחק" : "✦ על מה לשים לב");
+  btn.type = "button";
+  btn.addEventListener("click", () => {
+    const open = wrap.querySelector(".ai-panel");
+    if (open) { open.remove(); return; }
+    const p = el("div", "ai-panel");
+    const src = an || pv;
+    p.append(el("h4", null, src.headline));
+    if (an) {
+      p.append(el("p", null, an.summary));
+      const ul = el("ul");
+      for (const k of an.key_points) ul.append(el("li", null, k));
+      p.append(ul);
+      p.append(el("p", "caveat", "מה הנתונים לא מראים: " + an.caveat));
+    } else {
+      for (const pt of pv.points) {
+        const d = el("div", "pt");
+        d.append(el("strong", null, pt.title), el("p", null, pt.text));
+        p.append(d);
+      }
+    }
+    p.append(el("p", "ai-note", "נכתב על ידי Claude מתוך הנתונים שנאספו, בלי לראות את המשחק. עלול לטעות."));
+    wrap.append(p);
+  });
+  wrap.append(btn);
+  return wrap;
+}
+
+function conceptCard() {
+  const weeks = Object.keys(state.ai.concepts).sort();
+  if (!weeks.length) return null;
+  const c = state.ai.concepts[weeks[weeks.length - 1]];
+  const box = el("section", "concept");
+  const head = el("button", "concept-head");
+  head.type = "button";
+  head.append(el("span", "k", "מושג טקטי של השבוע"), el("strong", null, c.concept));
+  const body = el("div", "concept-body");
+  body.hidden = true;
+  body.append(el("p", null, c.explanation));
+  body.append(el("h4", null, "דוגמה מהשבוע"), el("p", null, c.example));
+  body.append(el("h4", null, "במה לשים לב"), el("p", null, c.how_to_spot));
+  body.append(el("p", "caveat", "עד כמה הנתונים תומכים: " + c.data_support));
+  body.append(el("p", "ai-note", "נכתב על ידי Claude מתוך נתונים שנאספו. עלול לטעות."));
+  head.addEventListener("click", () => { body.hidden = !body.hidden; });
+  box.append(head, body);
+  return box;
 }
 
 function matchRow(m) {
@@ -452,6 +521,8 @@ function renderMatches() {
         lastLeague = m.league;
       }
       list.append(matchRow(m));
+      const panel = aiPanel(m);
+      if (panel) list.append(panel);
     }
   };
   section("משחקים חיים", live);

@@ -212,3 +212,22 @@ a.match:hover { background: var(--surface); }
   .match .team img { width: 18px; height: 18px; }
   .tbl .x { display: none; }
 }
+
+/* ---------- שכבת Claude ---------- */
+.sum-he { margin: 4px 0 2px; font-size: .95rem; border-inline-start: 2px solid var(--accent); padding-inline-start: 10px; }
+.card .sum { -webkit-line-clamp: 2; }
+.card .sum-he + .sum { font-size: .82rem; }
+.ai-wrap { padding: 0 0 6px; border-bottom: 1px solid var(--line); }
+.ai-btn { background: transparent; border: 1px solid var(--line); color: var(--accent); border-radius: 6px; padding: 1px 10px; font-size: .8rem; margin-top: 4px; }
+.ai-panel { margin-top: 8px; padding: 12px 14px; background: var(--surface); border-radius: var(--radius); font-size: .93rem; }
+.ai-panel h4, .concept-body h4 { margin: 10px 0 2px; font-size: .95rem; }
+.ai-panel p, .concept-body p { margin: 4px 0; }
+.ai-panel ul { margin: 6px 0; padding-inline-start: 20px; }
+.ai-panel .pt strong { color: var(--accent); }
+.caveat { color: var(--muted); font-size: .85rem; }
+.ai-note { color: var(--muted); font-size: .75rem; margin-top: 10px; }
+.concept { margin: 12px 0 4px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.concept-head { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; background: none; border: 0; padding: 12px 14px; text-align: start; }
+.concept-head .k { font-size: .75rem; color: var(--accent); font-weight: 700; }
+.concept-head strong { font-size: 1.05rem; }
+.concept-body { padding: 0 14px 12px; }

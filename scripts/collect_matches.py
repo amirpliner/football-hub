@@ -63,6 +63,7 @@ def parse_event(e, league, matcher):
             "short": t.get("shortDisplayName") or name,
             "logo": t.get("logo"),
             "score": int(c["score"]) if str(c.get("score", "")).isdigit() else None,
+            "form": c.get("form") or None,   # למשל "DWLLW" (החדש ביותר מימין)
             "team_id": next((x for x in teams if matcher.team_league[x] == league), teams[0] if teams else None),
         }
     if "home" not in sides or "away" not in sides:

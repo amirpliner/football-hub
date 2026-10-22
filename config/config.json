@@ -2132,5 +2132,45 @@
         "sporting"
       ]
     }
-  ]
+  ],
+  "ai": {
+    "_comment": "שכבת Claude. מושבתת עד שמאשרים: enabled=true ומפתח ANTHROPIC_API_KEY ב-GitHub Secrets. models = איזה מודל לכל משימה (החלטה שלך אחרי הערכת העלות).",
+    "enabled": false,
+    "monthly_budget_usd": 10,
+    "models": {
+      "summaries": "claude-haiku-5-5",
+      "preview": "claude-sonnet-5-5",
+      "analysis": "claude-sonnet-5-5",
+      "concept": "claude-sonnet-5-5"
+    },
+    "effort": {
+      "summaries": "low",
+      "preview": "medium",
+      "analysis": "medium",
+      "concept": "high"
+    },
+    "prices_per_mtok_usd": {
+      "claude-haiku-5-5": {
+        "in": 0.1,
+        "out": 0.5
+      },
+      "claude-sonnet-5-5": {
+        "in": 2.0,
+        "out": 10.0
+      },
+      "claude-opus-5-5": {
+        "in": 4.0,
+        "out": 20.0
+      }
+    },
+    "summaries": {
+      "max_per_run": 40,
+      "batch_size": 20
+    },
+    "big_matches": {
+      "top_rank": 6,
+      "max_previews_per_run": 4,
+      "max_analyses_per_run": 3
+    }
+  }
 }
