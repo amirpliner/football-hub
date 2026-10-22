@@ -2135,7 +2135,7 @@
   ],
   "ai": {
     "_comment": "שכבת Claude. מושבתת עד שמאשרים: enabled=true ומפתח ANTHROPIC_API_KEY ב-GitHub Secrets. models = איזה מודל לכל משימה (החלטה שלך אחרי הערכת העלות).",
-    "enabled": false,
+    "enabled": true,
     "monthly_budget_usd": 10,
     "models": {
       "summaries": "claude-haiku-5-5",
