@@ -1,3 +1,4 @@
 .DS_Store
 __pycache__/
 tools/feed_check_report.json
+.claude/
