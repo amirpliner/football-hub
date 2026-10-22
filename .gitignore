@@ -2,3 +2,7 @@
 __pycache__/
 tools/feed_check_report.json
 .claude/
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/live/
+.impeccable/config.local.json

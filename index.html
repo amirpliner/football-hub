@@ -2,38 +2,56 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="dark light">
-  <meta name="theme-color" content="#0e1210">
+  <meta name="theme-color" content="#1f3bd6">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="מגרש">
   <title>מגרש – מרכז הכדורגל שלי</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Secular+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-view="all">
   <header class="top">
-    <div class="top-row">
-      <h1>מגרש</h1>
+    <div class="wrap">
+      <div class="brand-row">
+        <h1>מגרש</h1>
+        <div class="tools">
+          <button id="btn-filters" class="only-mobile" aria-expanded="false"><span data-icon="sliders"></span>סינון</button>
+          <button id="btn-keywords" title="מילות מעקב"><span data-icon="eye"></span>מעקב</button>
+          <button id="btn-refresh" class="icon-only" title="רענן נתונים" aria-label="רענן נתונים"><span data-icon="refresh"></span></button>
+          <button id="btn-theme" class="icon-only" title="מצב כהה / בהיר" aria-label="החלף מצב כהה/בהיר"><span data-icon="moon"></span></button>
+        </div>
+      </div>
+
       <nav class="views" id="views" aria-label="תצוגה">
         <button data-view="all" class="on">חדשות</button>
         <button data-view="matches">משחקים</button>
         <button data-view="tables">טבלאות</button>
-        <button data-view="watch">מעקב <span class="n" id="n-watch"></span></button>
-        <button data-view="saved">שמורים <span class="n" id="n-saved"></span></button>
+        <button data-view="watch">מעקב <span class="n num" id="n-watch"></span></button>
+        <button data-view="saved">שמורים <span class="n num" id="n-saved"></span></button>
       </nav>
-      <div class="tools">
-        <button id="btn-filters" class="only-mobile" aria-expanded="false">סינון</button>
-        <button id="btn-keywords" title="מילות מעקב">מעקב ✎</button>
-        <button id="btn-refresh" title="רענן נתונים" aria-label="רענן נתונים">↻</button>
-        <button id="btn-theme" title="מצב כהה / בהיר" aria-label="החלף מצב כהה/בהיר">◐</button>
+
+      <div class="tally" id="tally" role="group" aria-label="אלבום היום">
+        <span class="tally-count num" id="tally-count"></span>
+        <div class="slots" id="slots"></div>
       </div>
     </div>
+  </header>
 
-    <div class="chips" id="league-chips" role="tablist" aria-label="ליגה"></div>
+  <div class="pages-bar">
+    <div class="wrap pages-row">
+      <div class="mini-tally" id="mini-tally" aria-hidden="true"><span class="num" id="mini-count"></span><span class="mini-slots" id="mini-slots"></span></div>
+      <div class="chips" id="league-chips" role="tablist" aria-label="ליגה"></div>
+    </div>
+  </div>
 
+  <main class="wrap">
     <div class="filters" id="filters">
       <input type="search" id="q" placeholder="חיפוש בכותרות ובתקצירים…" aria-label="חיפוש">
       <select id="f-team" aria-label="קבוצה"></select>
@@ -48,9 +66,7 @@
       <label class="check"><input type="checkbox" id="f-dups"> הצג גם כפילויות</label>
       <label class="check"><input type="checkbox" id="f-hide-read"> הסתר שנקראו</label>
     </div>
-  </header>
 
-  <main>
     <p class="status" id="status" role="status">טוען…</p>
     <div id="list"></div>
     <button id="more" class="more" hidden>הצג עוד</button>

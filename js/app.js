@@ -6,6 +6,49 @@ const CAT_LABEL = { news: "חדשות", analysis: "ניתוח", fan: "אוהדי
 
 const $ = (id) => document.getElementById(id);
 
+// ---------- אייקונים (SVG מצויר, משקל קו אחד) ----------
+const ICON_PATHS = {
+  star: "M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9l-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z",
+  check: "M5 12.5l4.5 4.5L19 7.5",
+  pen: "M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19z",
+  play: "M8 5.5v13L19 12z",
+  refresh: "M20 12a8 8 0 11-2.6-5.9M20 4v5h-5",
+  moon: "M20 14.5A8 8 0 019.5 4a8 8 0 1010.5 10.5z",
+  spark: "M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z",
+  ext: "M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5",
+  eye: "M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 15a3 3 0 100-6 3 3 0 000 6z",
+  copy: "M9 9h10v11H9zM5 15V4h10",
+  x: "M6 6l12 12M18 6L6 18",
+  sliders: "M4 7h9M17 7h3M4 17h3M11 17h9M15 5v4M9 15v4",
+  layers: "M12 4l9 5-9 5-9-5zM3 14l9 5 9-5",
+  alert: "M12 4l9 16H3zM12 10v4M12 17h.01",
+};
+const SVG_NS = "http://www.w3.org/2000/svg";
+function icon(name, fill) {
+  const svg = document.createElementNS(SVG_NS, "svg");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("class", "ico" + (fill ? " fill" : ""));
+  svg.setAttribute("aria-hidden", "true");
+  const path = document.createElementNS(SVG_NS, "path");
+  path.setAttribute("d", ICON_PATHS[name]);
+  svg.append(path);
+  return svg;
+}
+function hydrateIcons() {
+  for (const n of document.querySelectorAll("[data-icon]")) n.replaceWith(icon(n.dataset.icon));
+}
+
+// צבע לכל ליגה: המדבקות באלבום, הנקודות והמסגרות
+const LEAGUE_COLORS = {
+  israel: "#3aa0ff", premier_league: "#a259ff", la_liga: "#ffb01f", serie_a: "#19a35b", bundesliga: "#e63a2e",
+  ligue_1: "#25c9e8", championship: "#ff5fa2", liga_portugal: "#0fbf9a", eredivisie: "#ff6f3c", champions_league: "#8fa6ff",
+};
+function leagueColor(it) {
+  const ls = (it && it.leagues) || [];
+  const first = ls.find((l) => l !== "champions_league") || ls[0];
+  return LEAGUE_COLORS[first] || "var(--muted)";
+}
+
 // ---------- אחסון מקומי (localStorage) ----------
 const store = {
   get(key, fallback) {
@@ -31,12 +74,64 @@ const state = {
   read: new Set(store.get("fh_read", [])),
   saved: store.get("fh_saved", {}),     // id -> עותק של הכתבה (שלא תיעלם אחרי 14 יום)
   watch: store.get("fh_watch", []),
+  today: { day: "", items: [] },
 };
+
+// ---------- האלבום של היום: כל כתבה שנקראה ממלאת משבצת ----------
+const GOAL = 20;
+function todayKey() { return fmtDayKey.format(new Date()); }
+function loadToday() {
+  const t = store.get("fh_today", null);
+  return t && t.day === todayKey() && Array.isArray(t.items) ? t : { day: todayKey(), items: [] };
+}
+function tallyAdd(id) {
+  if (state.today.items.some((x) => x.id === id)) return false;
+  const it = state.items.find((i) => i.id === id) || state.saved[id];
+  state.today.items.push({ id, c: it ? leagueColor(it) : "var(--gold)" });
+  store.set("fh_today", state.today);
+  return true;
+}
+function tallyRemove(id) {
+  state.today.items = state.today.items.filter((x) => x.id !== id);
+  store.set("fh_today", state.today);
+}
+function renderTally(newId) {
+  if (state.today.day !== todayKey()) state.today = { day: todayKey(), items: [] };
+  const n = state.today.items.length;
+  const box = $("slots");
+  box.textContent = "";
+  for (let i = 0; i < GOAL; i++) {
+    const s = el("i", "slot");
+    const entry = state.today.items[i];
+    if (entry) {
+      s.classList.add("full");
+      s.style.setProperty("--c", entry.c);
+      if (newId && entry.id === newId) s.classList.add("new");
+    }
+    box.append(s);
+  }
+  const mini = $("mini-slots");
+  mini.textContent = "";
+  for (let i = 0; i < GOAL; i++) {
+    const m = el("i");
+    const entry = state.today.items[i];
+    if (entry) {
+      m.className = "full" + (newId && entry.id === newId ? " new" : "");
+      m.style.setProperty("--c", entry.c);
+    }
+    mini.append(m);
+  }
+  $("mini-count").textContent = `${n}/${GOAL}`;
+  $("tally-count").textContent = `היום ${n}/${GOAL}`;
+  $("tally").classList.toggle("done", n >= GOAL);
+  $("tally").setAttribute("aria-label", `אלבום היום: ${n} מתוך ${GOAL} כתבות נקראו`);
+}
 
 // ---------- זמן (שעון ישראל) ----------
 const fmtTime = new Intl.DateTimeFormat("he-IL", { timeZone: TZ, hour: "2-digit", minute: "2-digit" });
 const fmtDay = new Intl.DateTimeFormat("he-IL", { timeZone: TZ, weekday: "long", day: "numeric", month: "long" });
 const fmtDayKey = new Intl.DateTimeFormat("en-CA", { timeZone: TZ }); // YYYY-MM-DD
+state.today = loadToday();
 
 function dayLabel(date) {
   const key = fmtDayKey.format(date);
@@ -93,6 +188,7 @@ async function load() {
     buildControls();
     syncControls();
     render();
+    renderTally();
   } catch (e) {
     $("status").textContent = "לא הצלחתי לטעון את הנתונים (" + e.message + "). אם פתחת את הקובץ ישירות מהמחשב, צריך להריץ שרת מקומי או לפתוח דרך GitHub Pages.";
   }
@@ -111,15 +207,21 @@ function buildControls() {
   chips.textContent = "";
   const counts = {};
   for (const it of state.items) if (!it.dup_of) for (const l of it.leagues) counts[l] = (counts[l] || 0) + 1;
-  const add = (id, label) => {
+  const add = (id, label, count) => {
     const b = document.createElement("button");
     b.className = "chip" + (state.filters.league === id ? " on" : "");
-    b.textContent = label;
     b.dataset.league = id;
+    if (id) {
+      const dot = el("i", "dot");
+      dot.style.setProperty("--c", LEAGUE_COLORS[id] || "var(--muted)");
+      b.append(dot);
+    }
+    b.append(label);
+    if (count) b.append(el("span", "ct num", String(count)));
     chips.appendChild(b);
   };
   add("", "כל הליגות");
-  for (const [lid, league] of Object.entries(state.leagues)) add(lid, `${league.name_he}${counts[lid] ? " " + counts[lid] : ""}`);
+  for (const [lid, league] of Object.entries(state.leagues)) add(lid, league.name_he, counts[lid]);
 
   buildTeamSelect();
 
@@ -218,36 +320,7 @@ function renderCard(it, rx) {
   card.dataset.id = it.id;
 
   if (it.video_id) card.classList.add("video");
-
-  if (it.image) {
-    const img = el("img", "thumb");
-    img.src = it.image;
-    img.alt = "";
-    img.loading = "lazy";
-    img.referrerPolicy = "no-referrer";
-    img.addEventListener("error", () => img.remove());
-    if (it.video_id) {
-      const wrap = el("button", "thumb-wrap");
-      wrap.type = "button";
-      wrap.setAttribute("aria-label", "נגן: " + it.title);
-      wrap.append(img, el("span", "play", "▶"));
-      wrap.addEventListener("click", () => togglePlayer(card, it));
-      card.append(wrap);
-    } else {
-      card.append(img);
-    }
-  }
-
-  const meta = el("div", "meta");
-  meta.append(el("span", "src", it.source));
-  const t = el("time", null, ago(it.date));
-  t.dateTime = it.published;
-  t.title = fmtTime.format(it.date);
-  meta.append(t);
-  if (it.category !== "news") meta.append(el("span", "tag cat", CAT_LABEL[it.category] || it.category));
-  for (const l of it.leagues.slice(0, 2)) if (state.leagues[l]) meta.append(el("span", "tag", state.leagues[l].name_he));
-  for (const tm of it.teams.slice(0, 2)) meta.append(el("span", "tag", state.teamName[tm] || tm));
-  card.append(meta);
+  card.append(sticker(it, card));
 
   const h = el("h2");
   const a = document.createElement("a");
@@ -263,10 +336,30 @@ function renderCard(it, rx) {
   h.append(a);
   card.append(h);
 
+  const meta = el("div", "meta");
+  meta.append(el("span", "src", it.source));
+  const t = el("time", null, ago(it.date));
+  t.dateTime = it.published;
+  t.title = fmtTime.format(it.date);
+  meta.append(t);
+  if (it.category !== "news") meta.append(el("span", "tag cat", CAT_LABEL[it.category] || it.category));
+  for (const l of it.leagues.slice(0, 2)) {
+    if (!state.leagues[l]) continue;
+    const tag = el("span", "tag");
+    const dot = el("i", "dot");
+    dot.style.setProperty("--c", LEAGUE_COLORS[l] || "var(--muted)");
+    tag.append(dot, state.leagues[l].name_he);
+    meta.append(tag);
+  }
+  for (const tm of it.teams.slice(0, 2)) meta.append(el("span", "tag", state.teamName[tm] || tm));
+  card.append(meta);
+
   const he = state.ai.summaries[it.id];
   if (he && it.lang !== "he") {
     const hp = el("p", "sum-he");
-    hp.append(highlight(he.he, rx));
+    const tag = el("span", "ai-tag");
+    tag.append(icon("spark"), "תקציר Claude");
+    hp.append(tag, highlight(he.he, rx));
     card.append(hp);
   }
 
@@ -279,12 +372,14 @@ function renderCard(it, rx) {
   }
 
   const acts = el("div", "acts");
-  const save = el("button", state.saved[it.id] ? "on" : "", state.saved[it.id] ? "★ שמור" : "☆ לקרוא אחר כך");
+  const saved = !!state.saved[it.id];
+  const save = iconBtn("star", saved ? "נשמר" : "שמור", saved ? "on" : "", saved);
   save.addEventListener("click", () => toggleSaved(it));
-  const read = el("button", state.read.has(it.id) ? "on" : "", state.read.has(it.id) ? "✓ נקרא" : "סמן כנקרא");
+  const isRead = state.read.has(it.id);
+  const read = iconBtn("check", "נקרא", isRead ? "on" : "");
   read.addEventListener("click", () => setRead(it.id, !state.read.has(it.id)));
   if (it.video_id) {
-    const play = el("button", "", "▶ נגן");
+    const play = iconBtn("play", "נגן", "", true);
     play.addEventListener("click", () => togglePlayer(card, it));
     acts.append(play);
   }
@@ -311,6 +406,52 @@ function renderCard(it, rx) {
   }
   card.append(acts);
   return card;
+}
+
+function iconBtn(name, label, cls, fill) {
+  const b = el("button", cls || "");
+  b.type = "button";
+  b.append(icon(name, fill), label);
+  return b;
+}
+
+// מדבקה: תמונת הכתבה עם מסגרת לבנה; בלי תמונה, משבצת בצבע הליגה עם שם המקור
+function sticker(it, card) {
+  const color = leagueColor(it);
+  const tile = () => {
+    const t = el("span", "stk tile");
+    t.append(el("span", "plate", it.source));
+    t.style.setProperty("--c", color);
+    return t;
+  };
+  if (it.video_id) {
+    const wrap = el("button", "stk video");
+    wrap.type = "button";
+    wrap.style.setProperty("--c", color);
+    wrap.setAttribute("aria-label", "נגן: " + it.title);
+    if (it.image) {
+      const img = el("img");
+      img.src = it.image; img.alt = ""; img.loading = "lazy"; img.referrerPolicy = "no-referrer";
+      img.addEventListener("error", () => img.remove());
+      wrap.append(img);
+    }
+    const play = el("span", "play");
+    play.append(icon("play", true));
+    wrap.append(play);
+    wrap.addEventListener("click", () => togglePlayer(card, it));
+    return wrap;
+  }
+  if (!it.image) return tile();
+  const a = el("a", "stk");
+  a.href = it.link; a.target = "_blank"; a.rel = "noopener noreferrer"; a.tabIndex = -1;
+  a.setAttribute("aria-hidden", "true");
+  a.style.setProperty("--c", color);
+  const img = el("img");
+  img.src = it.image; img.alt = ""; img.loading = "lazy"; img.referrerPolicy = "no-referrer";
+  img.addEventListener("error", () => a.replaceWith(tile()));
+  a.append(img);
+  a.addEventListener("click", () => setRead(it.id, true));
+  return a;
 }
 
 // ---------- נגן יוטיוב מוטמע ----------
@@ -344,7 +485,7 @@ function togglePlayer(card, it) {
   watchLink.href = it.link;
   watchLink.target = "_blank";
   watchLink.rel = "noopener noreferrer";
-  watchLink.textContent = "פתח ביוטיוב ↗";
+  watchLink.append("פתח ביוטיוב ", icon("ext"));
   note.append("לא נטען? ", watchLink);
   box.append(frame, note);
   card.append(box);
@@ -380,6 +521,7 @@ function setReadQuiet(id) {
   store.set("fh_read", [...state.read]);
   const c = document.querySelector(`.card[data-id="${id}"]`);
   if (c) c.classList.add("read");
+  renderTally(tallyAdd(id) ? id : null);
 }
 
 function render() {
@@ -403,7 +545,7 @@ function render() {
   }
   $("more").hidden = items.length <= state.shown;
   $("status").textContent = items.length
-    ? `${items.length} כתבות · עודכן ${fmtDay.format(state.generatedAt)} ${fmtTime.format(state.generatedAt)}${staleNote()}`
+    ? `${items.length} כתבות · עודכן ${fmtDay.format(state.generatedAt)} ${fmtTime.format(state.generatedAt)}${staleNote()}${Object.keys(state.ai.summaries).length ? " · התקצירים בעברית נכתבו על ידי Claude ועלולים לטעות" : ""}`
     : state.view === "saved" ? "אין עדיין כתבות שמורות."
     : state.view === "watch" ? (state.watch.length ? "אין כרגע כתבות שמתאימות למילות המעקב." : "עוד לא הוספת מילות מעקב. לחץ על \"מילות מעקב\".")
     : "אין כתבות שמתאימות לסינון.";
@@ -415,7 +557,7 @@ function render() {
 // ---------- משחקים וטבלאות ----------
 function staleNote() {
   const hours = (Date.now() - state.generatedAt.getTime()) / 3600000;
-  return hours > 18 ? ` · ⚠ הנתונים לא התעדכנו כבר ${Math.round(hours)} שעות` : "";
+  return hours > 18 ? ` · הנתונים לא התעדכנו כבר ${Math.round(hours)} שעות` : "";
 }
 
 function updatedLabel() {
@@ -424,7 +566,11 @@ function updatedLabel() {
 
 // ---------- זוויות לציוץ ----------
 function copyText(text, btn) {
-  const done = () => { const old = btn.textContent; btn.textContent = "הועתק ✓"; setTimeout(() => { btn.textContent = old; }, 1500); };
+  const done = () => {
+    const old = [...btn.childNodes];
+    btn.replaceChildren(icon("check"), "הועתק");
+    setTimeout(() => btn.replaceChildren(...old), 1500);
+  };
   if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, () => {});
   else {
     const ta = document.createElement("textarea");
@@ -449,12 +595,11 @@ function tweetPanel(entry) {
     upd();
     d.append(ta);
     const row = el("div", "tw-row");
-    const copy = el("button", "", "העתק");
-    copy.type = "button";
+    const copy = iconBtn("copy", "העתק");
     copy.addEventListener("click", () => copyText(ta.value, copy));
     const open = document.createElement("a");
     open.className = "tw-open";
-    open.textContent = "פתח ב-X ↗";
+    open.append("פתח ב-X ", icon("ext"));
     open.target = "_blank";
     open.rel = "noopener noreferrer";
     open.href = "#";
@@ -473,8 +618,7 @@ function tweetPanel(entry) {
 function addTweetButton(key, parent, container) {
   const entry = state.ai.tweets[key];
   if (!entry || !entry.angles || !entry.angles.length) return;
-  const btn = el("button", "tw-btn", "✍ זווית לציוץ");
-  btn.type = "button";
+  const btn = iconBtn("pen", "זווית לציוץ", "tw-btn");
   btn.addEventListener("click", () => {
     const open = container.querySelector(":scope > .tweets");
     if (open) { open.remove(); return; }
@@ -487,8 +631,7 @@ function aiPanel(m) {
   const pv = state.ai.previews[m.id], an = state.ai.analyses[m.id];
   if (!pv && !an) return null;
   const wrap = el("div", "ai-wrap");
-  const btn = el("button", "ai-btn", an ? "✦ ניתוח המשחק" : "✦ על מה לשים לב");
-  btn.type = "button";
+  const btn = iconBtn("spark", an ? "ניתוח המשחק" : "על מה לשים לב", "ai-btn");
   btn.addEventListener("click", () => {
     const open = wrap.querySelector(".ai-panel");
     if (open) { open.remove(); return; }
@@ -523,7 +666,7 @@ function conceptCard() {
   const box = el("section", "concept");
   const head = el("button", "concept-head");
   head.type = "button";
-  head.append(el("span", "k", "מושג טקטי של השבוע"), el("strong", null, c.concept));
+  head.append(el("strong", null, "מושג טקטי של השבוע: " + c.concept));
   const body = el("div", "concept-body");
   body.hidden = true;
   body.append(el("p", null, c.explanation));
@@ -590,7 +733,11 @@ function renderMatches() {
       const label = dayLabel(d);
       if (label !== lastDay) { list.append(el("div", "day", label)); lastDay = label; lastLeague = ""; }
       if (!lg && m.league !== lastLeague) {
-        list.append(el("div", "lg", state.leagues[m.league] ? state.leagues[m.league].name_he : m.league));
+        const lgEl = el("div", "lg");
+        const lgDot = el("i", "dot");
+        lgDot.style.setProperty("--c", LEAGUE_COLORS[m.league] || "var(--muted)");
+        lgEl.append(lgDot, state.leagues[m.league] ? state.leagues[m.league].name_he : m.league);
+        list.append(lgEl);
         lastLeague = m.league;
       }
       list.append(matchRow(m));
@@ -651,9 +798,12 @@ function renderTables() {
 
 // ---------- פעולות ----------
 function setRead(id, value) {
-  if (value) state.read.add(id); else state.read.delete(id);
+  let added = false;
+  if (value) { state.read.add(id); added = tallyAdd(id); }
+  else { state.read.delete(id); tallyRemove(id); }
   store.set("fh_read", [...state.read]);
   render();
+  renderTally(added ? id : null);
 }
 
 function toggleSaved(it) {
@@ -732,8 +882,9 @@ function wireEvents() {
     ul.textContent = "";
     for (const w of state.watch) {
       const li = el("li", null, w);
-      const x = el("button", null, "×");
+      const x = el("button");
       x.type = "button";
+      x.append(icon("x"));
       x.setAttribute("aria-label", "הסר " + w);
       x.addEventListener("click", () => {
         state.watch = state.watch.filter((k) => k !== w);
@@ -773,5 +924,12 @@ function wireEvents() {
 }
 
 document.documentElement.dataset.theme = store.get("fh_theme", "dark");
+hydrateIcons();
+// כשהאלבום הגדול גולל החוצה, גרסה קטנה שלו מופיעה בסרגל הליגות
+if ("IntersectionObserver" in window) {
+  new IntersectionObserver(([e]) => document.querySelector(".pages-bar").classList.toggle("compact", !e.isIntersecting))
+    .observe(document.querySelector(".top"));
+}
 wireEvents();
+renderTally();
 load();
