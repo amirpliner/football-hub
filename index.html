@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>מגרש – מרכז הכדורגל שלי</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="top-row">
+      <h1>מגרש</h1>
+      <nav class="views" id="views" aria-label="תצוגה">
+        <button data-view="all" class="on">הכל</button>
+        <button data-view="watch">מעקב <span class="n" id="n-watch"></span></button>
+        <button data-view="saved">שמורים <span class="n" id="n-saved"></span></button>
+      </nav>
+      <div class="tools">
+        <button id="btn-filters" class="only-mobile" aria-expanded="false">סינון</button>
+        <button id="btn-keywords" title="מילות מעקב">מעקב ✎</button>
+        <button id="btn-theme" title="מצב כהה / בהיר" aria-label="החלף מצב כהה/בהיר">◐</button>
+      </div>
+    </div>
+
+    <div class="chips" id="league-chips" role="tablist" aria-label="ליגה"></div>
+
+    <div class="filters" id="filters">
+      <input type="search" id="q" placeholder="חיפוש בכותרות ובתקצירים…" aria-label="חיפוש">
+      <select id="f-team" aria-label="קבוצה"></select>
+      <select id="f-source" aria-label="מקור"></select>
+      <select id="f-cat" aria-label="סוג">
+        <option value="">כל הסוגים</option>
+        <option value="news">חדשות</option>
+        <option value="analysis">ניתוח וטקטיקה</option>
+        <option value="fan">בלוגי אוהדים</option>
+      </select>
+      <label class="check"><input type="checkbox" id="f-dups"> הצג גם כפילויות</label>
+      <label class="check"><input type="checkbox" id="f-hide-read"> הסתר שנקראו</label>
+    </div>
+  </header>
+
+  <main>
+    <p class="status" id="status" role="status">טוען…</p>
+    <div id="list"></div>
+    <button id="more" class="more" hidden>הצג עוד</button>
+  </main>
+
+  <dialog id="dlg-keywords">
+    <form method="dialog" class="kw">
+      <h2>מילות מעקב</h2>
+      <p class="hint">שחקנים, קבוצות, מאמנים. כתבה שמזכירה אחת מהמילים מודגשת, ומופיעה בלשונית "מעקב".</p>
+      <div class="kw-add">
+        <input id="kw-input" type="text" placeholder="למשל: Mbappé" autocomplete="off">
+        <button type="button" id="kw-add">הוסף</button>
+      </div>
+      <ul id="kw-list" class="kw-list"></ul>
+      <button class="close">סגור</button>
+    </form>
+  </dialog>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

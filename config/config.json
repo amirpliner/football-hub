@@ -225,7 +225,7 @@
   "sources": [
     {"id": "bbc-pl", "name": "BBC Sport", "url": "https://feeds.bbci.co.uk/sport/football/premier-league/rss.xml", "category": "news", "lang": "en", "leagues": ["premier_league"], "priority": 2},
     {"id": "guardian-pl", "name": "Guardian", "url": "https://www.theguardian.com/football/premierleague/rss", "category": "news", "lang": "en", "leagues": ["premier_league"], "priority": 2},
-    {"id": "sky-pl", "name": "Sky Sports", "url": "https://www.skysports.com/rss/12040", "category": "news", "lang": "en", "leagues": ["premier_league"], "priority": 3},
+    {"id": "sky-pl", "name": "Sky Sports", "url": "https://www.skysports.com/rss/12040", "category": "news", "lang": "en", "match_leagues": ["premier_league", "championship"], "priority": 3},
     {"id": "arseblog", "name": "Arseblog", "url": "https://arseblog.com/feed/", "category": "fan", "lang": "en", "leagues": ["premier_league"], "teams": ["arsenal"], "priority": 8},
     {"id": "stretty", "name": "Stretty News", "url": "https://strettynews.com/feed/", "category": "fan", "lang": "en", "leagues": ["premier_league"], "teams": ["man_utd"], "priority": 8},
     {"id": "wagnh", "name": "We Ain't Got No History", "url": "https://weaintgotnohistory.sbnation.com/rss/index.xml", "category": "fan", "lang": "en", "leagues": ["premier_league"], "teams": ["chelsea"], "priority": 8},
