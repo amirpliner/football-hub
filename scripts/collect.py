@@ -238,6 +238,18 @@ def parse_feed(root, source, summary_max):
             continue
         link = link.strip()
         desc_raw = child_text(e, "description", "summary")
+        if not desc_raw:  # יוטיוב: התיאור בתוך media:group
+            for ch in e.iter():
+                if local(ch.tag) == "description" and (ch.text or "").strip():
+                    desc_raw = ch.text.strip()
+                    break
+        video_id = None
+        for ch in e.iter():
+            if local(ch.tag) == "videoId" and (ch.text or "").strip():
+                video_id = ch.text.strip()
+                break
+        if "/shorts/" in link:  # לא מציגים Shorts
+            continue
         content_raw = child_text(e, "encoded", "content")
         body_html = content_raw or desc_raw
         summary = html_to_text(desc_raw or content_raw)
@@ -250,6 +262,7 @@ def parse_feed(root, source, summary_max):
             "summary": truncate(summary, summary_max),
             "image": extract_image(e, body_html, link),
             "published": published,
+            "video_id": video_id,
         })
     return out
 
@@ -407,7 +420,7 @@ def process_source(src, cfg, matcher):
         for t in src.get("teams", []):
             if t not in teams:
                 teams.insert(0, t)
-        kept.append({
+        item = {
             "id": item_id(e["link"]),
             "title": e["title"],
             "summary": e["summary"],
@@ -420,7 +433,10 @@ def process_source(src, cfg, matcher):
             "lang": src.get("lang", "en"),
             "leagues": sorted(leagues),
             "teams": teams,
-        })
+        }
+        if e.get("video_id"):
+            item["video_id"] = e["video_id"]
+        kept.append(item)
     res["kept"] = len(kept)
     newest = max((e["published"] for e in entries if e["published"]), default=None)
     res["newest"] = newest.strftime("%Y-%m-%dT%H:%M:%SZ") if newest else None
@@ -445,6 +461,11 @@ def main():
         for lid in x.get("leagues", []) + x.get("match_leagues", []):
             if lid not in cfg["leagues"]:
                 raise SystemExit(f"מקור {x['id']}: ליגה לא מוכרת {lid}")
+    known_teams = set(matcher.team_league)
+    for x in sources:
+        for t in x.get("teams", []):
+            if t not in known_teams:
+                raise SystemExit(f"מקור {x['id']}: קבוצה לא מוכרת {t}")
     if args.only:
         sources = [x for x in sources if x["id"] == args.only]
         if not sources:
@@ -480,7 +501,11 @@ def main():
     cutoff = NOW - dt.timedelta(days=s["keep_days"])
     items = [it for it in merged.values()
              if ts(it["published"]) >= cutoff]
-    n_dups = dedupe(items, s["dedup_window_hours"], priority)
+    videos = [it for it in items if it["category"] == "video"]
+    for it in videos:  # וידאו לא עובר איחוד כפילויות
+        it["dup_of"] = None
+        it.pop("also", None)
+    n_dups = dedupe([it for it in items if it["category"] != "video"], s["dedup_window_hours"], priority)
     items.sort(key=lambda i: i["published"], reverse=True)
 
     ok = [r for r, _ in results if r["ok"]]

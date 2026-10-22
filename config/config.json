@@ -5,213 +5,1069 @@
     "fetch_timeout_seconds": 25,
     "dedup_window_hours": 48
   },
-
   "text_replacements": {
     "Inter Milan": "Inter",
     "Inter Miami": "",
     "Inter de Milão": "Inter"
   },
-
   "champions_league_keywords": [
-    "Champions League", "Champions-League", "Ligue des champions", "Ligue des Champions",
-    "Liga de Campeones", "Liga dos Campeões", "Champions League", "UCL"
+    "Champions League",
+    "Champions-League",
+    "Ligue des champions",
+    "Ligue des Champions",
+    "Liga de Campeones",
+    "Liga dos Campeões",
+    "Champions League",
+    "UCL"
   ],
-
   "leagues": {
     "premier_league": {
       "name_he": "פרמייר ליג",
       "teams": {
-        "arsenal": {"name": "Arsenal", "aliases": ["Arsenal", "Gunners"]},
-        "aston_villa": {"name": "Aston Villa", "aliases": ["Aston Villa"]},
-        "bournemouth": {"name": "Bournemouth", "aliases": ["Bournemouth"]},
-        "brentford": {"name": "Brentford", "aliases": ["Brentford"]},
-        "brighton": {"name": "Brighton", "aliases": ["Brighton"]},
-        "burnley": {"name": "Burnley", "aliases": ["Burnley"]},
-        "chelsea": {"name": "Chelsea", "aliases": ["Chelsea"]},
-        "crystal_palace": {"name": "Crystal Palace", "aliases": ["Crystal Palace"]},
-        "everton": {"name": "Everton", "aliases": ["Everton"]},
-        "fulham": {"name": "Fulham", "aliases": ["Fulham"]},
-        "leeds": {"name": "Leeds United", "aliases": ["Leeds United", "Leeds"]},
-        "liverpool": {"name": "Liverpool", "aliases": ["Liverpool"]},
-        "man_city": {"name": "Manchester City", "aliases": ["Manchester City", "Man City"]},
-        "man_utd": {"name": "Manchester United", "aliases": ["Manchester United", "Man United", "Man Utd"]},
-        "newcastle": {"name": "Newcastle", "aliases": ["Newcastle"]},
-        "nottm_forest": {"name": "Nottingham Forest", "aliases": ["Nottingham Forest"]},
-        "sunderland": {"name": "Sunderland", "aliases": ["Sunderland"]},
-        "tottenham": {"name": "Tottenham", "aliases": ["Tottenham", "Spurs"]},
-        "west_ham": {"name": "West Ham", "aliases": ["West Ham"]},
-        "wolves": {"name": "Wolves", "aliases": ["Wolves", "Wolverhampton"]}
+        "arsenal": {
+          "name": "Arsenal",
+          "aliases": [
+            "Arsenal",
+            "Gunners"
+          ]
+        },
+        "aston_villa": {
+          "name": "Aston Villa",
+          "aliases": [
+            "Aston Villa"
+          ]
+        },
+        "bournemouth": {
+          "name": "Bournemouth",
+          "aliases": [
+            "Bournemouth"
+          ]
+        },
+        "brentford": {
+          "name": "Brentford",
+          "aliases": [
+            "Brentford"
+          ]
+        },
+        "brighton": {
+          "name": "Brighton",
+          "aliases": [
+            "Brighton"
+          ]
+        },
+        "burnley": {
+          "name": "Burnley",
+          "aliases": [
+            "Burnley"
+          ]
+        },
+        "chelsea": {
+          "name": "Chelsea",
+          "aliases": [
+            "Chelsea"
+          ]
+        },
+        "crystal_palace": {
+          "name": "Crystal Palace",
+          "aliases": [
+            "Crystal Palace"
+          ]
+        },
+        "everton": {
+          "name": "Everton",
+          "aliases": [
+            "Everton"
+          ]
+        },
+        "fulham": {
+          "name": "Fulham",
+          "aliases": [
+            "Fulham"
+          ]
+        },
+        "leeds": {
+          "name": "Leeds United",
+          "aliases": [
+            "Leeds United",
+            "Leeds"
+          ]
+        },
+        "liverpool": {
+          "name": "Liverpool",
+          "aliases": [
+            "Liverpool"
+          ]
+        },
+        "man_city": {
+          "name": "Manchester City",
+          "aliases": [
+            "Manchester City",
+            "Man City"
+          ]
+        },
+        "man_utd": {
+          "name": "Manchester United",
+          "aliases": [
+            "Manchester United",
+            "Man United",
+            "Man Utd"
+          ]
+        },
+        "newcastle": {
+          "name": "Newcastle",
+          "aliases": [
+            "Newcastle"
+          ]
+        },
+        "nottm_forest": {
+          "name": "Nottingham Forest",
+          "aliases": [
+            "Nottingham Forest"
+          ]
+        },
+        "sunderland": {
+          "name": "Sunderland",
+          "aliases": [
+            "Sunderland"
+          ]
+        },
+        "tottenham": {
+          "name": "Tottenham",
+          "aliases": [
+            "Tottenham",
+            "Spurs"
+          ]
+        },
+        "west_ham": {
+          "name": "West Ham",
+          "aliases": [
+            "West Ham"
+          ]
+        },
+        "wolves": {
+          "name": "Wolves",
+          "aliases": [
+            "Wolves",
+            "Wolverhampton"
+          ]
+        }
       }
     },
     "la_liga": {
       "name_he": "לה ליגה",
       "teams": {
-        "alaves": {"name": "Alavés", "aliases": ["Alavés", "Alaves"]},
-        "athletic": {"name": "Athletic Bilbao", "aliases": ["Athletic Club", "Athletic Bilbao", "Athletic"]},
-        "atletico": {"name": "Atlético Madrid", "aliases": ["Atlético de Madrid", "Atlético Madrid", "Atletico Madrid", "Atlético", "Atletico"]},
-        "barcelona": {"name": "Barcelona", "aliases": ["Barcelona", "Barça", "Barca"]},
-        "celta": {"name": "Celta Vigo", "aliases": ["Celta Vigo", "Celta"]},
-        "elche": {"name": "Elche", "aliases": ["Elche"]},
-        "espanyol": {"name": "Espanyol", "aliases": ["Espanyol"]},
-        "getafe": {"name": "Getafe", "aliases": ["Getafe"]},
-        "girona": {"name": "Girona", "aliases": ["Girona"]},
-        "levante": {"name": "Levante", "aliases": ["Levante"]},
-        "mallorca": {"name": "Mallorca", "aliases": ["Mallorca"]},
-        "osasuna": {"name": "Osasuna", "aliases": ["Osasuna"]},
-        "rayo": {"name": "Rayo Vallecano", "aliases": ["Rayo Vallecano", "Rayo"]},
-        "betis": {"name": "Real Betis", "aliases": ["Real Betis", "Betis"]},
-        "real_madrid": {"name": "Real Madrid", "aliases": ["Real Madrid", "Los Blancos"]},
-        "real_oviedo": {"name": "Real Oviedo", "aliases": ["Real Oviedo", "Oviedo"]},
-        "real_sociedad": {"name": "Real Sociedad", "aliases": ["Real Sociedad"]},
-        "sevilla": {"name": "Sevilla", "aliases": ["Sevilla"]},
-        "valencia": {"name": "Valencia", "aliases": ["Valencia"]},
-        "villarreal": {"name": "Villarreal", "aliases": ["Villarreal"]}
+        "alaves": {
+          "name": "Alavés",
+          "aliases": [
+            "Alavés",
+            "Alaves"
+          ]
+        },
+        "athletic": {
+          "name": "Athletic Bilbao",
+          "aliases": [
+            "Athletic Club",
+            "Athletic Bilbao",
+            "Athletic"
+          ]
+        },
+        "atletico": {
+          "name": "Atlético Madrid",
+          "aliases": [
+            "Atlético de Madrid",
+            "Atlético Madrid",
+            "Atletico Madrid",
+            "Atlético",
+            "Atletico"
+          ]
+        },
+        "barcelona": {
+          "name": "Barcelona",
+          "aliases": [
+            "Barcelona",
+            "Barça",
+            "Barca"
+          ]
+        },
+        "celta": {
+          "name": "Celta Vigo",
+          "aliases": [
+            "Celta Vigo",
+            "Celta"
+          ]
+        },
+        "elche": {
+          "name": "Elche",
+          "aliases": [
+            "Elche"
+          ]
+        },
+        "espanyol": {
+          "name": "Espanyol",
+          "aliases": [
+            "Espanyol"
+          ]
+        },
+        "getafe": {
+          "name": "Getafe",
+          "aliases": [
+            "Getafe"
+          ]
+        },
+        "girona": {
+          "name": "Girona",
+          "aliases": [
+            "Girona"
+          ]
+        },
+        "levante": {
+          "name": "Levante",
+          "aliases": [
+            "Levante"
+          ]
+        },
+        "mallorca": {
+          "name": "Mallorca",
+          "aliases": [
+            "Mallorca"
+          ]
+        },
+        "osasuna": {
+          "name": "Osasuna",
+          "aliases": [
+            "Osasuna"
+          ]
+        },
+        "rayo": {
+          "name": "Rayo Vallecano",
+          "aliases": [
+            "Rayo Vallecano",
+            "Rayo"
+          ]
+        },
+        "betis": {
+          "name": "Real Betis",
+          "aliases": [
+            "Real Betis",
+            "Betis"
+          ]
+        },
+        "real_madrid": {
+          "name": "Real Madrid",
+          "aliases": [
+            "Real Madrid",
+            "Los Blancos"
+          ]
+        },
+        "real_oviedo": {
+          "name": "Real Oviedo",
+          "aliases": [
+            "Real Oviedo",
+            "Oviedo"
+          ]
+        },
+        "real_sociedad": {
+          "name": "Real Sociedad",
+          "aliases": [
+            "Real Sociedad"
+          ]
+        },
+        "sevilla": {
+          "name": "Sevilla",
+          "aliases": [
+            "Sevilla"
+          ]
+        },
+        "valencia": {
+          "name": "Valencia",
+          "aliases": [
+            "Valencia"
+          ]
+        },
+        "villarreal": {
+          "name": "Villarreal",
+          "aliases": [
+            "Villarreal"
+          ]
+        }
       }
     },
     "serie_a": {
       "name_he": "סרייה A",
       "teams": {
-        "atalanta": {"name": "Atalanta", "aliases": ["Atalanta"]},
-        "bologna": {"name": "Bologna", "aliases": ["Bologna"]},
-        "cagliari": {"name": "Cagliari", "aliases": ["Cagliari"]},
-        "como": {"name": "Como", "aliases": ["Como"]},
-        "cremonese": {"name": "Cremonese", "aliases": ["Cremonese"]},
-        "fiorentina": {"name": "Fiorentina", "aliases": ["Fiorentina"]},
-        "genoa": {"name": "Genoa", "aliases": ["Genoa"]},
-        "verona": {"name": "Hellas Verona", "aliases": ["Hellas Verona", "Verona"]},
-        "inter": {"name": "Inter", "aliases": ["Internazionale", "Inter"]},
-        "juventus": {"name": "Juventus", "aliases": ["Juventus", "Juve"]},
-        "lazio": {"name": "Lazio", "aliases": ["Lazio"]},
-        "lecce": {"name": "Lecce", "aliases": ["Lecce"]},
-        "milan": {"name": "AC Milan", "aliases": ["AC Milan", "Milan"]},
-        "napoli": {"name": "Napoli", "aliases": ["Napoli"]},
-        "parma": {"name": "Parma", "aliases": ["Parma"]},
-        "pisa": {"name": "Pisa", "aliases": ["Pisa"]},
-        "roma": {"name": "Roma", "aliases": ["AS Roma", "Roma"]},
-        "sassuolo": {"name": "Sassuolo", "aliases": ["Sassuolo"]},
-        "torino": {"name": "Torino", "aliases": ["Torino"]},
-        "udinese": {"name": "Udinese", "aliases": ["Udinese"]}
+        "atalanta": {
+          "name": "Atalanta",
+          "aliases": [
+            "Atalanta"
+          ]
+        },
+        "bologna": {
+          "name": "Bologna",
+          "aliases": [
+            "Bologna"
+          ]
+        },
+        "cagliari": {
+          "name": "Cagliari",
+          "aliases": [
+            "Cagliari"
+          ]
+        },
+        "como": {
+          "name": "Como",
+          "aliases": [
+            "Como"
+          ]
+        },
+        "cremonese": {
+          "name": "Cremonese",
+          "aliases": [
+            "Cremonese"
+          ]
+        },
+        "fiorentina": {
+          "name": "Fiorentina",
+          "aliases": [
+            "Fiorentina"
+          ]
+        },
+        "genoa": {
+          "name": "Genoa",
+          "aliases": [
+            "Genoa"
+          ]
+        },
+        "verona": {
+          "name": "Hellas Verona",
+          "aliases": [
+            "Hellas Verona",
+            "Verona"
+          ]
+        },
+        "inter": {
+          "name": "Inter",
+          "aliases": [
+            "Internazionale",
+            "Inter"
+          ]
+        },
+        "juventus": {
+          "name": "Juventus",
+          "aliases": [
+            "Juventus",
+            "Juve"
+          ]
+        },
+        "lazio": {
+          "name": "Lazio",
+          "aliases": [
+            "Lazio"
+          ]
+        },
+        "lecce": {
+          "name": "Lecce",
+          "aliases": [
+            "Lecce"
+          ]
+        },
+        "milan": {
+          "name": "AC Milan",
+          "aliases": [
+            "AC Milan",
+            "Milan"
+          ]
+        },
+        "napoli": {
+          "name": "Napoli",
+          "aliases": [
+            "Napoli"
+          ]
+        },
+        "parma": {
+          "name": "Parma",
+          "aliases": [
+            "Parma"
+          ]
+        },
+        "pisa": {
+          "name": "Pisa",
+          "aliases": [
+            "Pisa"
+          ]
+        },
+        "roma": {
+          "name": "Roma",
+          "aliases": [
+            "AS Roma",
+            "Roma"
+          ]
+        },
+        "sassuolo": {
+          "name": "Sassuolo",
+          "aliases": [
+            "Sassuolo"
+          ]
+        },
+        "torino": {
+          "name": "Torino",
+          "aliases": [
+            "Torino"
+          ]
+        },
+        "udinese": {
+          "name": "Udinese",
+          "aliases": [
+            "Udinese"
+          ]
+        }
       }
     },
     "bundesliga": {
       "name_he": "בונדסליגה",
       "teams": {
-        "bayern": {"name": "Bayern Munich", "aliases": ["Bayern Munich", "Bayern München", "Bayern Munchen", "Bayern"]},
-        "dortmund": {"name": "Borussia Dortmund", "aliases": ["Borussia Dortmund", "Dortmund", "BVB"]},
-        "leverkusen": {"name": "Bayer Leverkusen", "aliases": ["Bayer Leverkusen", "Leverkusen"]},
-        "leipzig": {"name": "RB Leipzig", "aliases": ["RB Leipzig", "Leipzig"]},
-        "frankfurt": {"name": "Eintracht Frankfurt", "aliases": ["Eintracht Frankfurt", "Frankfurt"]},
-        "stuttgart": {"name": "Stuttgart", "aliases": ["Stuttgart"]},
-        "freiburg": {"name": "Freiburg", "aliases": ["Freiburg"]},
-        "wolfsburg": {"name": "Wolfsburg", "aliases": ["Wolfsburg"]},
-        "gladbach": {"name": "Gladbach", "aliases": ["Borussia Mönchengladbach", "Mönchengladbach", "Gladbach"]},
-        "union_berlin": {"name": "Union Berlin", "aliases": ["Union Berlin"]},
-        "mainz": {"name": "Mainz", "aliases": ["Mainz"]},
-        "hoffenheim": {"name": "Hoffenheim", "aliases": ["Hoffenheim"]},
-        "werder": {"name": "Werder Bremen", "aliases": ["Werder Bremen", "Werder"]},
-        "augsburg": {"name": "Augsburg", "aliases": ["Augsburg"]},
-        "heidenheim": {"name": "Heidenheim", "aliases": ["Heidenheim"]},
-        "st_pauli": {"name": "St. Pauli", "aliases": ["St. Pauli", "St Pauli"]},
-        "koln": {"name": "Köln", "aliases": ["1. FC Köln", "FC Köln", "Köln", "Cologne"]},
-        "hamburg": {"name": "Hamburger SV", "aliases": ["Hamburger SV", "HSV"]}
+        "bayern": {
+          "name": "Bayern Munich",
+          "aliases": [
+            "Bayern Munich",
+            "Bayern München",
+            "Bayern Munchen",
+            "Bayern"
+          ]
+        },
+        "dortmund": {
+          "name": "Borussia Dortmund",
+          "aliases": [
+            "Borussia Dortmund",
+            "Dortmund",
+            "BVB"
+          ]
+        },
+        "leverkusen": {
+          "name": "Bayer Leverkusen",
+          "aliases": [
+            "Bayer Leverkusen",
+            "Leverkusen"
+          ]
+        },
+        "leipzig": {
+          "name": "RB Leipzig",
+          "aliases": [
+            "RB Leipzig",
+            "Leipzig"
+          ]
+        },
+        "frankfurt": {
+          "name": "Eintracht Frankfurt",
+          "aliases": [
+            "Eintracht Frankfurt",
+            "Frankfurt"
+          ]
+        },
+        "stuttgart": {
+          "name": "Stuttgart",
+          "aliases": [
+            "Stuttgart"
+          ]
+        },
+        "freiburg": {
+          "name": "Freiburg",
+          "aliases": [
+            "Freiburg"
+          ]
+        },
+        "wolfsburg": {
+          "name": "Wolfsburg",
+          "aliases": [
+            "Wolfsburg"
+          ]
+        },
+        "gladbach": {
+          "name": "Gladbach",
+          "aliases": [
+            "Borussia Mönchengladbach",
+            "Mönchengladbach",
+            "Gladbach"
+          ]
+        },
+        "union_berlin": {
+          "name": "Union Berlin",
+          "aliases": [
+            "Union Berlin"
+          ]
+        },
+        "mainz": {
+          "name": "Mainz",
+          "aliases": [
+            "Mainz"
+          ]
+        },
+        "hoffenheim": {
+          "name": "Hoffenheim",
+          "aliases": [
+            "Hoffenheim"
+          ]
+        },
+        "werder": {
+          "name": "Werder Bremen",
+          "aliases": [
+            "Werder Bremen",
+            "Werder"
+          ]
+        },
+        "augsburg": {
+          "name": "Augsburg",
+          "aliases": [
+            "Augsburg"
+          ]
+        },
+        "heidenheim": {
+          "name": "Heidenheim",
+          "aliases": [
+            "Heidenheim"
+          ]
+        },
+        "st_pauli": {
+          "name": "St. Pauli",
+          "aliases": [
+            "St. Pauli",
+            "St Pauli"
+          ]
+        },
+        "koln": {
+          "name": "Köln",
+          "aliases": [
+            "1. FC Köln",
+            "FC Köln",
+            "Köln",
+            "Cologne"
+          ]
+        },
+        "hamburg": {
+          "name": "Hamburger SV",
+          "aliases": [
+            "Hamburger SV",
+            "HSV"
+          ]
+        }
       }
     },
     "ligue_1": {
       "name_he": "ליג 1",
       "teams": {
-        "angers": {"name": "Angers", "aliases": ["Angers"]},
-        "auxerre": {"name": "Auxerre", "aliases": ["Auxerre"]},
-        "brest": {"name": "Brest", "aliases": ["Brest"]},
-        "le_havre": {"name": "Le Havre", "aliases": ["Le Havre"]},
-        "lens": {"name": "Lens", "aliases": ["RC Lens", "Lens"]},
-        "lille": {"name": "Lille", "aliases": ["Lille", "LOSC"]},
-        "lorient": {"name": "Lorient", "aliases": ["Lorient"]},
-        "lyon": {"name": "Lyon", "aliases": ["Olympique Lyonnais", "Lyon"]},
-        "marseille": {"name": "Marseille", "aliases": ["Olympique de Marseille", "Marseille", "OM"]},
-        "metz": {"name": "Metz", "aliases": ["Metz"]},
-        "monaco": {"name": "Monaco", "aliases": ["AS Monaco", "Monaco"]},
-        "nantes": {"name": "Nantes", "aliases": ["Nantes"]},
-        "nice": {"name": "Nice", "aliases": ["OGC Nice", "OGCN"]},
-        "paris_fc": {"name": "Paris FC", "aliases": ["Paris FC"]},
-        "psg": {"name": "Paris Saint-Germain", "aliases": ["Paris Saint-Germain", "Paris Saint Germain", "Paris SG", "PSG"]},
-        "rennes": {"name": "Rennes", "aliases": ["Rennes"]},
-        "strasbourg": {"name": "Strasbourg", "aliases": ["Strasbourg"]},
-        "toulouse": {"name": "Toulouse", "aliases": ["Toulouse"]}
+        "angers": {
+          "name": "Angers",
+          "aliases": [
+            "Angers"
+          ]
+        },
+        "auxerre": {
+          "name": "Auxerre",
+          "aliases": [
+            "Auxerre"
+          ]
+        },
+        "brest": {
+          "name": "Brest",
+          "aliases": [
+            "Brest"
+          ]
+        },
+        "le_havre": {
+          "name": "Le Havre",
+          "aliases": [
+            "Le Havre"
+          ]
+        },
+        "lens": {
+          "name": "Lens",
+          "aliases": [
+            "RC Lens",
+            "Lens"
+          ]
+        },
+        "lille": {
+          "name": "Lille",
+          "aliases": [
+            "Lille",
+            "LOSC"
+          ]
+        },
+        "lorient": {
+          "name": "Lorient",
+          "aliases": [
+            "Lorient"
+          ]
+        },
+        "lyon": {
+          "name": "Lyon",
+          "aliases": [
+            "Olympique Lyonnais",
+            "Lyon"
+          ]
+        },
+        "marseille": {
+          "name": "Marseille",
+          "aliases": [
+            "Olympique de Marseille",
+            "Marseille",
+            "OM"
+          ]
+        },
+        "metz": {
+          "name": "Metz",
+          "aliases": [
+            "Metz"
+          ]
+        },
+        "monaco": {
+          "name": "Monaco",
+          "aliases": [
+            "AS Monaco",
+            "Monaco"
+          ]
+        },
+        "nantes": {
+          "name": "Nantes",
+          "aliases": [
+            "Nantes"
+          ]
+        },
+        "nice": {
+          "name": "Nice",
+          "aliases": [
+            "OGC Nice",
+            "OGCN"
+          ]
+        },
+        "paris_fc": {
+          "name": "Paris FC",
+          "aliases": [
+            "Paris FC"
+          ]
+        },
+        "psg": {
+          "name": "Paris Saint-Germain",
+          "aliases": [
+            "Paris Saint-Germain",
+            "Paris Saint Germain",
+            "Paris SG",
+            "PSG"
+          ]
+        },
+        "rennes": {
+          "name": "Rennes",
+          "aliases": [
+            "Rennes"
+          ]
+        },
+        "strasbourg": {
+          "name": "Strasbourg",
+          "aliases": [
+            "Strasbourg"
+          ]
+        },
+        "toulouse": {
+          "name": "Toulouse",
+          "aliases": [
+            "Toulouse"
+          ]
+        }
       }
     },
     "championship": {
       "name_he": "צ'מפיונשיפ",
       "teams": {
-        "birmingham": {"name": "Birmingham City", "aliases": ["Birmingham City"]},
-        "blackburn": {"name": "Blackburn", "aliases": ["Blackburn"]},
-        "bristol_city": {"name": "Bristol City", "aliases": ["Bristol City"]},
-        "charlton": {"name": "Charlton", "aliases": ["Charlton"]},
-        "coventry": {"name": "Coventry", "aliases": ["Coventry"]},
-        "derby": {"name": "Derby County", "aliases": ["Derby County", "Derby"]},
-        "hull": {"name": "Hull City", "aliases": ["Hull City", "Hull"]},
-        "ipswich": {"name": "Ipswich", "aliases": ["Ipswich"]},
-        "leicester": {"name": "Leicester", "aliases": ["Leicester"]},
-        "middlesbrough": {"name": "Middlesbrough", "aliases": ["Middlesbrough", "Boro"]},
-        "millwall": {"name": "Millwall", "aliases": ["Millwall"]},
-        "norwich": {"name": "Norwich", "aliases": ["Norwich"]},
-        "oxford": {"name": "Oxford United", "aliases": ["Oxford United"]},
-        "portsmouth": {"name": "Portsmouth", "aliases": ["Portsmouth"]},
-        "preston": {"name": "Preston", "aliases": ["Preston North End", "Preston"]},
-        "qpr": {"name": "QPR", "aliases": ["Queens Park Rangers", "QPR"]},
-        "sheff_utd": {"name": "Sheffield United", "aliases": ["Sheffield United"]},
-        "sheff_wed": {"name": "Sheffield Wednesday", "aliases": ["Sheffield Wednesday"]},
-        "southampton": {"name": "Southampton", "aliases": ["Southampton"]},
-        "stoke": {"name": "Stoke City", "aliases": ["Stoke City", "Stoke"]},
-        "swansea": {"name": "Swansea", "aliases": ["Swansea"]},
-        "watford": {"name": "Watford", "aliases": ["Watford"]},
-        "west_brom": {"name": "West Brom", "aliases": ["West Bromwich", "West Brom"]},
-        "wrexham": {"name": "Wrexham", "aliases": ["Wrexham"]}
+        "birmingham": {
+          "name": "Birmingham City",
+          "aliases": [
+            "Birmingham City"
+          ]
+        },
+        "blackburn": {
+          "name": "Blackburn",
+          "aliases": [
+            "Blackburn"
+          ]
+        },
+        "bristol_city": {
+          "name": "Bristol City",
+          "aliases": [
+            "Bristol City"
+          ]
+        },
+        "charlton": {
+          "name": "Charlton",
+          "aliases": [
+            "Charlton"
+          ]
+        },
+        "coventry": {
+          "name": "Coventry",
+          "aliases": [
+            "Coventry"
+          ]
+        },
+        "derby": {
+          "name": "Derby County",
+          "aliases": [
+            "Derby County",
+            "Derby"
+          ]
+        },
+        "hull": {
+          "name": "Hull City",
+          "aliases": [
+            "Hull City",
+            "Hull"
+          ]
+        },
+        "ipswich": {
+          "name": "Ipswich",
+          "aliases": [
+            "Ipswich"
+          ]
+        },
+        "leicester": {
+          "name": "Leicester",
+          "aliases": [
+            "Leicester"
+          ]
+        },
+        "middlesbrough": {
+          "name": "Middlesbrough",
+          "aliases": [
+            "Middlesbrough",
+            "Boro"
+          ]
+        },
+        "millwall": {
+          "name": "Millwall",
+          "aliases": [
+            "Millwall"
+          ]
+        },
+        "norwich": {
+          "name": "Norwich",
+          "aliases": [
+            "Norwich"
+          ]
+        },
+        "oxford": {
+          "name": "Oxford United",
+          "aliases": [
+            "Oxford United"
+          ]
+        },
+        "portsmouth": {
+          "name": "Portsmouth",
+          "aliases": [
+            "Portsmouth"
+          ]
+        },
+        "preston": {
+          "name": "Preston",
+          "aliases": [
+            "Preston North End",
+            "Preston"
+          ]
+        },
+        "qpr": {
+          "name": "QPR",
+          "aliases": [
+            "Queens Park Rangers",
+            "QPR"
+          ]
+        },
+        "sheff_utd": {
+          "name": "Sheffield United",
+          "aliases": [
+            "Sheffield United"
+          ]
+        },
+        "sheff_wed": {
+          "name": "Sheffield Wednesday",
+          "aliases": [
+            "Sheffield Wednesday"
+          ]
+        },
+        "southampton": {
+          "name": "Southampton",
+          "aliases": [
+            "Southampton"
+          ]
+        },
+        "stoke": {
+          "name": "Stoke City",
+          "aliases": [
+            "Stoke City",
+            "Stoke"
+          ]
+        },
+        "swansea": {
+          "name": "Swansea",
+          "aliases": [
+            "Swansea"
+          ]
+        },
+        "watford": {
+          "name": "Watford",
+          "aliases": [
+            "Watford"
+          ]
+        },
+        "west_brom": {
+          "name": "West Brom",
+          "aliases": [
+            "West Bromwich",
+            "West Brom"
+          ]
+        },
+        "wrexham": {
+          "name": "Wrexham",
+          "aliases": [
+            "Wrexham"
+          ]
+        }
       }
     },
     "liga_portugal": {
       "name_he": "ליגה פורטוגלית",
       "teams": {
-        "benfica": {"name": "Benfica", "aliases": ["Benfica"]},
-        "porto": {"name": "FC Porto", "aliases": ["FC Porto", "Porto"]},
-        "sporting": {"name": "Sporting CP", "aliases": ["Sporting CP", "Sporting"]},
-        "braga": {"name": "Braga", "aliases": ["Sporting de Braga", "SC Braga", "Braga"]},
-        "guimaraes": {"name": "Vitória Guimarães", "aliases": ["Vitória de Guimarães", "Vitória SC", "Guimarães"]},
-        "famalicao": {"name": "Famalicão", "aliases": ["Famalicão"]},
-        "estoril": {"name": "Estoril", "aliases": ["Estoril"]},
-        "moreirense": {"name": "Moreirense", "aliases": ["Moreirense"]},
-        "arouca": {"name": "Arouca", "aliases": ["Arouca"]},
-        "casa_pia": {"name": "Casa Pia", "aliases": ["Casa Pia"]},
-        "gil_vicente": {"name": "Gil Vicente", "aliases": ["Gil Vicente"]},
-        "rio_ave": {"name": "Rio Ave", "aliases": ["Rio Ave"]},
-        "santa_clara": {"name": "Santa Clara", "aliases": ["Santa Clara"]},
-        "nacional": {"name": "Nacional", "aliases": ["Nacional da Madeira", "CD Nacional"]},
-        "boavista": {"name": "Boavista", "aliases": ["Boavista"]},
-        "tondela": {"name": "Tondela", "aliases": ["Tondela"]},
-        "alverca": {"name": "Alverca", "aliases": ["Alverca"]},
-        "estrela": {"name": "Estrela da Amadora", "aliases": ["Estrela da Amadora"]}
+        "benfica": {
+          "name": "Benfica",
+          "aliases": [
+            "Benfica"
+          ]
+        },
+        "porto": {
+          "name": "FC Porto",
+          "aliases": [
+            "FC Porto",
+            "Porto"
+          ]
+        },
+        "sporting": {
+          "name": "Sporting CP",
+          "aliases": [
+            "Sporting CP",
+            "Sporting"
+          ]
+        },
+        "braga": {
+          "name": "Braga",
+          "aliases": [
+            "Sporting de Braga",
+            "SC Braga",
+            "Braga"
+          ]
+        },
+        "guimaraes": {
+          "name": "Vitória Guimarães",
+          "aliases": [
+            "Vitória de Guimarães",
+            "Vitória SC",
+            "Guimarães"
+          ]
+        },
+        "famalicao": {
+          "name": "Famalicão",
+          "aliases": [
+            "Famalicão"
+          ]
+        },
+        "estoril": {
+          "name": "Estoril",
+          "aliases": [
+            "Estoril"
+          ]
+        },
+        "moreirense": {
+          "name": "Moreirense",
+          "aliases": [
+            "Moreirense"
+          ]
+        },
+        "arouca": {
+          "name": "Arouca",
+          "aliases": [
+            "Arouca"
+          ]
+        },
+        "casa_pia": {
+          "name": "Casa Pia",
+          "aliases": [
+            "Casa Pia"
+          ]
+        },
+        "gil_vicente": {
+          "name": "Gil Vicente",
+          "aliases": [
+            "Gil Vicente"
+          ]
+        },
+        "rio_ave": {
+          "name": "Rio Ave",
+          "aliases": [
+            "Rio Ave"
+          ]
+        },
+        "santa_clara": {
+          "name": "Santa Clara",
+          "aliases": [
+            "Santa Clara"
+          ]
+        },
+        "nacional": {
+          "name": "Nacional",
+          "aliases": [
+            "Nacional da Madeira",
+            "CD Nacional"
+          ]
+        },
+        "boavista": {
+          "name": "Boavista",
+          "aliases": [
+            "Boavista"
+          ]
+        },
+        "tondela": {
+          "name": "Tondela",
+          "aliases": [
+            "Tondela"
+          ]
+        },
+        "alverca": {
+          "name": "Alverca",
+          "aliases": [
+            "Alverca"
+          ]
+        },
+        "estrela": {
+          "name": "Estrela da Amadora",
+          "aliases": [
+            "Estrela da Amadora"
+          ]
+        }
       }
     },
     "eredivisie": {
       "name_he": "ארדיביזי",
       "teams": {
-        "ajax": {"name": "Ajax", "aliases": ["Ajax"]},
-        "psv": {"name": "PSV", "aliases": ["PSV"]},
-        "feyenoord": {"name": "Feyenoord", "aliases": ["Feyenoord"]},
-        "az": {"name": "AZ", "aliases": ["AZ Alkmaar", "AZ"]},
-        "twente": {"name": "FC Twente", "aliases": ["FC Twente", "Twente"]},
-        "utrecht": {"name": "FC Utrecht", "aliases": ["FC Utrecht", "Utrecht"]},
-        "heerenveen": {"name": "Heerenveen", "aliases": ["Heerenveen"]},
-        "go_ahead": {"name": "Go Ahead Eagles", "aliases": ["Go Ahead Eagles"]},
-        "sparta": {"name": "Sparta Rotterdam", "aliases": ["Sparta Rotterdam", "Sparta"]},
-        "nec": {"name": "NEC", "aliases": ["NEC"]},
-        "fortuna": {"name": "Fortuna Sittard", "aliases": ["Fortuna Sittard"]},
-        "heracles": {"name": "Heracles", "aliases": ["Heracles"]},
-        "groningen": {"name": "FC Groningen", "aliases": ["FC Groningen", "Groningen"]},
-        "excelsior": {"name": "Excelsior", "aliases": ["Excelsior"]},
-        "pec": {"name": "PEC Zwolle", "aliases": ["PEC Zwolle", "Zwolle"]},
-        "volendam": {"name": "Volendam", "aliases": ["Volendam"]},
-        "telstar": {"name": "Telstar", "aliases": ["Telstar"]},
-        "nac": {"name": "NAC Breda", "aliases": ["NAC Breda", "NAC"]}
+        "ajax": {
+          "name": "Ajax",
+          "aliases": [
+            "Ajax"
+          ]
+        },
+        "psv": {
+          "name": "PSV",
+          "aliases": [
+            "PSV"
+          ]
+        },
+        "feyenoord": {
+          "name": "Feyenoord",
+          "aliases": [
+            "Feyenoord"
+          ]
+        },
+        "az": {
+          "name": "AZ",
+          "aliases": [
+            "AZ Alkmaar",
+            "AZ"
+          ]
+        },
+        "twente": {
+          "name": "FC Twente",
+          "aliases": [
+            "FC Twente",
+            "Twente"
+          ]
+        },
+        "utrecht": {
+          "name": "FC Utrecht",
+          "aliases": [
+            "FC Utrecht",
+            "Utrecht"
+          ]
+        },
+        "heerenveen": {
+          "name": "Heerenveen",
+          "aliases": [
+            "Heerenveen"
+          ]
+        },
+        "go_ahead": {
+          "name": "Go Ahead Eagles",
+          "aliases": [
+            "Go Ahead Eagles"
+          ]
+        },
+        "sparta": {
+          "name": "Sparta Rotterdam",
+          "aliases": [
+            "Sparta Rotterdam",
+            "Sparta"
+          ]
+        },
+        "nec": {
+          "name": "NEC",
+          "aliases": [
+            "NEC"
+          ]
+        },
+        "fortuna": {
+          "name": "Fortuna Sittard",
+          "aliases": [
+            "Fortuna Sittard"
+          ]
+        },
+        "heracles": {
+          "name": "Heracles",
+          "aliases": [
+            "Heracles"
+          ]
+        },
+        "groningen": {
+          "name": "FC Groningen",
+          "aliases": [
+            "FC Groningen",
+            "Groningen"
+          ]
+        },
+        "excelsior": {
+          "name": "Excelsior",
+          "aliases": [
+            "Excelsior"
+          ]
+        },
+        "pec": {
+          "name": "PEC Zwolle",
+          "aliases": [
+            "PEC Zwolle",
+            "Zwolle"
+          ]
+        },
+        "volendam": {
+          "name": "Volendam",
+          "aliases": [
+            "Volendam"
+          ]
+        },
+        "telstar": {
+          "name": "Telstar",
+          "aliases": [
+            "Telstar"
+          ]
+        },
+        "nac": {
+          "name": "NAC Breda",
+          "aliases": [
+            "NAC Breda",
+            "NAC"
+          ]
+        }
       }
     },
     "champions_league": {
@@ -219,78 +1075,1045 @@
       "teams": {}
     }
   },
-
-  "_comment_sources": "category: news = חדשות, fan = בלוג אוהדים, analysis = ניתוח/טקטיקה. leagues = הפיד שייך תמיד לליגות האלה. match_leagues = פיד רחב: שומרים רק כתבות שמזכירות קבוצה מהליגות האלה. keep_unmatched = שומרים הכול גם בלי התאמה. teams = קבוצה קבועה (לבלוגי אוהדים). priority = מספר נמוך מנצח כשמאחדים כפילויות. enabled=false מכבה מקור.",
-
+  "_comment_sources": "category: news = חדשות, fan = בלוג אוהדים, analysis = ניתוח/טקטיקה. leagues = הפיד שייך תמיד לליגות האלה. match_leagues = פיד רחב: שומרים רק כתבות שמזכירות קבוצה מהליגות האלה. keep_unmatched = שומרים הכול גם בלי התאמה. teams = קבוצה קבועה (לבלוגי אוהדים). priority = מספר נמוך מנצח כשמאחדים כפילויות. enabled=false מכבה מקור. | וידאו: category=video, כתובת של פיד ה-RSS של ערוץ יוטיוב רשמי (channel_id).",
   "sources": [
-    {"id": "bbc-pl", "name": "BBC Sport", "url": "https://feeds.bbci.co.uk/sport/football/premier-league/rss.xml", "category": "news", "lang": "en", "leagues": ["premier_league"], "priority": 2},
-    {"id": "guardian-pl", "name": "Guardian", "url": "https://www.theguardian.com/football/premierleague/rss", "category": "news", "lang": "en", "leagues": ["premier_league"], "priority": 2},
-    {"id": "sky-pl", "name": "Sky Sports", "url": "https://www.skysports.com/rss/12040", "category": "news", "lang": "en", "match_leagues": ["premier_league", "championship"], "priority": 3},
-    {"id": "arseblog", "name": "Arseblog", "url": "https://arseblog.com/feed/", "category": "fan", "lang": "en", "leagues": ["premier_league"], "teams": ["arsenal"], "priority": 8},
-    {"id": "stretty", "name": "Stretty News", "url": "https://strettynews.com/feed/", "category": "fan", "lang": "en", "leagues": ["premier_league"], "teams": ["man_utd"], "priority": 8},
-    {"id": "wagnh", "name": "We Ain't Got No History", "url": "https://weaintgotnohistory.sbnation.com/rss/index.xml", "category": "fan", "lang": "en", "leagues": ["premier_league"], "teams": ["chelsea"], "priority": 8},
-
-    {"id": "guardian-laliga", "name": "Guardian", "url": "https://www.theguardian.com/football/laligafootball/rss", "category": "news", "lang": "en", "leagues": ["la_liga"], "priority": 2},
-    {"id": "marca", "name": "Marca", "url": "https://e00-marca.uecdn.es/rss/futbol/primera-division.xml", "category": "news", "lang": "es", "leagues": ["la_liga"], "priority": 4},
-    {"id": "marca-en", "name": "Marca English", "url": "https://www.marca.com/en/rss/football.xml", "category": "news", "lang": "en", "match_leagues": ["la_liga"], "priority": 3},
-    {"id": "mundodeportivo", "name": "Mundo Deportivo", "url": "https://www.mundodeportivo.com/rss/futbol", "category": "news", "lang": "es", "match_leagues": ["la_liga"], "priority": 5},
-    {"id": "football-espana", "name": "Football Espana", "url": "https://www.football-espana.net/feed", "category": "news", "lang": "en", "leagues": ["la_liga"], "priority": 3},
-    {"id": "blaugranes", "name": "Barca Blaugranes", "url": "https://www.barcablaugranes.com/rss/index.xml", "category": "fan", "lang": "en", "leagues": ["la_liga"], "teams": ["barcelona"], "priority": 8},
-    {"id": "managingmadrid", "name": "Managing Madrid", "url": "https://www.managingmadrid.com/rss/index.xml", "category": "fan", "lang": "en", "leagues": ["la_liga"], "teams": ["real_madrid"], "priority": 8},
-    {"id": "intothecalderon", "name": "Into the Calderon", "url": "https://www.intothecalderon.com/rss/index.xml", "category": "fan", "lang": "en", "leagues": ["la_liga"], "teams": ["atletico"], "priority": 8},
-
-    {"id": "guardian-seriea", "name": "Guardian", "url": "https://www.theguardian.com/football/serieafootball/rss", "category": "news", "lang": "en", "leagues": ["serie_a"], "priority": 2},
-    {"id": "football-italia", "name": "Football Italia", "url": "https://football-italia.net/feed/", "category": "news", "lang": "en", "leagues": ["serie_a"], "priority": 3},
-    {"id": "corriere-seriea", "name": "Corriere dello Sport", "url": "https://www.corrieredellosport.it/rss/calcio/serie-a", "category": "news", "lang": "it", "leagues": ["serie_a"], "priority": 5},
-    {"id": "tuttosport", "name": "Tuttosport", "url": "https://www.tuttosport.com/rss/calcio", "category": "news", "lang": "it", "match_leagues": ["serie_a"], "priority": 5},
-    {"id": "goalazzo", "name": "Goalazzo", "url": "https://goalazzo.substack.com/feed", "category": "analysis", "lang": "en", "leagues": ["serie_a"], "priority": 6},
-    {"id": "sempremilan", "name": "Sempre Milan", "url": "https://sempremilan.com/feed", "category": "fan", "lang": "en", "leagues": ["serie_a"], "teams": ["milan"], "priority": 8},
-    {"id": "bwwro", "name": "Black & White & Read All Over", "url": "https://www.blackwhitereadallover.com/rss/index.xml", "category": "fan", "lang": "en", "leagues": ["serie_a"], "teams": ["juventus"], "priority": 8},
-
-    {"id": "guardian-bundesliga", "name": "Guardian", "url": "https://www.theguardian.com/football/bundesligafootball/rss", "category": "news", "lang": "en", "leagues": ["bundesliga"], "priority": 2},
-    {"id": "bundesliga-com", "name": "Bundesliga.com", "url": "https://www.bundesliga.com/en/bundesliga/news/rss", "category": "news", "lang": "en", "leagues": ["bundesliga"], "priority": 1},
-    {"id": "kicker", "name": "kicker", "url": "https://newsfeed.kicker.de/news/aktuell", "category": "news", "lang": "de", "match_leagues": ["bundesliga"], "priority": 5},
-    {"id": "sportschau", "name": "Sportschau", "url": "https://www.sportschau.de/fussball/index~rss2.xml", "category": "news", "lang": "de", "match_leagues": ["bundesliga"], "priority": 5},
-    {"id": "bfw", "name": "Bavarian Football Works", "url": "https://www.bavarianfootballworks.com/rss/index.xml", "category": "fan", "lang": "en", "leagues": ["bundesliga"], "teams": ["bayern"], "priority": 8},
-    {"id": "fearthewall", "name": "Fear The Wall", "url": "https://www.fearthewall.com/rss/index.xml", "category": "fan", "lang": "en", "leagues": ["bundesliga"], "teams": ["dortmund"], "priority": 8},
-
-    {"id": "guardian-ligue1", "name": "Guardian", "url": "https://www.theguardian.com/football/ligue1football/rss", "category": "news", "lang": "en", "leagues": ["ligue_1"], "priority": 2},
-    {"id": "rmc-ligue1", "name": "RMC Sport", "url": "https://rmcsport.bfmtv.com/rss/football/ligue-1/", "category": "news", "lang": "fr", "leagues": ["ligue_1"], "priority": 5},
-    {"id": "footmercato", "name": "Foot Mercato", "url": "https://www.footmercato.net/flux-rss", "category": "news", "lang": "fr", "match_leagues": ["ligue_1"], "priority": 5},
-    {"id": "lequipe-foot", "name": "L'Equipe", "url": "https://dwh.lequipe.fr/api/edito/rss?path=/Football/", "category": "news", "lang": "fr", "match_leagues": ["ligue_1"], "priority": 4},
-    {"id": "lequipe-ligue1", "name": "L'Equipe (ליג 1)", "url": "https://dwh.lequipe.fr/api/edito/rss?path=/Football/FRANCE/Ligue-1/", "category": "news", "lang": "fr", "leagues": ["ligue_1"], "priority": 4, "enabled": false},
-
-    {"id": "bbc-championship", "name": "BBC Sport", "url": "https://feeds.bbci.co.uk/sport/football/championship/rss.xml", "category": "news", "lang": "en", "leagues": ["championship"], "priority": 2},
-    {"id": "guardian-championship", "name": "Guardian", "url": "https://www.theguardian.com/football/championship/rss", "category": "news", "lang": "en", "leagues": ["championship"], "priority": 2},
-    {"id": "sky-championship", "name": "Sky Sports", "url": "https://www.skysports.com/rss/12206", "category": "news", "lang": "en", "leagues": ["championship"], "priority": 3},
-    {"id": "flw", "name": "Football League World", "url": "https://www.footballleagueworld.co.uk/feed/", "category": "news", "lang": "en", "leagues": ["championship"], "priority": 6},
-    {"id": "leedslive", "name": "Leeds Live", "url": "https://www.leeds-live.co.uk/?service=rss", "category": "news", "lang": "en", "match_leagues": ["premier_league", "championship"], "priority": 7},
-
-    {"id": "guardian-portugal", "name": "Guardian", "url": "https://www.theguardian.com/football/portugal/rss", "category": "news", "lang": "en", "leagues": ["liga_portugal"], "priority": 2},
-    {"id": "record", "name": "Record", "url": "https://www.record.pt/rss", "category": "news", "lang": "pt", "match_leagues": ["liga_portugal"], "priority": 5},
-    {"id": "maisfutebol", "name": "Maisfutebol", "url": "https://maisfutebol.iol.pt/rss", "category": "news", "lang": "pt", "match_leagues": ["liga_portugal"], "priority": 5},
-    {"id": "zerozero", "name": "Zerozero", "url": "https://www.zerozero.pt/rss/noticias.php", "category": "news", "lang": "pt", "match_leagues": ["liga_portugal"], "priority": 5},
-    {"id": "bolanarede", "name": "Bola na Rede", "url": "https://bolanarede.pt/feed", "category": "news", "lang": "pt", "match_leagues": ["liga_portugal"], "priority": 6},
-    {"id": "observador", "name": "Observador", "url": "https://observador.pt/seccao/desporto/feed/", "category": "news", "lang": "pt", "match_leagues": ["liga_portugal"], "priority": 5},
-
-    {"id": "nos", "name": "NOS Voetbal", "url": "https://feeds.nos.nl/nosvoetbal", "category": "news", "lang": "nl", "match_leagues": ["eredivisie"], "priority": 4},
-    {"id": "vi", "name": "Voetbal International", "url": "https://www.vi.nl/rss", "category": "news", "lang": "nl", "match_leagues": ["eredivisie"], "priority": 4},
-    {"id": "voetbalprimeur", "name": "Voetbalprimeur", "url": "https://www.voetbalprimeur.nl/rss/nieuws.xml", "category": "news", "lang": "nl", "match_leagues": ["eredivisie"], "priority": 5},
-    {"id": "ad-voetbal", "name": "AD Voetbal", "url": "https://www.ad.nl/voetbal/rss.xml", "category": "news", "lang": "nl", "match_leagues": ["eredivisie"], "priority": 5},
-    {"id": "nu-voetbal", "name": "NU.nl Voetbal", "url": "https://www.nu.nl/rss/Voetbal", "category": "news", "lang": "nl", "match_leagues": ["eredivisie"], "priority": 5},
-    {"id": "dutchnews", "name": "DutchNews", "url": "https://www.dutchnews.nl/category/football/feed/", "category": "news", "lang": "en", "match_leagues": ["eredivisie"], "priority": 3},
-    {"id": "omroepbrabant", "name": "Omroep Brabant", "url": "https://www.omroepbrabant.nl/rss", "category": "news", "lang": "nl", "match_leagues": ["eredivisie"], "priority": 7, "enabled": false},
-
-    {"id": "bbc-cl", "name": "BBC Sport", "url": "https://feeds.bbci.co.uk/sport/football/champions-league/rss.xml", "category": "news", "lang": "en", "leagues": ["champions_league"], "priority": 2},
-    {"id": "guardian-cl", "name": "Guardian", "url": "https://www.theguardian.com/football/championsleague/rss", "category": "news", "lang": "en", "leagues": ["champions_league"], "priority": 2},
-
-    {"id": "spielverlagerung", "name": "Spielverlagerung", "url": "https://spielverlagerung.com/feed/", "category": "analysis", "lang": "en", "keep_unmatched": true, "priority": 6},
-    {"id": "theanalyst", "name": "The Analyst", "url": "https://theanalyst.com/feed", "category": "analysis", "lang": "en", "keep_unmatched": true, "priority": 6},
-    {"id": "tgg", "name": "Training Ground Guru", "url": "https://trainingground.guru/feed", "category": "analysis", "lang": "en", "keep_unmatched": true, "priority": 6},
-    {"id": "scouted", "name": "Scouted Football", "url": "https://scoutedftbl.com/feed/", "category": "analysis", "lang": "en", "keep_unmatched": true, "priority": 6},
-
-    {"id": "bbc-football", "name": "BBC Sport", "url": "https://feeds.bbci.co.uk/sport/football/rss.xml", "category": "news", "lang": "en", "keep_unmatched": true, "priority": 3},
-    {"id": "guardian-football", "name": "Guardian", "url": "https://www.theguardian.com/football/rss", "category": "news", "lang": "en", "keep_unmatched": true, "priority": 3},
-    {"id": "fourfourtwo", "name": "FourFourTwo", "url": "https://www.fourfourtwo.com/feeds/all", "category": "news", "lang": "en", "keep_unmatched": true, "priority": 5}
+    {
+      "id": "bbc-pl",
+      "name": "BBC Sport",
+      "url": "https://feeds.bbci.co.uk/sport/football/premier-league/rss.xml",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "premier_league"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "guardian-pl",
+      "name": "Guardian",
+      "url": "https://www.theguardian.com/football/premierleague/rss",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "premier_league"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "sky-pl",
+      "name": "Sky Sports",
+      "url": "https://www.skysports.com/rss/12040",
+      "category": "news",
+      "lang": "en",
+      "match_leagues": [
+        "premier_league",
+        "championship"
+      ],
+      "priority": 3
+    },
+    {
+      "id": "arseblog",
+      "name": "Arseblog",
+      "url": "https://arseblog.com/feed/",
+      "category": "fan",
+      "lang": "en",
+      "leagues": [
+        "premier_league"
+      ],
+      "teams": [
+        "arsenal"
+      ],
+      "priority": 8
+    },
+    {
+      "id": "stretty",
+      "name": "Stretty News",
+      "url": "https://strettynews.com/feed/",
+      "category": "fan",
+      "lang": "en",
+      "leagues": [
+        "premier_league"
+      ],
+      "teams": [
+        "man_utd"
+      ],
+      "priority": 8
+    },
+    {
+      "id": "wagnh",
+      "name": "We Ain't Got No History",
+      "url": "https://weaintgotnohistory.sbnation.com/rss/index.xml",
+      "category": "fan",
+      "lang": "en",
+      "leagues": [
+        "premier_league"
+      ],
+      "teams": [
+        "chelsea"
+      ],
+      "priority": 8
+    },
+    {
+      "id": "guardian-laliga",
+      "name": "Guardian",
+      "url": "https://www.theguardian.com/football/laligafootball/rss",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "la_liga"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "marca",
+      "name": "Marca",
+      "url": "https://e00-marca.uecdn.es/rss/futbol/primera-division.xml",
+      "category": "news",
+      "lang": "es",
+      "leagues": [
+        "la_liga"
+      ],
+      "priority": 4
+    },
+    {
+      "id": "marca-en",
+      "name": "Marca English",
+      "url": "https://www.marca.com/en/rss/football.xml",
+      "category": "news",
+      "lang": "en",
+      "match_leagues": [
+        "la_liga"
+      ],
+      "priority": 3
+    },
+    {
+      "id": "mundodeportivo",
+      "name": "Mundo Deportivo",
+      "url": "https://www.mundodeportivo.com/rss/futbol",
+      "category": "news",
+      "lang": "es",
+      "match_leagues": [
+        "la_liga"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "football-espana",
+      "name": "Football Espana",
+      "url": "https://www.football-espana.net/feed",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "la_liga"
+      ],
+      "priority": 3
+    },
+    {
+      "id": "blaugranes",
+      "name": "Barca Blaugranes",
+      "url": "https://www.barcablaugranes.com/rss/index.xml",
+      "category": "fan",
+      "lang": "en",
+      "leagues": [
+        "la_liga"
+      ],
+      "teams": [
+        "barcelona"
+      ],
+      "priority": 8
+    },
+    {
+      "id": "managingmadrid",
+      "name": "Managing Madrid",
+      "url": "https://www.managingmadrid.com/rss/index.xml",
+      "category": "fan",
+      "lang": "en",
+      "leagues": [
+        "la_liga"
+      ],
+      "teams": [
+        "real_madrid"
+      ],
+      "priority": 8
+    },
+    {
+      "id": "intothecalderon",
+      "name": "Into the Calderon",
+      "url": "https://www.intothecalderon.com/rss/index.xml",
+      "category": "fan",
+      "lang": "en",
+      "leagues": [
+        "la_liga"
+      ],
+      "teams": [
+        "atletico"
+      ],
+      "priority": 8
+    },
+    {
+      "id": "guardian-seriea",
+      "name": "Guardian",
+      "url": "https://www.theguardian.com/football/serieafootball/rss",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "serie_a"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "football-italia",
+      "name": "Football Italia",
+      "url": "https://football-italia.net/feed/",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "serie_a"
+      ],
+      "priority": 3
+    },
+    {
+      "id": "corriere-seriea",
+      "name": "Corriere dello Sport",
+      "url": "https://www.corrieredellosport.it/rss/calcio/serie-a",
+      "category": "news",
+      "lang": "it",
+      "leagues": [
+        "serie_a"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "tuttosport",
+      "name": "Tuttosport",
+      "url": "https://www.tuttosport.com/rss/calcio",
+      "category": "news",
+      "lang": "it",
+      "match_leagues": [
+        "serie_a"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "goalazzo",
+      "name": "Goalazzo",
+      "url": "https://goalazzo.substack.com/feed",
+      "category": "analysis",
+      "lang": "en",
+      "leagues": [
+        "serie_a"
+      ],
+      "priority": 6
+    },
+    {
+      "id": "sempremilan",
+      "name": "Sempre Milan",
+      "url": "https://sempremilan.com/feed",
+      "category": "fan",
+      "lang": "en",
+      "leagues": [
+        "serie_a"
+      ],
+      "teams": [
+        "milan"
+      ],
+      "priority": 8
+    },
+    {
+      "id": "bwwro",
+      "name": "Black & White & Read All Over",
+      "url": "https://www.blackwhitereadallover.com/rss/index.xml",
+      "category": "fan",
+      "lang": "en",
+      "leagues": [
+        "serie_a"
+      ],
+      "teams": [
+        "juventus"
+      ],
+      "priority": 8
+    },
+    {
+      "id": "guardian-bundesliga",
+      "name": "Guardian",
+      "url": "https://www.theguardian.com/football/bundesligafootball/rss",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "bundesliga"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "bundesliga-com",
+      "name": "Bundesliga.com",
+      "url": "https://www.bundesliga.com/en/bundesliga/news/rss",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "bundesliga"
+      ],
+      "priority": 1
+    },
+    {
+      "id": "kicker",
+      "name": "kicker",
+      "url": "https://newsfeed.kicker.de/news/aktuell",
+      "category": "news",
+      "lang": "de",
+      "match_leagues": [
+        "bundesliga"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "sportschau",
+      "name": "Sportschau",
+      "url": "https://www.sportschau.de/fussball/index~rss2.xml",
+      "category": "news",
+      "lang": "de",
+      "match_leagues": [
+        "bundesliga"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "bfw",
+      "name": "Bavarian Football Works",
+      "url": "https://www.bavarianfootballworks.com/rss/index.xml",
+      "category": "fan",
+      "lang": "en",
+      "leagues": [
+        "bundesliga"
+      ],
+      "teams": [
+        "bayern"
+      ],
+      "priority": 8
+    },
+    {
+      "id": "fearthewall",
+      "name": "Fear The Wall",
+      "url": "https://www.fearthewall.com/rss/index.xml",
+      "category": "fan",
+      "lang": "en",
+      "leagues": [
+        "bundesliga"
+      ],
+      "teams": [
+        "dortmund"
+      ],
+      "priority": 8
+    },
+    {
+      "id": "guardian-ligue1",
+      "name": "Guardian",
+      "url": "https://www.theguardian.com/football/ligue1football/rss",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "ligue_1"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "rmc-ligue1",
+      "name": "RMC Sport",
+      "url": "https://rmcsport.bfmtv.com/rss/football/ligue-1/",
+      "category": "news",
+      "lang": "fr",
+      "leagues": [
+        "ligue_1"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "footmercato",
+      "name": "Foot Mercato",
+      "url": "https://www.footmercato.net/flux-rss",
+      "category": "news",
+      "lang": "fr",
+      "match_leagues": [
+        "ligue_1"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "lequipe-foot",
+      "name": "L'Equipe",
+      "url": "https://dwh.lequipe.fr/api/edito/rss?path=/Football/",
+      "category": "news",
+      "lang": "fr",
+      "match_leagues": [
+        "ligue_1"
+      ],
+      "priority": 4
+    },
+    {
+      "id": "lequipe-ligue1",
+      "name": "L'Equipe (ליג 1)",
+      "url": "https://dwh.lequipe.fr/api/edito/rss?path=/Football/FRANCE/Ligue-1/",
+      "category": "news",
+      "lang": "fr",
+      "leagues": [
+        "ligue_1"
+      ],
+      "priority": 4,
+      "enabled": false
+    },
+    {
+      "id": "bbc-championship",
+      "name": "BBC Sport",
+      "url": "https://feeds.bbci.co.uk/sport/football/championship/rss.xml",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "championship"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "guardian-championship",
+      "name": "Guardian",
+      "url": "https://www.theguardian.com/football/championship/rss",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "championship"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "sky-championship",
+      "name": "Sky Sports",
+      "url": "https://www.skysports.com/rss/12206",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "championship"
+      ],
+      "priority": 3
+    },
+    {
+      "id": "flw",
+      "name": "Football League World",
+      "url": "https://www.footballleagueworld.co.uk/feed/",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "championship"
+      ],
+      "priority": 6
+    },
+    {
+      "id": "leedslive",
+      "name": "Leeds Live",
+      "url": "https://www.leeds-live.co.uk/?service=rss",
+      "category": "news",
+      "lang": "en",
+      "match_leagues": [
+        "premier_league",
+        "championship"
+      ],
+      "priority": 7
+    },
+    {
+      "id": "guardian-portugal",
+      "name": "Guardian",
+      "url": "https://www.theguardian.com/football/portugal/rss",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "liga_portugal"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "record",
+      "name": "Record",
+      "url": "https://www.record.pt/rss",
+      "category": "news",
+      "lang": "pt",
+      "match_leagues": [
+        "liga_portugal"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "maisfutebol",
+      "name": "Maisfutebol",
+      "url": "https://maisfutebol.iol.pt/rss",
+      "category": "news",
+      "lang": "pt",
+      "match_leagues": [
+        "liga_portugal"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "zerozero",
+      "name": "Zerozero",
+      "url": "https://www.zerozero.pt/rss/noticias.php",
+      "category": "news",
+      "lang": "pt",
+      "match_leagues": [
+        "liga_portugal"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "bolanarede",
+      "name": "Bola na Rede",
+      "url": "https://bolanarede.pt/feed",
+      "category": "news",
+      "lang": "pt",
+      "match_leagues": [
+        "liga_portugal"
+      ],
+      "priority": 6
+    },
+    {
+      "id": "observador",
+      "name": "Observador",
+      "url": "https://observador.pt/seccao/desporto/feed/",
+      "category": "news",
+      "lang": "pt",
+      "match_leagues": [
+        "liga_portugal"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "nos",
+      "name": "NOS Voetbal",
+      "url": "https://feeds.nos.nl/nosvoetbal",
+      "category": "news",
+      "lang": "nl",
+      "match_leagues": [
+        "eredivisie"
+      ],
+      "priority": 4
+    },
+    {
+      "id": "vi",
+      "name": "Voetbal International",
+      "url": "https://www.vi.nl/rss",
+      "category": "news",
+      "lang": "nl",
+      "match_leagues": [
+        "eredivisie"
+      ],
+      "priority": 4
+    },
+    {
+      "id": "voetbalprimeur",
+      "name": "Voetbalprimeur",
+      "url": "https://www.voetbalprimeur.nl/rss/nieuws.xml",
+      "category": "news",
+      "lang": "nl",
+      "match_leagues": [
+        "eredivisie"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "ad-voetbal",
+      "name": "AD Voetbal",
+      "url": "https://www.ad.nl/voetbal/rss.xml",
+      "category": "news",
+      "lang": "nl",
+      "match_leagues": [
+        "eredivisie"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "nu-voetbal",
+      "name": "NU.nl Voetbal",
+      "url": "https://www.nu.nl/rss/Voetbal",
+      "category": "news",
+      "lang": "nl",
+      "match_leagues": [
+        "eredivisie"
+      ],
+      "priority": 5
+    },
+    {
+      "id": "dutchnews",
+      "name": "DutchNews",
+      "url": "https://www.dutchnews.nl/category/football/feed/",
+      "category": "news",
+      "lang": "en",
+      "match_leagues": [
+        "eredivisie"
+      ],
+      "priority": 3
+    },
+    {
+      "id": "omroepbrabant",
+      "name": "Omroep Brabant",
+      "url": "https://www.omroepbrabant.nl/rss",
+      "category": "news",
+      "lang": "nl",
+      "match_leagues": [
+        "eredivisie"
+      ],
+      "priority": 7,
+      "enabled": false
+    },
+    {
+      "id": "bbc-cl",
+      "name": "BBC Sport",
+      "url": "https://feeds.bbci.co.uk/sport/football/champions-league/rss.xml",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "champions_league"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "guardian-cl",
+      "name": "Guardian",
+      "url": "https://www.theguardian.com/football/championsleague/rss",
+      "category": "news",
+      "lang": "en",
+      "leagues": [
+        "champions_league"
+      ],
+      "priority": 2
+    },
+    {
+      "id": "spielverlagerung",
+      "name": "Spielverlagerung",
+      "url": "https://spielverlagerung.com/feed/",
+      "category": "analysis",
+      "lang": "en",
+      "keep_unmatched": true,
+      "priority": 6
+    },
+    {
+      "id": "theanalyst",
+      "name": "The Analyst",
+      "url": "https://theanalyst.com/feed",
+      "category": "analysis",
+      "lang": "en",
+      "keep_unmatched": true,
+      "priority": 6
+    },
+    {
+      "id": "tgg",
+      "name": "Training Ground Guru",
+      "url": "https://trainingground.guru/feed",
+      "category": "analysis",
+      "lang": "en",
+      "keep_unmatched": true,
+      "priority": 6
+    },
+    {
+      "id": "scouted",
+      "name": "Scouted Football",
+      "url": "https://scoutedftbl.com/feed/",
+      "category": "analysis",
+      "lang": "en",
+      "keep_unmatched": true,
+      "priority": 6
+    },
+    {
+      "id": "bbc-football",
+      "name": "BBC Sport",
+      "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
+      "category": "news",
+      "lang": "en",
+      "keep_unmatched": true,
+      "priority": 3
+    },
+    {
+      "id": "guardian-football",
+      "name": "Guardian",
+      "url": "https://www.theguardian.com/football/rss",
+      "category": "news",
+      "lang": "en",
+      "keep_unmatched": true,
+      "priority": 3
+    },
+    {
+      "id": "fourfourtwo",
+      "name": "FourFourTwo",
+      "url": "https://www.fourfourtwo.com/feeds/all",
+      "category": "news",
+      "lang": "en",
+      "keep_unmatched": true,
+      "priority": 5
+    },
+    {
+      "id": "yt-premierleague",
+      "name": "Premier League (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCG5qGWdu8nIRZqJ_GgDwQ-w",
+      "category": "video",
+      "lang": "en",
+      "priority": 5,
+      "leagues": [
+        "premier_league"
+      ]
+    },
+    {
+      "id": "yt-laliga",
+      "name": "LALIGA (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCTv-XvfzLX3i4IGWAm4sbmA",
+      "category": "video",
+      "lang": "es",
+      "priority": 5,
+      "leagues": [
+        "la_liga"
+      ]
+    },
+    {
+      "id": "yt-seriea",
+      "name": "Serie A (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCBJeMCIeLQos7wacox4hmLQ",
+      "category": "video",
+      "lang": "en",
+      "priority": 5,
+      "leagues": [
+        "serie_a"
+      ]
+    },
+    {
+      "id": "yt-bundesliga",
+      "name": "Bundesliga (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC6UL29enLNe4mqwTfAyeNuw",
+      "category": "video",
+      "lang": "en",
+      "priority": 5,
+      "leagues": [
+        "bundesliga"
+      ]
+    },
+    {
+      "id": "yt-ligue1",
+      "name": "Ligue 1 (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCQsH5XtIc9hONE1BQjucM0g",
+      "category": "video",
+      "lang": "fr",
+      "priority": 5,
+      "leagues": [
+        "ligue_1"
+      ]
+    },
+    {
+      "id": "yt-ligaportugal",
+      "name": "Liga Portugal (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCOY_cGXSOJdlYxdDP9PiBHQ",
+      "category": "video",
+      "lang": "pt",
+      "priority": 5,
+      "leagues": [
+        "liga_portugal"
+      ]
+    },
+    {
+      "id": "yt-uefa",
+      "name": "UEFA (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCyGa1YEx9ST66rYrJTGIKOw",
+      "category": "video",
+      "lang": "en",
+      "priority": 5,
+      "leagues": [
+        "champions_league"
+      ]
+    },
+    {
+      "id": "yt-sky-football",
+      "name": "Sky Sports Football",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCZ7wY7MRDSygp63HIEfdQZA",
+      "category": "video",
+      "lang": "en",
+      "priority": 6,
+      "match_leagues": [
+        "championship"
+      ]
+    },
+    {
+      "id": "yt-espnnl",
+      "name": "ESPN NL",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCXnPiEv1DoUCDAqDUXT9shQ",
+      "category": "video",
+      "lang": "nl",
+      "priority": 6,
+      "match_leagues": [
+        "eredivisie"
+      ]
+    },
+    {
+      "id": "yt-tifo",
+      "name": "Tifo Football",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCGYYNGmyhZ_kwBF_lqqXdAQ",
+      "category": "video",
+      "lang": "en",
+      "priority": 6,
+      "keep_unmatched": true
+    },
+    {
+      "id": "yt-coachesvoice",
+      "name": "Coaches' Voice",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCuR-ZdVJtF3muYhYUQ-he-Q",
+      "category": "video",
+      "lang": "en",
+      "priority": 6,
+      "keep_unmatched": true
+    },
+    {
+      "id": "yt-club-arsenal",
+      "name": "Arsenal (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCpryVRk_VDudG8SHXgWcG0w",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "premier_league"
+      ],
+      "teams": [
+        "arsenal"
+      ]
+    },
+    {
+      "id": "yt-club-mancity",
+      "name": "Manchester City (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCkzCjdRMrW2vXLx8mvPVLdQ",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "premier_league"
+      ],
+      "teams": [
+        "man_city"
+      ]
+    },
+    {
+      "id": "yt-club-manutd",
+      "name": "Manchester United (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC6yW44UGJJBvYTlfC7CRg2Q",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "premier_league"
+      ],
+      "teams": [
+        "man_utd"
+      ]
+    },
+    {
+      "id": "yt-club-liverpool",
+      "name": "Liverpool (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC9LQwHZoucFT94I2h6JOcjw",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "premier_league"
+      ],
+      "teams": [
+        "liverpool"
+      ]
+    },
+    {
+      "id": "yt-club-realmadrid",
+      "name": "Real Madrid (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCWV3obpZVGgJ3j9FVhEjF2Q",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "la_liga"
+      ],
+      "teams": [
+        "real_madrid"
+      ]
+    },
+    {
+      "id": "yt-club-barcelona",
+      "name": "Barcelona (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC14UlmYlSNiQCBe9Eookf_A",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "la_liga"
+      ],
+      "teams": [
+        "barcelona"
+      ]
+    },
+    {
+      "id": "yt-club-bayern",
+      "name": "Bayern Munich (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCZkcxFIsqW5htimoUQKA0iA",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "bundesliga"
+      ],
+      "teams": [
+        "bayern"
+      ]
+    },
+    {
+      "id": "yt-club-dortmund",
+      "name": "Borussia Dortmund (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCK8rTVgp3-MebXkmeJcQb1Q",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "bundesliga"
+      ],
+      "teams": [
+        "dortmund"
+      ]
+    },
+    {
+      "id": "yt-club-juventus",
+      "name": "Juventus (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCLzKhsxrExAC6yAdtZ-BOWw",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "serie_a"
+      ],
+      "teams": [
+        "juventus"
+      ]
+    },
+    {
+      "id": "yt-club-inter",
+      "name": "Inter (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCvXzEblUa0cfny4HAJ_ZOWw",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "serie_a"
+      ],
+      "teams": [
+        "inter"
+      ]
+    },
+    {
+      "id": "yt-club-milan",
+      "name": "AC Milan (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCKcx1uK38H4AOkmfv4ywlrg",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "serie_a"
+      ],
+      "teams": [
+        "milan"
+      ]
+    },
+    {
+      "id": "yt-club-psg",
+      "name": "Paris Saint-Germain (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCt9a_qP9CqHCNwilf-iULag",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "ligue_1"
+      ],
+      "teams": [
+        "psg"
+      ]
+    },
+    {
+      "id": "yt-club-ajax",
+      "name": "Ajax (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCGpf7WX7R1one-NwOvg_PbQ",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "eredivisie"
+      ],
+      "teams": [
+        "ajax"
+      ]
+    },
+    {
+      "id": "yt-club-psv",
+      "name": "PSV (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC_2ynsXrRrKP8zYrU7Hc06A",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "eredivisie"
+      ],
+      "teams": [
+        "psv"
+      ]
+    },
+    {
+      "id": "yt-club-feyenoord",
+      "name": "Feyenoord (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCg_DGzRRIQlXpHxCrMMiAIQ",
+      "category": "video",
+      "lang": "en",
+      "priority": 7,
+      "leagues": [
+        "eredivisie"
+      ],
+      "teams": [
+        "feyenoord"
+      ]
+    },
+    {
+      "id": "yt-club-benfica",
+      "name": "Benfica (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC8zrah5cNf2c3jKKeD_Z3fw",
+      "category": "video",
+      "lang": "pt",
+      "priority": 7,
+      "leagues": [
+        "liga_portugal"
+      ],
+      "teams": [
+        "benfica"
+      ]
+    },
+    {
+      "id": "yt-club-porto",
+      "name": "FC Porto (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCQegzQwEExHgXvm_yHptzQg",
+      "category": "video",
+      "lang": "pt",
+      "priority": 7,
+      "leagues": [
+        "liga_portugal"
+      ],
+      "teams": [
+        "porto"
+      ]
+    },
+    {
+      "id": "yt-club-sporting",
+      "name": "Sporting CP (רשמי)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCnJj6L93JX3Jrhzv81ayywA",
+      "category": "video",
+      "lang": "pt",
+      "priority": 7,
+      "leagues": [
+        "liga_portugal"
+      ],
+      "teams": [
+        "sporting"
+      ]
+    }
   ]
 }

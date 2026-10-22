@@ -2,7 +2,7 @@
 
 const TZ = "Asia/Jerusalem";
 const PAGE = 60;
-const CAT_LABEL = { news: "חדשות", analysis: "ניתוח", fan: "אוהדים" };
+const CAT_LABEL = { news: "חדשות", analysis: "ניתוח", fan: "אוהדים", video: "וידאו" };
 
 const $ = (id) => document.getElementById(id);
 
@@ -198,6 +198,8 @@ function renderCard(it, rx) {
   const card = el("article", "card" + (state.read.has(it.id) ? " read" : "") + (it.dup_of ? " dup" : ""));
   card.dataset.id = it.id;
 
+  if (it.video_id) card.classList.add("video");
+
   if (it.image) {
     const img = el("img", "thumb");
     img.src = it.image;
@@ -205,7 +207,16 @@ function renderCard(it, rx) {
     img.loading = "lazy";
     img.referrerPolicy = "no-referrer";
     img.addEventListener("error", () => img.remove());
-    card.append(img);
+    if (it.video_id) {
+      const wrap = el("button", "thumb-wrap");
+      wrap.type = "button";
+      wrap.setAttribute("aria-label", "נגן: " + it.title);
+      wrap.append(img, el("span", "play", "▶"));
+      wrap.addEventListener("click", () => togglePlayer(card, it));
+      card.append(wrap);
+    } else {
+      card.append(img);
+    }
   }
 
   const meta = el("div", "meta");
@@ -246,6 +257,11 @@ function renderCard(it, rx) {
   save.addEventListener("click", () => toggleSaved(it));
   const read = el("button", state.read.has(it.id) ? "on" : "", state.read.has(it.id) ? "✓ נקרא" : "סמן כנקרא");
   read.addEventListener("click", () => setRead(it.id, !state.read.has(it.id)));
+  if (it.video_id) {
+    const play = el("button", "", "▶ נגן");
+    play.addEventListener("click", () => togglePlayer(card, it));
+    acts.append(play);
+  }
   acts.append(save, read);
   if (it.also && it.also.length) {
     const more = el("button", "", `עוד ${it.also.length} מקורות`);
@@ -268,6 +284,75 @@ function renderCard(it, rx) {
   }
   card.append(acts);
   return card;
+}
+
+// ---------- נגן יוטיוב מוטמע ----------
+let ytApi = null;
+function loadYT() {
+  if (ytApi) return ytApi;
+  ytApi = new Promise((resolve, reject) => {
+    if (window.YT && window.YT.Player) return resolve(window.YT);
+    const prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => { if (prev) prev(); resolve(window.YT); };
+    const sc = document.createElement("script");
+    sc.src = "https://www.youtube.com/iframe_api";
+    sc.onerror = () => reject(new Error("api"));
+    document.head.append(sc);
+    setTimeout(() => reject(new Error("timeout")), 6000);
+  });
+  ytApi.catch(() => { ytApi = null; });
+  return ytApi;
+}
+
+function togglePlayer(card, it) {
+  const existing = card.querySelector(".player");
+  if (existing) { existing.remove(); return; }
+  setReadQuiet(it.id);
+  const box = el("div", "player");
+  const frame = el("div", "frame");
+  const slot = el("div");
+  frame.append(slot);
+  const note = el("p", "player-note");
+  const watchLink = document.createElement("a");
+  watchLink.href = it.link;
+  watchLink.target = "_blank";
+  watchLink.rel = "noopener noreferrer";
+  watchLink.textContent = "פתח ביוטיוב ↗";
+  note.append("לא נטען? ", watchLink);
+  box.append(frame, note);
+  card.append(box);
+
+  const fail = () => {
+    frame.remove();
+    note.textContent = "";
+    note.append("הסרטון חסום להטמעה או לצפייה במדינה שלך. ", watchLink);
+    note.classList.add("err");
+  };
+  const plainIframe = () => {
+    const f = document.createElement("iframe");
+    f.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(it.video_id)}?autoplay=1&rel=0&playsinline=1`;
+    f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+    f.allowFullscreen = true;
+    f.title = it.title;
+    slot.replaceWith(f);
+  };
+  loadYT().then((YT) => {
+    new YT.Player(slot, {
+      videoId: it.video_id,
+      host: "https://www.youtube-nocookie.com",
+      playerVars: { autoplay: 1, rel: 0, playsinline: 1 },
+      events: { onError: fail },
+    });
+  }).catch(plainIframe);
+}
+
+function setReadQuiet(id) {
+  // מסמן כנקרא בלי לצייר מחדש (כדי לא להרוס את הנגן שנפתח)
+  if (state.read.has(id)) return;
+  state.read.add(id);
+  store.set("fh_read", [...state.read]);
+  const c = document.querySelector(`.card[data-id="${id}"]`);
+  if (c) c.classList.add("read");
 }
 
 function render() {
