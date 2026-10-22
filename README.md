@@ -25,6 +25,12 @@ python3 scripts/collect.py --only bbc-pl
 ## להוסיף / להסיר ליגה או קבוצה
 ב-`leagues` ב-`config/config.json`. בתחילת כל עונה (עליות וירידות) מריצים `python3 tools/check_teams.py`: הוא משווה את הרשימות לטבלאות העדכניות ומראה מה חסר או מיותר.
 
+## זוויות לציוץ
+כפתור "✍ זווית לציוץ" מופיע ליד כתבות מרובות-מקורות או כתבות ניתוח, ליד ניתוחי משחק ובמושג השבועי. הטיוטות נוצרות מראש ב-Action (בגלל שמפתח ה-API לא יכול לשבת בדפדפן), ולכן אין יצירה "לפי דרישה". `ai.tweets.max_per_run` שולט בכמה כתבות בכל הרצה (0 = כבוי), ו-`ai.tweets.language` בשפת הציוץ (`he` / `en`).
+
+## התקנה על הטלפון
+פותחים את האתר ב-Safari או Chrome ← שיתוף ← "הוסף למסך הבית".
+
 ## הפעלת שכבת Claude (רק אחרי שאישרת עלות)
 1. ב-GitHub: Settings ← Secrets and variables ← Actions ← New repository secret, שם `ANTHROPIC_API_KEY`.
 2. ב-`config/config.json` תחת `ai`: בוחרים מודלים ב-`models`, מגדירים `monthly_budget_usd`, ומשנים `enabled` ל-`true`.
