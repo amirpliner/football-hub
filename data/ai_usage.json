@@ -1,0 +1,24 @@
+{
+ "months": {
+  "2026-10": {
+   "cost_usd": 0.0586,
+   "calls": 5,
+   "by_job": {
+    "summaries": {
+     "model": "claude-haiku-5-5",
+     "calls": 2,
+     "in": 7471,
+     "out": 6079,
+     "cost_usd": 0.00378
+    },
+    "analysis": {
+     "model": "claude-sonnet-5-5",
+     "calls": 3,
+     "in": 7186,
+     "out": 4045,
+     "cost_usd": 0.05482
+    }
+   }
+  }
+ }
+}
