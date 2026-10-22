@@ -175,3 +175,40 @@ dialog::backdrop { background: rgba(0,0,0,.55); }
   .filters select { flex: 1 1 45%; }
   h1 { font-size: 1.3rem; }
 }
+
+/* ---------- משחקים וטבלאות ---------- */
+body[data-view="matches"] .filters, body[data-view="tables"] .filters,
+body[data-view="matches"] #btn-filters, body[data-view="tables"] #btn-filters { display: none; }
+.sec { margin: 22px 0 4px; font-size: 1.05rem; font-weight: 900; }
+.lg { margin: 12px 0 2px; font-size: .8rem; color: var(--accent); font-weight: 700; }
+.match {
+  display: grid; grid-template-columns: 56px 1fr auto 1fr; align-items: center; gap: 8px;
+  padding: 9px 0; border-bottom: 1px solid var(--line); text-decoration: none; font-size: .95rem;
+}
+a.match:hover { background: var(--surface); }
+.match .when { color: var(--muted); font-size: .8rem; }
+.match .when.live { color: var(--accent); font-weight: 700; }
+.match .team { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.match .team.away { justify-content: flex-end; flex-direction: row-reverse; }
+.match .team img, .tbl img { width: 20px; height: 20px; object-fit: contain; flex: none; }
+.match .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.match .mid { display: flex; gap: 6px; align-items: center; justify-content: center; min-width: 64px; font-weight: 900; font-variant-numeric: tabular-nums; }
+.match .dash { color: var(--muted); font-weight: 400; font-size: .8rem; }
+.match.pre .dash { font-size: .75rem; }
+.match .sc { min-width: 1ch; text-align: center; }
+
+.tbl-wrap { overflow-x: auto; }
+.tbl { width: 100%; border-collapse: collapse; font-size: .9rem; font-variant-numeric: tabular-nums; }
+.tbl th { color: var(--muted); font-weight: 400; font-size: .75rem; text-align: center; padding: 4px 6px; border-bottom: 1px solid var(--line); }
+.tbl td { padding: 7px 6px; text-align: center; border-bottom: 1px solid var(--line); }
+.tbl .t { text-align: start; width: 100%; }
+.tbl td.t { display: flex; align-items: center; gap: 8px; }
+.tbl th.t { text-align: start; }
+.tbl .r { color: var(--muted); width: 1%; }
+.tbl .p { font-weight: 900; }
+
+@media (max-width: 560px) {
+  .match { grid-template-columns: 44px 1fr auto 1fr; gap: 6px; font-size: .88rem; }
+  .match .team img { width: 18px; height: 18px; }
+  .tbl .x { display: none; }
+}

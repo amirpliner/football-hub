@@ -24,6 +24,9 @@ jobs:
           python-version: "3.11"
       - name: Run collector
         run: python3 scripts/collect.py
+      - name: Collect matches and tables
+        run: python3 scripts/collect_matches.py
+        continue-on-error: true   # ESPN לא רשמי: כשל שם לא יפיל את איסוף הכתבות
       - name: Commit updated data
         run: |
           git config user.name "football-bot"

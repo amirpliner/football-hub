@@ -19,6 +19,8 @@ const store = {
 
 const state = {
   items: [],
+  matches: [],
+  standings: {},
   leagues: {},     // id -> {name_he, teams}
   teamName: {},    // id -> שם
   teamLeague: {},  // id -> ליגה
@@ -55,10 +57,19 @@ function ago(date) {
 // ---------- טעינה ----------
 async function load() {
   try {
-    const [cfgRes, dataRes] = await Promise.all([
+    const [cfgRes, dataRes, matchRes] = await Promise.all([
       fetch("config/config.json", { cache: "no-cache" }),
       fetch("data/articles.json", { cache: "no-cache" }),
+      fetch("data/matches.json", { cache: "no-cache" }).catch(() => null),
     ]);
+    if (matchRes && matchRes.ok) {  // נתוני משחקים הם בונוס: אם חסרים, שאר האתר ממשיך לעבוד
+      try {
+        const md = await matchRes.json();
+        state.matches = md.matches || [];
+        state.standings = md.standings || {};
+        state.matchesAt = new Date(md.generated_at);
+      } catch (e) { /* ignore */ }
+    }
     if (!cfgRes.ok || !dataRes.ok) throw new Error(`HTTP ${cfgRes.status}/${dataRes.status}`);
     const cfg = await cfgRes.json();
     const data = await dataRes.json();
@@ -356,6 +367,10 @@ function setReadQuiet(id) {
 }
 
 function render() {
+  document.body.dataset.view = state.view;
+  if (state.view === "matches") return renderMatches();
+  if (state.view === "tables") return renderTables();
+  $("more").hidden = true;
   const rx = watchRegex();
   const items = visibleItems();
   const list = $("list");
@@ -375,6 +390,114 @@ function render() {
   $("n-saved").textContent = Object.keys(state.saved).length || "";
   $("n-watch").textContent = state.watch.length
     ? state.items.filter((i) => !i.dup_of && matchesWatch(i, rx)).length || "" : "";
+}
+
+// ---------- משחקים וטבלאות ----------
+function updatedLabel() {
+  return state.matchesAt ? `עודכן ${fmtDay.format(state.matchesAt)} ${fmtTime.format(state.matchesAt)} · נתוני ESPN, לא בזמן אמת` : "";
+}
+
+function matchRow(m) {
+  const row = document.createElement(m.link ? "a" : "div");
+  row.className = "match " + m.state;
+  if (m.link) { row.href = m.link; row.target = "_blank"; row.rel = "noopener noreferrer"; }
+  const date = new Date(m.date);
+  const when = el("span", "when");
+  if (m.state === "pre") when.textContent = fmtTime.format(date);
+  else if (m.state === "in") { when.textContent = m.detail; when.classList.add("live"); }
+  else when.textContent = m.detail === "FT" ? "סיום" : m.detail;
+  const side = (t, cls) => {
+    const s = el("span", "team " + cls);
+    if (t.logo) {
+      const img = el("img");
+      img.src = t.logo; img.alt = ""; img.loading = "lazy"; img.referrerPolicy = "no-referrer";
+      img.addEventListener("error", () => img.remove());
+      s.append(img);
+    }
+    s.append(el("span", "nm", t.short));
+    return s;
+  };
+  const sc = (v) => el("span", "sc", v == null ? "" : String(v));
+  const hasScore = m.state !== "pre";
+  const mid = el("span", "mid");
+  mid.append(hasScore ? sc(m.home.score) : el("span", "sc", ""), el("span", "dash", hasScore ? "–" : "נגד"), hasScore ? sc(m.away.score) : el("span", "sc", ""));
+  row.append(when, side(m.home, "home"), mid, side(m.away, "away"));
+  return row;
+}
+
+function renderMatches() {
+  const list = $("list");
+  list.textContent = "";
+  $("more").hidden = true;
+  const lg = state.filters.league;
+  const ms = state.matches.filter((m) => !lg || m.league === lg);
+  if (!ms.length) {
+    $("status").textContent = state.matches.length ? "אין משחקים בליגה הזו בטווח התאריכים." : "אין נתוני משחקים.";
+    return;
+  }
+  $("status").textContent = updatedLabel();
+  const live = ms.filter((m) => m.state === "in");
+  const upcoming = ms.filter((m) => m.state === "pre").sort((a, b) => a.date.localeCompare(b.date));
+  const done = ms.filter((m) => m.state === "post").sort((a, b) => b.date.localeCompare(a.date));
+  const section = (title, arr) => {
+    if (!arr.length) return;
+    list.append(el("h3", "sec", title));
+    let lastDay = "", lastLeague = "";
+    for (const m of arr) {
+      const d = new Date(m.date);
+      const label = dayLabel(d);
+      if (label !== lastDay) { list.append(el("div", "day", label)); lastDay = label; lastLeague = ""; }
+      if (!lg && m.league !== lastLeague) {
+        list.append(el("div", "lg", state.leagues[m.league] ? state.leagues[m.league].name_he : m.league));
+        lastLeague = m.league;
+      }
+      list.append(matchRow(m));
+    }
+  };
+  section("משחקים חיים", live);
+  section("משחקים קרובים", upcoming);
+  section("תוצאות אחרונות", done);
+}
+
+function renderTables() {
+  const list = $("list");
+  list.textContent = "";
+  $("more").hidden = true;
+  const ids = Object.keys(state.leagues).filter((l) => state.standings[l] && (!state.filters.league || l === state.filters.league));
+  if (!ids.length) { $("status").textContent = "אין נתוני טבלה."; return; }
+  $("status").textContent = updatedLabel();
+  for (const lid of ids) {
+    for (const t of state.standings[lid]) {
+      const wrap = el("section", "tbl-wrap");
+      const title = state.leagues[lid].name_he + (state.standings[lid].length > 1 && t.name ? " · " + t.name : "");
+      wrap.append(el("h3", "sec", title));
+      const table = el("table", "tbl");
+      const head = el("tr");
+      for (const [h, cls] of [["#", "r"], ["קבוצה", "t"], ["מש׳", ""], ["נצ׳", "x"], ["תק׳", "x"], ["הפ׳", "x"], ["שערים", "x"], ["הפרש", ""], ["נק׳", "p"]]) {
+        head.append(el("th", cls, h));
+      }
+      table.append(head);
+      for (const r of t.rows) {
+        const tr = el("tr");
+        tr.append(el("td", "r", r.rank));
+        const td = el("td", "t");
+        if (r.logo) {
+          const img = el("img");
+          img.src = r.logo; img.alt = ""; img.loading = "lazy"; img.referrerPolicy = "no-referrer";
+          img.addEventListener("error", () => img.remove());
+          td.append(img);
+        }
+        td.append(el("span", null, r.team));
+        tr.append(td);
+        const ltr = (cls, text) => { const c = el("td", cls, text); c.dir = "ltr"; return c; };  // כדי ש-"+12" לא יתהפך ל-"12+"
+        tr.append(el("td", "", r.gp), el("td", "x", r.w), el("td", "x", r.d), el("td", "x", r.l),
+          ltr("x", `${r.gf}:${r.ga}`), ltr("", r.gd > 0 ? "+" + r.gd : String(r.gd)), el("td", "p", r.pts));
+        table.append(tr);
+      }
+      wrap.append(table);
+      list.append(wrap);
+    }
+  }
 }
 
 // ---------- פעולות ----------

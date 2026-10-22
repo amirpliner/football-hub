@@ -4,6 +4,8 @@
 - `config/config.json` – **קובץ ההגדרות היחיד**: ליגות, קבוצות (לזיהוי אוטומטי), מקורות RSS, כמה ימים לשמור.
 - `scripts/collect.py` – אוסף את הכתבות ושומר ל-`data/articles.json` (ו-`data/status.json` עם מצב כל מקור).
 - `.github/workflows/collect.yml` – מריץ את הסקריפט 4 פעמים ביום, וגם ידנית.
+- `scripts/collect_matches.py` – משחקים וטבלאות מה-API הציבורי של ESPN ל-`data/matches.json`.
+- `tools/check_teams.py` – בדיקת רשימות הקבוצות מול הטבלאות.
 - `tools/check_feeds.py` – בודק אם כתובת RSS חדשה באמת עובדת, לפני שמוסיפים אותה.
 
 ## הרצה מקומית
@@ -20,4 +22,4 @@ python3 scripts/collect.py --only bbc-pl
 - `keep_unmatched` – שומרים הכול (כללי / ניתוח).
 
 ## להוסיף / להסיר ליגה או קבוצה
-ב-`leagues` ב-`config/config.json`. רשימות הקבוצות מבוססות על עונת 2025-26 – **צריך לעדכן עלייה/ירידה** בתחילת כל עונה.
+ב-`leagues` ב-`config/config.json`. בתחילת כל עונה (עליות וירידות) מריצים `python3 tools/check_teams.py`: הוא משווה את הרשימות לטבלאות העדכניות ומראה מה חסר או מיותר.

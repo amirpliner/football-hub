@@ -55,12 +55,6 @@
             "Brighton"
           ]
         },
-        "burnley": {
-          "name": "Burnley",
-          "aliases": [
-            "Burnley"
-          ]
-        },
         "chelsea": {
           "name": "Chelsea",
           "aliases": [
@@ -138,17 +132,23 @@
             "Spurs"
           ]
         },
-        "west_ham": {
-          "name": "West Ham",
+        "hull": {
+          "name": "Hull City",
           "aliases": [
-            "West Ham"
+            "Hull City",
+            "Hull"
           ]
         },
-        "wolves": {
-          "name": "Wolves",
+        "ipswich": {
+          "name": "Ipswich",
           "aliases": [
-            "Wolves",
-            "Wolverhampton"
+            "Ipswich"
+          ]
+        },
+        "coventry": {
+          "name": "Coventry",
+          "aliases": [
+            "Coventry"
           ]
         }
       }
@@ -214,22 +214,10 @@
             "Getafe"
           ]
         },
-        "girona": {
-          "name": "Girona",
-          "aliases": [
-            "Girona"
-          ]
-        },
         "levante": {
           "name": "Levante",
           "aliases": [
             "Levante"
-          ]
-        },
-        "mallorca": {
-          "name": "Mallorca",
-          "aliases": [
-            "Mallorca"
           ]
         },
         "osasuna": {
@@ -259,13 +247,6 @@
             "Los Blancos"
           ]
         },
-        "real_oviedo": {
-          "name": "Real Oviedo",
-          "aliases": [
-            "Real Oviedo",
-            "Oviedo"
-          ]
-        },
         "real_sociedad": {
           "name": "Real Sociedad",
           "aliases": [
@@ -288,6 +269,27 @@
           "name": "Villarreal",
           "aliases": [
             "Villarreal"
+          ]
+        },
+        "deportivo": {
+          "name": "Deportivo La Coruña",
+          "aliases": [
+            "Deportivo La Coruña",
+            "Deportivo"
+          ]
+        },
+        "racing": {
+          "name": "Racing Santander",
+          "aliases": [
+            "Racing Santander",
+            "Racing de Santander"
+          ]
+        },
+        "malaga": {
+          "name": "Málaga",
+          "aliases": [
+            "Málaga",
+            "Malaga"
           ]
         }
       }
@@ -319,12 +321,6 @@
             "Como"
           ]
         },
-        "cremonese": {
-          "name": "Cremonese",
-          "aliases": [
-            "Cremonese"
-          ]
-        },
         "fiorentina": {
           "name": "Fiorentina",
           "aliases": [
@@ -335,13 +331,6 @@
           "name": "Genoa",
           "aliases": [
             "Genoa"
-          ]
-        },
-        "verona": {
-          "name": "Hellas Verona",
-          "aliases": [
-            "Hellas Verona",
-            "Verona"
           ]
         },
         "inter": {
@@ -389,12 +378,6 @@
             "Parma"
           ]
         },
-        "pisa": {
-          "name": "Pisa",
-          "aliases": [
-            "Pisa"
-          ]
-        },
         "roma": {
           "name": "Roma",
           "aliases": [
@@ -418,6 +401,24 @@
           "name": "Udinese",
           "aliases": [
             "Udinese"
+          ]
+        },
+        "frosinone": {
+          "name": "Frosinone",
+          "aliases": [
+            "Frosinone"
+          ]
+        },
+        "monza": {
+          "name": "Monza",
+          "aliases": [
+            "Monza"
+          ]
+        },
+        "venezia": {
+          "name": "Venezia",
+          "aliases": [
+            "Venezia"
           ]
         }
       }
@@ -475,12 +476,6 @@
             "Freiburg"
           ]
         },
-        "wolfsburg": {
-          "name": "Wolfsburg",
-          "aliases": [
-            "Wolfsburg"
-          ]
-        },
         "gladbach": {
           "name": "Gladbach",
           "aliases": [
@@ -520,19 +515,6 @@
             "Augsburg"
           ]
         },
-        "heidenheim": {
-          "name": "Heidenheim",
-          "aliases": [
-            "Heidenheim"
-          ]
-        },
-        "st_pauli": {
-          "name": "St. Pauli",
-          "aliases": [
-            "St. Pauli",
-            "St Pauli"
-          ]
-        },
         "koln": {
           "name": "Köln",
           "aliases": [
@@ -546,7 +528,30 @@
           "name": "Hamburger SV",
           "aliases": [
             "Hamburger SV",
+            "Hamburg SV",
             "HSV"
+          ]
+        },
+        "elversberg": {
+          "name": "SV Elversberg",
+          "aliases": [
+            "SV Elversberg",
+            "Elversberg"
+          ]
+        },
+        "schalke": {
+          "name": "Schalke 04",
+          "aliases": [
+            "Schalke 04",
+            "Schalke"
+          ]
+        },
+        "paderborn": {
+          "name": "SC Paderborn",
+          "aliases": [
+            "SC Paderborn 07",
+            "SC Paderborn",
+            "Paderborn"
           ]
         }
       }
@@ -613,12 +618,6 @@
             "OM"
           ]
         },
-        "metz": {
-          "name": "Metz",
-          "aliases": [
-            "Metz"
-          ]
-        },
         "monaco": {
           "name": "Monaco",
           "aliases": [
@@ -626,17 +625,12 @@
             "Monaco"
           ]
         },
-        "nantes": {
-          "name": "Nantes",
-          "aliases": [
-            "Nantes"
-          ]
-        },
         "nice": {
           "name": "Nice",
           "aliases": [
             "OGC Nice",
-            "OGCN"
+            "OGCN",
+            "Nice"
           ]
         },
         "paris_fc": {
@@ -657,6 +651,7 @@
         "rennes": {
           "name": "Rennes",
           "aliases": [
+            "Stade Rennais",
             "Rennes"
           ]
         },
@@ -670,6 +665,18 @@
           "name": "Toulouse",
           "aliases": [
             "Toulouse"
+          ]
+        },
+        "le_mans": {
+          "name": "Le Mans",
+          "aliases": [
+            "Le Mans"
+          ]
+        },
+        "troyes": {
+          "name": "Troyes",
+          "aliases": [
+            "Troyes"
           ]
         }
       }
@@ -701,36 +708,11 @@
             "Charlton"
           ]
         },
-        "coventry": {
-          "name": "Coventry",
-          "aliases": [
-            "Coventry"
-          ]
-        },
         "derby": {
           "name": "Derby County",
           "aliases": [
             "Derby County",
             "Derby"
-          ]
-        },
-        "hull": {
-          "name": "Hull City",
-          "aliases": [
-            "Hull City",
-            "Hull"
-          ]
-        },
-        "ipswich": {
-          "name": "Ipswich",
-          "aliases": [
-            "Ipswich"
-          ]
-        },
-        "leicester": {
-          "name": "Leicester",
-          "aliases": [
-            "Leicester"
           ]
         },
         "middlesbrough": {
@@ -750,12 +732,6 @@
           "name": "Norwich",
           "aliases": [
             "Norwich"
-          ]
-        },
-        "oxford": {
-          "name": "Oxford United",
-          "aliases": [
-            "Oxford United"
           ]
         },
         "portsmouth": {
@@ -782,12 +758,6 @@
           "name": "Sheffield United",
           "aliases": [
             "Sheffield United"
-          ]
-        },
-        "sheff_wed": {
-          "name": "Sheffield Wednesday",
-          "aliases": [
-            "Sheffield Wednesday"
           ]
         },
         "southampton": {
@@ -827,6 +797,45 @@
           "aliases": [
             "Wrexham"
           ]
+        },
+        "burnley": {
+          "name": "Burnley",
+          "aliases": [
+            "Burnley"
+          ]
+        },
+        "west_ham": {
+          "name": "West Ham",
+          "aliases": [
+            "West Ham"
+          ]
+        },
+        "wolves": {
+          "name": "Wolves",
+          "aliases": [
+            "Wolves",
+            "Wolverhampton"
+          ]
+        },
+        "bolton": {
+          "name": "Bolton Wanderers",
+          "aliases": [
+            "Bolton Wanderers",
+            "Bolton"
+          ]
+        },
+        "lincoln": {
+          "name": "Lincoln City",
+          "aliases": [
+            "Lincoln City"
+          ]
+        },
+        "cardiff": {
+          "name": "Cardiff City",
+          "aliases": [
+            "Cardiff City",
+            "Cardiff"
+          ]
         }
       }
     },
@@ -865,6 +874,7 @@
           "name": "Vitória Guimarães",
           "aliases": [
             "Vitória de Guimarães",
+            "Vitória de Guimaraes",
             "Vitória SC",
             "Guimarães"
           ]
@@ -872,7 +882,9 @@
         "famalicao": {
           "name": "Famalicão",
           "aliases": [
-            "Famalicão"
+            "Famalicão",
+            "FC Famalicao",
+            "Famalicao"
           ]
         },
         "estoril": {
@@ -921,19 +933,8 @@
           "name": "Nacional",
           "aliases": [
             "Nacional da Madeira",
-            "CD Nacional"
-          ]
-        },
-        "boavista": {
-          "name": "Boavista",
-          "aliases": [
-            "Boavista"
-          ]
-        },
-        "tondela": {
-          "name": "Tondela",
-          "aliases": [
-            "Tondela"
+            "CD Nacional",
+            "C.D. Nacional"
           ]
         },
         "alverca": {
@@ -945,7 +946,22 @@
         "estrela": {
           "name": "Estrela da Amadora",
           "aliases": [
-            "Estrela da Amadora"
+            "Estrela da Amadora",
+            "Estrela"
+          ]
+        },
+        "viseu": {
+          "name": "Académico de Viseu",
+          "aliases": [
+            "Académico de Viseu",
+            "Academico de Viseu"
+          ]
+        },
+        "maritimo": {
+          "name": "Marítimo",
+          "aliases": [
+            "Marítimo",
+            "Maritimo"
           ]
         }
       }
@@ -1023,12 +1039,6 @@
             "Fortuna Sittard"
           ]
         },
-        "heracles": {
-          "name": "Heracles",
-          "aliases": [
-            "Heracles"
-          ]
-        },
         "groningen": {
           "name": "FC Groningen",
           "aliases": [
@@ -1049,23 +1059,30 @@
             "Zwolle"
           ]
         },
-        "volendam": {
-          "name": "Volendam",
-          "aliases": [
-            "Volendam"
-          ]
-        },
         "telstar": {
           "name": "Telstar",
           "aliases": [
             "Telstar"
           ]
         },
-        "nac": {
-          "name": "NAC Breda",
+        "cambuur": {
+          "name": "SC Cambuur",
           "aliases": [
-            "NAC Breda",
-            "NAC"
+            "SC Cambuur",
+            "Cambuur"
+          ]
+        },
+        "den_haag": {
+          "name": "ADO Den Haag",
+          "aliases": [
+            "ADO Den Haag",
+            "Den Haag"
+          ]
+        },
+        "willem_ii": {
+          "name": "Willem II",
+          "aliases": [
+            "Willem II"
           ]
         }
       }
