@@ -269,9 +269,13 @@ def parse_feed(root, source, summary_max):
 
 # ---------- זיהוי קבוצות וליגות ----------
 
+_QUOTES = str.maketrans({"״": '"', "”": '"', "“": '"', "׳": "'", "’": "'", "‘": "'"})
+
+
 class Matcher:
     def __init__(self, cfg):
         self.replacements = cfg.get("text_replacements", {})
+        self.norm = lambda t: t.translate(_QUOTES)  # גרשיים עבריים וטיפוגרפיים -> ASCII
         self.cl_re = self._compile(cfg.get("champions_league_keywords", []))
         self.team_re = {}      # team_id -> regex
         self.team_league = {}  # team_id -> league_id
@@ -279,18 +283,30 @@ class Matcher:
             for tid, team in league.get("teams", {}).items():
                 if tid in self.team_re:
                     raise SystemExit(f"מזהה קבוצה כפול בקובץ ההגדרות: {tid}")
-                self.team_re[tid] = self._compile(team["aliases"])
+                self.team_re[tid] = self._compile([self.norm(a) for a in team["aliases"]])
                 self.team_league[tid] = lid
 
     @staticmethod
     def _compile(words):
         if not words:
             return None
-        alt = "|".join(re.escape(w) for w in sorted(set(words), key=len, reverse=True))
+        hebrew = re.compile(r"[\u0590-\u05FF]")
+
+        def alt(ws):
+            return "|".join(re.escape(w) for w in sorted(set(ws), key=len, reverse=True))
+
+        parts = []
+        latin = [w for w in words if not hebrew.search(w)]
+        heb = [w for w in words if hebrew.search(w)]
         # רגיש לאותיות גדולות/קטנות בכוונה: "Sporting" ולא "sporting director"
-        return re.compile(r"(?<!\w)(?:%s)(?!\w)" % alt)
+        if latin:
+            parts.append(r"(?<!\w)(?:%s)(?!\w)" % alt(latin))
+        if heb:  # בעברית מותר תחילית: "במכבי חיפה", "להפועל באר שבע"
+            parts.append(r"(?<!\w)[והבכלמש]{0,2}(?:%s)(?!\w)" % alt(heb))
+        return re.compile("|".join(parts))
 
     def analyze(self, text):
+        text = self.norm(text)
         for old, new in self.replacements.items():
             text = text.replace(old, new)
         teams = [tid for tid, rx in self.team_re.items() if rx.search(text)]
@@ -304,7 +320,8 @@ _STOP = set("""the and for with from this that has have are was were will its hi
  not but who what when how why new vs de la le el il lo los las les du des di da del della dei van het een der die das
  und von mit zu im ein eine para por con una uno che per sul sui sulla dopo avant apres pour dans sur une est les
  dos das uma que com nos nas sao em ao aos voor met bij naar over
- champions league premier liga serie bundesliga ligue uefa happened live blog liveblog prediction preview""".split())
+ champions league premier liga serie bundesliga ligue uefa happened live blog liveblog prediction preview
+ אחרי לפני עוד כבר אבל הוא היא הם הן גם בין עם שלו שלה שלהם כל לא או כי אם""".split())
 
 _PREVIEW = re.compile(r"\b(prediction|preview|odds|tips|vorschau|pronostic|pron[oó]stico|previa|anteprima|voorbeschouwing|probable)\b", re.I)
 _LIVE = re.compile(r"(as it happened|live ?blog|minute by minute|\blive\b|en directo|diretta|\bdirect\b|ao minuto)", re.I)
@@ -321,7 +338,7 @@ def title_kind(title):
 def title_tokens(title):
     t = unicodedata.normalize("NFKD", title.lower())
     t = "".join(c for c in t if not unicodedata.combining(c))
-    return {w for w in re.findall(r"[a-z0-9]+", t) if len(w) > 2 and w not in _STOP}
+    return {w for w in re.findall(r"[a-z0-9\u05d0-\u05ea]+", t) if len(w) > 2 and w not in _STOP}
 
 
 def similar(a, b):
@@ -398,12 +415,15 @@ def process_source(src, cfg, matcher):
     cutoff = NOW - dt.timedelta(days=s["keep_days"])
     fixed_leagues = set(src.get("leagues", []))
     match_leagues = set(src.get("match_leagues", []))
+    exclude = re.compile("|".join(re.escape(w) for w in src["exclude"])) if src.get("exclude") else None
     kept = []
     for e in entries:
         published = e["published"] or NOW
         if published > NOW + dt.timedelta(hours=2):
             published = NOW
         if published < cutoff:
+            continue
+        if exclude and exclude.search(e["title"] + " " + e["summary"]):
             continue
         teams, is_cl = matcher.analyze(e["title"] + " " + e["summary"])
         leagues = set(fixed_leagues)

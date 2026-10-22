@@ -572,7 +572,9 @@ function renderMatches() {
   const lg = state.filters.league;
   const ms = state.matches.filter((m) => !lg || m.league === lg);
   if (!ms.length) {
-    $("status").textContent = state.matches.length ? "אין משחקים בליגה הזו בטווח התאריכים." : "אין נתוני משחקים.";
+    $("status").textContent = lg && state.leagues[lg] && state.leagues[lg].no_match_data
+      ? "אין נתוני משחקים לליגה הזו: אין מקור חינמי מעודכן."
+      : state.matches.length ? "אין משחקים בליגה הזו בטווח התאריכים." : "אין נתוני משחקים.";
     return;
   }
   $("status").textContent = updatedLabel();
@@ -606,7 +608,12 @@ function renderTables() {
   list.textContent = "";
   $("more").hidden = true;
   const ids = Object.keys(state.leagues).filter((l) => state.standings[l] && (!state.filters.league || l === state.filters.league));
-  if (!ids.length) { $("status").textContent = "אין נתוני טבלה."; return; }
+  if (!ids.length) {
+    const lg = state.filters.league;
+    $("status").textContent = lg && state.leagues[lg] && state.leagues[lg].no_match_data
+      ? "אין טבלה לליגה הזו: אין מקור חינמי מעודכן." : "אין נתוני טבלה.";
+    return;
+  }
   $("status").textContent = updatedLabel();
   for (const lid of ids) {
     for (const t of state.standings[lid]) {

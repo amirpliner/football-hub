@@ -289,7 +289,7 @@ def pick(cfg, art, mt, ai, only, kind):
     standings = mt.get("standings", {})
     now = now_utc()
     if kind == "summaries":
-        cands = [i for i in items if i["category"] != "video" and not i["dup_of"] and i["id"] not in ai["summaries"] and i["title"]]
+        cands = [i for i in items if i["category"] != "video" and not i["dup_of"] and i["id"] not in ai["summaries"] and i["title"] and i["lang"] != "he"]
         return cands[: cfg["ai"]["summaries"]["max_per_run"]]
     ms = mt.get("matches", [])
     if kind == "preview":

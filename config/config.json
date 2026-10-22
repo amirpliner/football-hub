@@ -18,9 +18,155 @@
     "Liga de Campeones",
     "Liga dos Campeões",
     "Champions League",
-    "UCL"
+    "UCL",
+    "ליגת האלופות"
   ],
   "leagues": {
+    "israel": {
+      "name_he": "ליגת העל",
+      "hebrew_names": true,
+      "teams": {
+        "mac_tlv": {
+          "name": "מכבי תל אביב",
+          "aliases": [
+            "Maccabi Tel Aviv",
+            "Maccabi Tel-Aviv",
+            "מכבי תל אביב",
+            "מכבי תל-אביב",
+            "מכבי ת\"א"
+          ]
+        },
+        "mac_haifa": {
+          "name": "מכבי חיפה",
+          "aliases": [
+            "Maccabi Haifa",
+            "מכבי חיפה"
+          ]
+        },
+        "beitar": {
+          "name": "בית״ר ירושלים",
+          "aliases": [
+            "Beitar Jerusalem",
+            "בית\"ר ירושלים",
+            "ביתר ירושלים"
+          ]
+        },
+        "mac_netanya": {
+          "name": "מכבי נתניה",
+          "aliases": [
+            "Maccabi Netanya",
+            "מכבי נתניה"
+          ]
+        },
+        "hap_haifa": {
+          "name": "הפועל חיפה",
+          "aliases": [
+            "Hapoel Haifa",
+            "הפועל חיפה"
+          ]
+        },
+        "hap_bs": {
+          "name": "הפועל באר שבע",
+          "aliases": [
+            "Hapoel Be'er Sheva",
+            "Hapoel Beer Sheva",
+            "הפועל באר-שבע",
+            "הפועל באר שבע",
+            "Hapoel Be'er",
+            "הפועל ב\"ש"
+          ]
+        },
+        "mac_pt": {
+          "name": "מכבי פתח תקווה",
+          "aliases": [
+            "Maccabi Petah Tikva",
+            "Maccabi Petah-Tikva",
+            "מכבי פתח-תקווה",
+            "מכבי פתח תקווה",
+            "מכבי פ\"ת"
+          ]
+        },
+        "ashdod": {
+          "name": "מ.ס. אשדוד",
+          "aliases": [
+            "Moadon Sport Ashdod",
+            "מועדון ספורט אשדוד",
+            "מ.ס. אשדוד",
+            "מ.ס אשדוד",
+            "Ashdod"
+          ]
+        },
+        "kiryat_shmona": {
+          "name": "הפועל קריית שמונה",
+          "aliases": [
+            "Hapoel Kiryat Shmona",
+            "הפועל קריית שמונה",
+            "הפועל קרית שמונה",
+            "קריית שמונה"
+          ]
+        },
+        "sakhnin": {
+          "name": "בני סכנין",
+          "aliases": [
+            "Bnei Sakhnin",
+            "בני סכנין",
+            "סכנין"
+          ]
+        },
+        "hap_hadera": {
+          "name": "הפועל חדרה",
+          "aliases": [
+            "Hapoel Hadera",
+            "הפועל חדרה"
+          ]
+        },
+        "hap_jlm": {
+          "name": "הפועל ירושלים",
+          "aliases": [
+            "Hapoel Jerusalem",
+            "הפועל ירושלים"
+          ]
+        },
+        "raina": {
+          "name": "מכבי בני ריינה",
+          "aliases": [
+            "מכבי בני ריינה",
+            "Maccabi Raina",
+            "Bnei Raina",
+            "בני ריינה"
+          ]
+        },
+        "tiberias": {
+          "name": "עירוני טבריה",
+          "aliases": [
+            "Ironi Tiberias",
+            "עירוני טבריה"
+          ]
+        },
+        "hap_tlv": {
+          "name": "הפועל תל אביב",
+          "aliases": [
+            "Hapoel Tel Aviv",
+            "Hapoel Tel-Aviv",
+            "הפועל תל אביב",
+            "הפועל תל-אביב",
+            "הפועל ת\"א"
+          ]
+        },
+        "hap_pt": {
+          "name": "הפועל פתח תקווה",
+          "aliases": [
+            "Hapoel Petah-Tikva",
+            "Hapoel Petah Tikva",
+            "הפועל פתח-תקווה",
+            "הפועל פתח תקווה",
+            "הפועל פ\"ת"
+          ]
+        }
+      },
+      "no_match_data": true,
+      "_comment": "אין נתוני משחקים/טבלה: ה-API של ESPN לליגת העל תקוע על עונת 2024-25. רשימת הקבוצות לא אומתה מול מקור עדכני."
+    },
     "premier_league": {
       "name_he": "פרמייר ליג",
       "teams": {
@@ -1092,8 +1238,167 @@
       "teams": {}
     }
   },
-  "_comment_sources": "category: news = חדשות, fan = בלוג אוהדים, analysis = ניתוח/טקטיקה. leagues = הפיד שייך תמיד לליגות האלה. match_leagues = פיד רחב: שומרים רק כתבות שמזכירות קבוצה מהליגות האלה. keep_unmatched = שומרים הכול גם בלי התאמה. teams = קבוצה קבועה (לבלוגי אוהדים). priority = מספר נמוך מנצח כשמאחדים כפילויות. enabled=false מכבה מקור. | וידאו: category=video, כתובת של פיד ה-RSS של ערוץ יוטיוב רשמי (channel_id).",
+  "_comment_sources": "category: news = חדשות, fan = בלוג אוהדים, analysis = ניתוח/טקטיקה. leagues = הפיד שייך תמיד לליגות האלה. match_leagues = פיד רחב: שומרים רק כתבות שמזכירות קבוצה מהליגות האלה. keep_unmatched = שומרים הכול גם בלי התאמה. teams = קבוצה קבועה (לבלוגי אוהדים). priority = מספר נמוך מנצח כשמאחדים כפילויות. enabled=false מכבה מקור. | וידאו: category=video, כתובת של פיד ה-RSS של ערוץ יוטיוב רשמי (channel_id). | exclude = מילים שמוציאות כתבה (למשל כדורסל, כי שמות כמו 'מכבי ת\"א' משותפים).",
   "sources": [
+    {
+      "id": "walla-il-football",
+      "name": "וואלה ספורט – כדורגל ישראלי",
+      "url": "https://rss.walla.co.il/feed/156",
+      "category": "news",
+      "lang": "he",
+      "leagues": [
+        "israel"
+      ],
+      "priority": 4
+    },
+    {
+      "id": "walla-sport",
+      "name": "וואלה ספורט",
+      "url": "https://rss.walla.co.il/feed/3?type=main",
+      "category": "news",
+      "lang": "he",
+      "match_leagues": [
+        "israel"
+      ],
+      "priority": 5,
+      "exclude": [
+        "כדורסל",
+        "כדורסלן",
+        "כדורסלנית",
+        "יורוליג",
+        "יורוקאפ",
+        "פיינל פור",
+        "NBA",
+        "ליגת ווינר",
+        "כדורעף",
+        "כדוריד",
+        "טניס",
+        "פורמולה",
+        "גארד",
+        "פורוורד",
+        "יד אליהו",
+        "היכל מנורה",
+        "היכל הספורט",
+        "על הפרקט",
+        "סל "
+      ]
+    },
+    {
+      "id": "ynet-sport",
+      "name": "ynet ספורט",
+      "url": "https://www.ynet.co.il/Integration/StoryRss3.xml",
+      "category": "news",
+      "lang": "he",
+      "match_leagues": [
+        "israel"
+      ],
+      "priority": 4,
+      "exclude": [
+        "כדורסל",
+        "כדורסלן",
+        "כדורסלנית",
+        "יורוליג",
+        "יורוקאפ",
+        "פיינל פור",
+        "NBA",
+        "ליגת ווינר",
+        "כדורעף",
+        "כדוריד",
+        "טניס",
+        "פורמולה",
+        "גארד",
+        "פורוורד",
+        "יד אליהו",
+        "היכל מנורה",
+        "היכל הספורט",
+        "על הפרקט",
+        "סל "
+      ]
+    },
+    {
+      "id": "one",
+      "name": "ONE",
+      "url": "https://www.one.co.il/RSS",
+      "category": "news",
+      "lang": "he",
+      "match_leagues": [
+        "israel"
+      ],
+      "priority": 4,
+      "exclude": [
+        "כדורסל",
+        "כדורסלן",
+        "כדורסלנית",
+        "יורוליג",
+        "יורוקאפ",
+        "פיינל פור",
+        "NBA",
+        "ליגת ווינר",
+        "כדורעף",
+        "כדוריד",
+        "טניס",
+        "פורמולה",
+        "גארד",
+        "פורוורד",
+        "יד אליהו",
+        "היכל מנורה",
+        "היכל הספורט",
+        "על הפרקט",
+        "סל "
+      ]
+    },
+    {
+      "id": "haaretz-sport",
+      "name": "הארץ ספורט",
+      "url": "https://www.haaretz.co.il/srv/%D7%A1%D7%A4%D7%95%D7%A8%D7%98--%D7%94%D7%90%D7%A8%D7%A5-rss",
+      "category": "news",
+      "lang": "he",
+      "match_leagues": [
+        "israel"
+      ],
+      "priority": 5,
+      "exclude": [
+        "כדורסל",
+        "כדורסלן",
+        "כדורסלנית",
+        "יורוליג",
+        "יורוקאפ",
+        "פיינל פור",
+        "NBA",
+        "ליגת ווינר",
+        "כדורעף",
+        "כדוריד",
+        "טניס",
+        "פורמולה",
+        "גארד",
+        "פורוורד",
+        "יד אליהו",
+        "היכל מנורה",
+        "היכל הספורט",
+        "על הפרקט",
+        "סל "
+      ]
+    },
+    {
+      "id": "jpost-sport",
+      "name": "Jerusalem Post – Israeli Sports",
+      "url": "https://www.jpost.com/Rss/RssFeedsSports.aspx",
+      "category": "news",
+      "lang": "en",
+      "match_leagues": [
+        "israel"
+      ],
+      "priority": 5,
+      "exclude": [
+        "basketball",
+        "EuroLeague",
+        "Euroleague",
+        "NBA",
+        "volleyball",
+        "handball",
+        "tennis"
+      ]
+    },
     {
       "id": "bbc-pl",
       "name": "BBC Sport",
