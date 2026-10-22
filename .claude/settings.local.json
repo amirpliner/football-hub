@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 tools/check_feeds.py)",
+      "WebSearch",
+      "Bash(python3 -)",
+      "Bash(cat)",
+      "Bash(python3 /private/tmp/claude-501/-Users-amirpliner---------------/4e48267e-9186-4acd-ab71-ef792d72094f/scratchpad/round3.py)",
+      "Bash(python3 scripts/collect.py)",
+      "Bash(curl -sL -A \"Mozilla/5.0\" https://www.record.pt/rss)",
+      "Bash(mkdir -p .github/workflows)",
+      "Bash(printf '.DS_Store\\\\n__pycache__/\\\\ntools/feed_check_report.json\\\\n')",
+      "Bash(rm -f data/*.json)",
+      "Bash(python3 -c \"import yaml\")",
+      "Bash(python3 -c ' *)",
+      "Bash(git --version)",
+      "Bash(gh auth *)",
+      "Bash(git config *)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit -q -m 'Stage 2: feed collector and GitHub Action *)",
+      "Bash(gh repo *)"
+    ]
+  }
+}
