@@ -21,7 +21,7 @@ const state = {
   items: [],
   matches: [],
   standings: {},
-  ai: { summaries: {}, previews: {}, analyses: {}, concepts: {} },
+  ai: { summaries: {}, previews: {}, analyses: {}, concepts: {}, tweets: {} },
   leagues: {},     // id -> {name_he, teams}
   teamName: {},    // id -> שם
   teamLeague: {},  // id -> ליגה
@@ -66,7 +66,7 @@ async function load() {
     // שכבת ה-AI אופציונלית: אם אין קובץ (עדיין לא הופעלה), האתר עובד כרגיל
     fetch("data/ai.json", { cache: "no-cache" })
       .then((r) => (r.ok ? r.json() : null))
-      .then((a) => { if (a) { state.ai = { summaries: {}, previews: {}, analyses: {}, concepts: {}, ...a }; render(); } })
+      .then((a) => { if (a) { state.ai = { summaries: {}, previews: {}, analyses: {}, concepts: {}, tweets: {}, ...a }; render(); } })
       .catch(() => {});
     if (matchRes && matchRes.ok) {  // נתוני משחקים הם בונוס: אם חסרים, שאר האתר ממשיך לעבוד
       try {
@@ -89,7 +89,9 @@ async function load() {
     state.items = data.items.map((it) => ({ ...it, date: new Date(it.published) }));
     state.generatedAt = new Date(data.generated_at);
     pruneRead();
+    if (!state.restored) { restoreFilters(); state.restored = true; }
     buildControls();
+    syncControls();
     render();
   } catch (e) {
     $("status").textContent = "לא הצלחתי לטעון את הנתונים (" + e.message + "). אם פתחת את הקובץ ישירות מהמחשב, צריך להריץ שרת מקומי או לפתוח דרך GitHub Pages.";
@@ -287,6 +289,7 @@ function renderCard(it, rx) {
     acts.append(play);
   }
   acts.append(save, read);
+  addTweetButton("a:" + it.id, acts, card);
   if (it.also && it.also.length) {
     const more = el("button", "", `עוד ${it.also.length} מקורות`);
     more.addEventListener("click", () => {
@@ -400,7 +403,7 @@ function render() {
   }
   $("more").hidden = items.length <= state.shown;
   $("status").textContent = items.length
-    ? `${items.length} כתבות · עודכן ${fmtDay.format(state.generatedAt)} ${fmtTime.format(state.generatedAt)}`
+    ? `${items.length} כתבות · עודכן ${fmtDay.format(state.generatedAt)} ${fmtTime.format(state.generatedAt)}${staleNote()}`
     : state.view === "saved" ? "אין עדיין כתבות שמורות."
     : state.view === "watch" ? (state.watch.length ? "אין כרגע כתבות שמתאימות למילות המעקב." : "עוד לא הוספת מילות מעקב. לחץ על \"מילות מעקב\".")
     : "אין כתבות שמתאימות לסינון.";
@@ -410,8 +413,74 @@ function render() {
 }
 
 // ---------- משחקים וטבלאות ----------
+function staleNote() {
+  const hours = (Date.now() - state.generatedAt.getTime()) / 3600000;
+  return hours > 18 ? ` · ⚠ הנתונים לא התעדכנו כבר ${Math.round(hours)} שעות` : "";
+}
+
 function updatedLabel() {
   return state.matchesAt ? `עודכן ${fmtDay.format(state.matchesAt)} ${fmtTime.format(state.matchesAt)} · נתוני ESPN, לא בזמן אמת` : "";
+}
+
+// ---------- זוויות לציוץ ----------
+function copyText(text, btn) {
+  const done = () => { const old = btn.textContent; btn.textContent = "הועתק ✓"; setTimeout(() => { btn.textContent = old; }, 1500); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, () => {});
+  else {
+    const ta = document.createElement("textarea");
+    ta.value = text; document.body.append(ta); ta.select();
+    try { document.execCommand("copy"); done(); } catch (e) { /* ignore */ }
+    ta.remove();
+  }
+}
+
+function tweetPanel(entry) {
+  const box = el("div", "tweets");
+  for (const a of entry.angles) {
+    const d = el("div", "angle");
+    const ta = el("textarea", "tw-text");
+    ta.value = a.tweet;
+    ta.rows = 3;
+    ta.dir = "auto";
+    ta.setAttribute("aria-label", "טיוטת ציוץ (אפשר לערוך)");
+    const count = el("span", "tw-count");
+    const upd = () => { const n = ta.value.length; count.textContent = n + "/280"; count.classList.toggle("over", n > 280); };
+    ta.addEventListener("input", upd);
+    upd();
+    d.append(ta);
+    const row = el("div", "tw-row");
+    const copy = el("button", "", "העתק");
+    copy.type = "button";
+    copy.addEventListener("click", () => copyText(ta.value, copy));
+    const open = document.createElement("a");
+    open.className = "tw-open";
+    open.textContent = "פתח ב-X ↗";
+    open.target = "_blank";
+    open.rel = "noopener noreferrer";
+    open.href = "#";
+    open.addEventListener("click", () => { open.href = "https://x.com/intent/post?text=" + encodeURIComponent(ta.value); });
+    row.append(copy, open, count);
+    d.append(row);
+    d.append(el("p", "tw-why", "למה זו זווית פחות מדוברת: " + a.why));
+    d.append(el("p", "tw-verify", "לבדוק לפני פרסום: " + a.verify));
+    box.append(d);
+  }
+  box.append(el("p", "ai-note", "טיוטות של Claude לפי הנתונים שנאספו. אתה אחראי לבדוק עובדות לפני שמפרסמים."));
+  return box;
+}
+
+// מוסיף כפתור "זווית לציוץ" ל-parent; הפאנל נפתח בתוך container
+function addTweetButton(key, parent, container) {
+  const entry = state.ai.tweets[key];
+  if (!entry || !entry.angles || !entry.angles.length) return;
+  const btn = el("button", "tw-btn", "✍ זווית לציוץ");
+  btn.type = "button";
+  btn.addEventListener("click", () => {
+    const open = container.querySelector(":scope > .tweets");
+    if (open) { open.remove(); return; }
+    container.append(tweetPanel(entry));
+  });
+  parent.append(btn);
 }
 
 function aiPanel(m) {
@@ -440,6 +509,7 @@ function aiPanel(m) {
       }
     }
     p.append(el("p", "ai-note", "נכתב על ידי Claude מתוך הנתונים שנאספו, בלי לראות את המשחק. עלול לטעות."));
+    if (an) addTweetButton("m:" + m.id, p, p);
     wrap.append(p);
   });
   wrap.append(btn);
@@ -462,6 +532,7 @@ function conceptCard() {
   body.append(el("p", "caveat", "עד כמה הנתונים תומכים: " + c.data_support));
   body.append(el("p", "ai-note", "נכתב על ידי Claude מתוך נתונים שנאספו. עלול לטעות."));
   head.addEventListener("click", () => { body.hidden = !body.hidden; });
+  addTweetButton("c:" + weeks[weeks.length - 1], body, body);
   box.append(head, body);
   return box;
 }
@@ -588,7 +659,30 @@ function toggleSaved(it) {
   render();
 }
 
-function refilter() { state.shown = PAGE; render(); }
+function saveFilters() {
+  const { league, team, source, cat } = state.filters;
+  store.set("fh_filters", { league, team, source, cat, view: state.view });
+}
+
+function restoreFilters() {
+  const f = store.get("fh_filters", null);
+  if (!f) return;
+  if (f.league && state.leagues[f.league]) state.filters.league = f.league;
+  if (f.team && state.teamName[f.team]) state.filters.team = f.team;
+  if (f.source && state.items.some((i) => i.source === f.source)) state.filters.source = f.source;
+  if (["news", "analysis", "fan", "video"].includes(f.cat)) state.filters.cat = f.cat;
+  if (["all", "matches", "tables", "watch", "saved"].includes(f.view)) state.view = f.view;
+}
+
+function syncControls() {
+  for (const c of $("league-chips").children) c.classList.toggle("on", c.dataset.league === state.filters.league);
+  $("f-team").value = state.filters.team;
+  $("f-source").value = state.filters.source;
+  $("f-cat").value = state.filters.cat;
+  for (const b of $("views").children) b.classList.toggle("on", b.dataset.view === state.view);
+}
+
+function refilter() { state.shown = PAGE; saveFilters(); render(); }
 
 function wireEvents() {
   $("league-chips").addEventListener("click", (e) => {
@@ -617,6 +711,12 @@ function wireEvents() {
   $("f-dups").addEventListener("change", (e) => { state.filters.dups = e.target.checked; refilter(); });
   $("f-hide-read").addEventListener("change", (e) => { state.filters.hideRead = e.target.checked; refilter(); });
   $("more").addEventListener("click", () => { state.shown += PAGE; render(); });
+  $("btn-refresh").addEventListener("click", async () => {
+    const b = $("btn-refresh");
+    b.disabled = true;
+    await load();
+    b.disabled = false;
+  });
 
   // מילות מעקב
   const dlg = $("dlg-keywords");

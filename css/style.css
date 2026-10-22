@@ -231,3 +231,22 @@ a.match:hover { background: var(--surface); }
 .concept-head .k { font-size: .75rem; color: var(--accent); font-weight: 700; }
 .concept-head strong { font-size: 1.05rem; }
 .concept-body { padding: 0 14px 12px; }
+
+/* ---------- זוויות לציוץ ---------- */
+.tw-btn { background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 1px 10px; font-size: .8rem; color: var(--accent); }
+.tw-btn:hover { border-color: var(--accent); }
+.tweets { grid-column: 1 / -1; margin-top: 8px; display: grid; gap: 10px; }
+.ai-panel .tweets, .concept-body .tweets { margin-top: 10px; }
+.angle { background: var(--surface-2); border-radius: var(--radius); padding: 10px 12px; }
+.tw-text { width: 100%; resize: vertical; background: var(--bg); color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font: inherit; line-height: 1.5; }
+.tw-row { display: flex; align-items: center; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+.tw-row button, .tw-open { background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 6px; padding: 2px 12px; font-size: .85rem; font-weight: 700; text-decoration: none; }
+.tw-count { margin-inline-start: auto; font-size: .78rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tw-count.over { color: #ff6b5e; font-weight: 700; }
+.tw-why, .tw-verify { margin: 6px 0 0; font-size: .85rem; color: var(--muted); }
+.tw-verify { color: var(--text); }
+
+/* ---------- נגישות ---------- */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button:disabled { opacity: .5; cursor: progress; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }

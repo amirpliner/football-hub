@@ -2134,20 +2134,22 @@
     }
   ],
   "ai": {
-    "_comment": "שכבת Claude. מושבתת עד שמאשרים: enabled=true ומפתח ANTHROPIC_API_KEY ב-GitHub Secrets. models = איזה מודל לכל משימה (החלטה שלך אחרי הערכת העלות).",
+    "_comment": "שכבת Claude. מושבתת עד שמאשרים: enabled=true ומפתח ANTHROPIC_API_KEY ב-GitHub Secrets. models = איזה מודל לכל משימה (החלטה שלך אחרי הערכת העלות). tweets: זוויות לציוץ. max_per_run = כמה כתבות בכל הרצה (ניתוחי משחק ומושג שבועי מקבלים זווית תמיד). language: he / en. כדי לכבות לכתבות: max_per_run=0.",
     "enabled": true,
     "monthly_budget_usd": 10,
     "models": {
       "summaries": "claude-haiku-5-5",
       "preview": "claude-sonnet-5-5",
       "analysis": "claude-sonnet-5-5",
-      "concept": "claude-sonnet-5-5"
+      "concept": "claude-sonnet-5-5",
+      "tweets": "claude-sonnet-5-5"
     },
     "effort": {
       "summaries": "low",
       "preview": "medium",
       "analysis": "medium",
-      "concept": "high"
+      "concept": "high",
+      "tweets": "medium"
     },
     "prices_per_mtok_usd": {
       "claude-haiku-5-5": {
@@ -2171,6 +2173,10 @@
       "top_rank": 6,
       "max_previews_per_run": 4,
       "max_analyses_per_run": 3
+    },
+    "tweets": {
+      "max_per_run": 2,
+      "language": "he"
     }
   }
 }

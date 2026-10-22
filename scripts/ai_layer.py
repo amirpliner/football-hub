@@ -30,7 +30,7 @@ ESPN_CODES = {
     "ligue_1": "fra.1", "championship": "eng.2", "liga_portugal": "por.1", "eredivisie": "ned.1",
     "champions_league": "uefa.champions",
 }
-JOBS = ("summaries", "preview", "analysis", "concept")
+JOBS = ("summaries", "preview", "analysis", "concept", "tweets")
 
 # ---------- פרומפטים ----------
 COMMON = (
@@ -60,7 +60,18 @@ SYS_CONCEPT = COMMON + (
     "well the data supports the link. Add 'how_to_spot': what to look for when watching."
 )
 
+SYS_TWEET = COMMON + (
+    " Task: help the user find tweet angles about football that OTHER accounts are probably NOT talking about: a counter-intuitive number, "
+    "a structural observation, an overlooked detail, a link between two events. Give 2 distinct angles (1 if the data supports only one). "
+    "For each: 'tweet' = ready-to-post text in {lang}, at most 270 characters, no hashtag spam, no clickbait, sounds like a thoughtful fan, not a press release; "
+    "'why' = one line on why this angle is less obvious than the mainstream take; 'verify' = one line listing what the user must double-check before posting. "
+    "Every number or claim in a tweet must appear in the supplied data. If nothing interesting is supported, return fewer angles rather than inventing one."
+)
+
 SCHEMAS = {
+    "tweets": {"type": "object", "properties": {"angles": {"type": "array", "items": {
+        "type": "object", "properties": {"tweet": {"type": "string"}, "why": {"type": "string"}, "verify": {"type": "string"}},
+        "required": ["tweet", "why", "verify"], "additionalProperties": False}}}, "required": ["angles"], "additionalProperties": False},
     "summaries": {"type": "object", "properties": {"summaries": {"type": "array", "items": {
         "type": "object", "properties": {"id": {"type": "string"}, "he": {"type": "string"}},
         "required": ["id", "he"], "additionalProperties": False}}}, "required": ["summaries"], "additionalProperties": False},
@@ -180,6 +191,44 @@ def concept_prompt(items, ai, week):
     return "Analysis articles this week:\n" + ("\n".join(arts) or "- none") + "\n\nMatch fact sheets this week:\n\n" + "\n\n".join(facts)
 
 
+def tweet_prompt_article(i, ai):
+    lines = [f"Source: {i['source']} ({i['lang']}) | published {i['published']}", f"Title: {i['title']}", f"Snippet: {i['summary'][:300]}"]
+    he = ai["summaries"].get(i["id"])
+    if he:
+        lines.append(f"Hebrew summary: {he['he']}")
+    for a in i.get("also", [])[:3]:
+        lines.append(f"Also reported by {a['source']}: {a['title']}")
+    return "\n".join(lines)
+
+
+def tweet_prompt_analysis(a):
+    return (f"Match analysis headline: {a['headline']}\nSummary: {a['summary']}\nKey points: " + "; ".join(a["key_points"])
+            + f"\nCaveat: {a['caveat']}\n\nRaw match facts:\n{a.get('facts', '')[:2500]}")
+
+
+def tweet_prompt_concept(c):
+    return (f"Tactical concept of the week: {c['concept']}\nExplanation: {c['explanation']}\nExample: {c['example']}\n"
+            f"How to spot: {c['how_to_spot']}\nData support: {c['data_support']}")
+
+
+def tweet_todo(cfg, art, ai):
+    """רשימת (מפתח, פרומפט) לזוויות שעדיין חסרות. ניתוחים ומושג תמיד; כתבות עד max_per_run."""
+    todo = []
+    for week, c in ai["concepts"].items():
+        if f"c:{week}" not in ai["tweets"]:
+            todo.append((f"c:{week}", tweet_prompt_concept(c)))
+    for mid, a in ai["analyses"].items():
+        if f"m:{mid}" not in ai["tweets"]:
+            todo.append((f"m:{mid}", tweet_prompt_analysis(a)))
+    cap = cfg["ai"]["tweets"]["max_per_run"]
+    arts = [i for i in art["items"] if i["category"] != "video" and not i["dup_of"] and f"a:{i['id']}" not in ai["tweets"]
+            and (i["category"] == "analysis" or i.get("also"))]
+    arts.sort(key=lambda i: i["published"], reverse=True)
+    for i in arts[:cap]:
+        todo.append((f"a:{i['id']}", tweet_prompt_article(i, ai)))
+    return todo
+
+
 # ---------- עלות ----------
 def price(cfg, model, tin, tout):
     p = cfg["ai"]["prices_per_mtok_usd"].get(model)
@@ -271,6 +320,8 @@ def run_jobs(cfg, art, mt, ai, usage, args):
         return {"summaries": {"summaries": [{"id": i, "he": "[דוגמה] תקציר בעברית לבדיקת התצוגה באתר."} for i in kw.get("ids", [])]},
                 "preview": {"headline": "[דוגמה] על מה לשים לב", "points": [{"title": "נקודה 1", "text": "טקסט לדוגמה."}, {"title": "נקודה 2", "text": "טקסט לדוגמה."}, {"title": "נקודה 3", "text": "טקסט לדוגמה."}]},
                 "analysis": {"headline": "[דוגמה] ניתוח", "summary": "סיכום לדוגמה.", "key_points": ["נקודה א", "נקודה ב"], "caveat": "זהו טקסט לדוגמה."},
+                "tweets": {"angles": [{"tweet": "[דוגמה] ציוץ לדוגמה על עובדה שאף אחד לא מדבר עליה.", "why": "זווית פחות מובנת מאליה.", "verify": "לבדוק את המספרים במקור."},
+                                       {"tweet": "[דוגמה] זווית שנייה לציוץ.", "why": "קישור בין שני אירועים.", "verify": "לוודא שהמשחק אכן התקיים כך."}]},
                 "concept": {"concept": "[דוגמה] לחץ גבוה", "explanation": "הסבר לדוגמה.", "example": "דוגמה לדוגמה.", "how_to_spot": "לחפש...", "data_support": "בדיקה"}}[job]
 
     def run(job, system, user, max_tokens, **kw):
@@ -333,6 +384,18 @@ def run_jobs(cfg, art, mt, ai, usage, args):
             if out:
                 ai["concepts"][week] = {**out, "at": now_utc().strftime("%Y-%m-%dT%H:%M:%SZ")}
                 stats["concept"] = "1/1"
+    # 5. זוויות לציוצים
+    if want("tweets"):
+        todo = tweet_todo(cfg, art, ai)
+        lang = {"he": "Hebrew", "en": "English"}[cfg["ai"]["tweets"]["language"]]
+        system = SYS_TWEET.replace("{lang}", lang)
+        n = 0
+        for key, prompt in todo:
+            out = run("tweets", system, prompt, 3000)
+            if out and out["angles"]:
+                ai["tweets"][key] = {"angles": out["angles"][:3], "at": now_utc().strftime("%Y-%m-%dT%H:%M:%SZ")}
+                n += 1
+        stats["tweets"] = f"{n}/{len(todo)}"
     return stats
 
 
@@ -343,6 +406,8 @@ def prune(ai, art, mt):
     ai["previews"] = {k: v for k, v in ai["previews"].items() if v.get("kickoff", "") >= keep_from}
     ai["analyses"] = {k: v for k, v in ai["analyses"].items() if v.get("date", "") >= keep_from}
     ai["concepts"] = dict(sorted(ai["concepts"].items())[-8:])
+    live = {"a": ids, "m": set(ai["analyses"]), "c": set(ai["concepts"])}
+    ai["tweets"] = {k: v for k, v in ai["tweets"].items() if k[2:] in live.get(k[0], set())}
 
 
 # ---------- הערכת עלות ----------
@@ -373,6 +438,8 @@ def estimate(cfg, art, mt):
         "preview": dict(n=big_per_month / 2, tin=tok(SYS_PREVIEW) + 1300, tout=330 + 1200),
         "analysis": dict(n=big_per_month / 2 * 0.8, tin=tok(SYS_ANALYSIS) + 1900, tout=650 + 2500),
         "concept": dict(n=4.3, tin=tok(SYS_CONCEPT) + 3500, tout=1000 + 8000),
+        "tweets": dict(n=cfg["ai"]["tweets"]["max_per_run"] * 4 * 30 + 32 + 4.3,   # כתבות + ניתוחים + מושגים
+                       tin=tok(SYS_TWEET) + 600, tout=350 + 900),
     }
     print(f"כתבות ראשיות ביום (ממוצע 5 ימים מלאים): {per_day:.0f} | תקרת תקצירים ביום בהגדרות: {cap_day}")
     print(f"משחקים 'גדולים' בטווח הנתונים: {len(big)} ב-{span_days} ימים -> כ-{big_per_month:.0f} בחודש\n")
@@ -384,8 +451,8 @@ def estimate(cfg, art, mt):
     for t in tiers:
         parts = {k: price(cfg, t, a["tin"] * a["n"], a["tout"] * a["n"]) for k, a in A.items()}
         print(f"  {t:<18} סה\"כ {sum(parts.values()):6.2f}   " + "  ".join(f"{k}={v:.2f}" for k, v in parts.items()))
-    mixes = {"תקצירים Haiku + שאר Sonnet": ("claude-haiku-5-5", "claude-sonnet-5-5", "claude-sonnet-5-5", "claude-sonnet-5-5"),
-             "תקצירים Haiku + ניתוחים Opus": ("claude-haiku-5-5", "claude-opus-5-5", "claude-opus-5-5", "claude-opus-5-5")}
+    mixes = {"תקצירים Haiku + שאר Sonnet": ("claude-haiku-5-5",) + ("claude-sonnet-5-5",) * 4,
+             "תקצירים Haiku + ניתוחים Opus": ("claude-haiku-5-5",) + ("claude-opus-5-5",) * 4}
     for name, ms in mixes.items():
         tot = sum(price(cfg, m, a["tin"] * a["n"], a["tout"] * a["n"]) for m, a in zip(ms, A.values()))
         print(f"  {name:<34} סה\"כ {tot:6.2f}")
@@ -415,7 +482,7 @@ def main():
             return 0
 
     ai = load_json(AI_PATH, {})
-    for k in ("summaries", "previews", "analyses", "concepts"):
+    for k in ("summaries", "previews", "analyses", "concepts", "tweets"):
         ai.setdefault(k, {})
     usage = load_json(USAGE_PATH, {})
     try:
