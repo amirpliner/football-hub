@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-25T09:11:32Z",
+ "generated_at": "2026-10-25T14:25:02Z",
  "sources": [
   {
    "id": "ad-voetbal",
@@ -7,9 +7,9 @@
    "url": "https://www.ad.nl/voetbal/rss.xml",
    "ok": true,
    "fetched": 30,
-   "kept": 17,
-   "newest": "2026-10-25T08:30:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 16,
+   "newest": "2026-10-25T14:18:00Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "arseblog",
@@ -19,7 +19,7 @@
    "fetched": 20,
    "kept": 20,
    "newest": "2026-10-25T08:36:26Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "bbc-championship",
@@ -28,8 +28,8 @@
    "ok": true,
    "fetched": 24,
    "kept": 21,
-   "newest": "2026-10-24T19:35:19Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T13:08:28Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "bbc-cl",
@@ -39,17 +39,17 @@
    "fetched": 15,
    "kept": 9,
    "newest": "2026-10-22T12:44:08Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "bbc-football",
    "name": "BBC Sport",
    "url": "https://feeds.bbci.co.uk/sport/football/rss.xml",
    "ok": true,
-   "fetched": 77,
-   "kept": 61,
-   "newest": "2026-10-25T09:00:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "fetched": 76,
+   "kept": 60,
+   "newest": "2026-10-25T13:26:13Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "bbc-pl",
@@ -59,7 +59,7 @@
    "fetched": 34,
    "kept": 32,
    "newest": "2026-10-25T06:34:07Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "bfw",
@@ -68,8 +68,8 @@
    "ok": true,
    "fetched": 10,
    "kept": 10,
-   "newest": "2026-10-24T14:00:11Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T14:15:07Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "blaugranes",
@@ -78,8 +78,8 @@
    "ok": true,
    "fetched": 10,
    "kept": 10,
-   "newest": "2026-10-24T11:45:21Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-24T21:59:48Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "bolanarede",
@@ -87,19 +87,19 @@
    "url": "https://bolanarede.pt/feed",
    "ok": true,
    "fetched": 10,
-   "kept": 7,
-   "newest": "2026-10-25T09:08:58Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 2,
+   "newest": "2026-10-25T14:16:53Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "bundesliga-com",
    "name": "Bundesliga.com",
    "url": "https://www.bundesliga.com/en/bundesliga/news/rss",
    "ok": true,
-   "fetched": 26,
-   "kept": 26,
+   "fetched": 27,
+   "kept": 27,
    "newest": "2026-10-24T20:31:27Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "bwwro",
@@ -109,7 +109,7 @@
    "fetched": 10,
    "kept": 10,
    "newest": "2026-10-24T20:50:33Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "corriere-seriea",
@@ -118,8 +118,8 @@
    "ok": true,
    "fetched": 30,
    "kept": 30,
-   "newest": "2026-10-25T09:03:07Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T13:44:44Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "dutchnews",
@@ -129,7 +129,7 @@
    "fetched": 10,
    "kept": 8,
    "newest": "2026-10-21T21:20:44Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "fearthewall",
@@ -138,8 +138,8 @@
    "ok": true,
    "fetched": 10,
    "kept": 10,
-   "newest": "2026-10-24T15:46:43Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T14:16:21Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "flw",
@@ -148,8 +148,8 @@
    "ok": true,
    "fetched": 10,
    "kept": 10,
-   "newest": "2026-10-25T08:00:15Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T12:10:54Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "football-espana",
@@ -158,8 +158,8 @@
    "ok": true,
    "fetched": 10,
    "kept": 10,
-   "newest": "2026-10-24T06:58:36Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T06:59:02Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "football-italia",
@@ -168,18 +168,18 @@
    "ok": true,
    "fetched": 20,
    "kept": 20,
-   "newest": "2026-10-25T09:03:51Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T14:23:19Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "footmercato",
    "name": "Foot Mercato",
    "url": "https://www.footmercato.net/flux-rss",
    "ok": true,
-   "fetched": 50,
-   "kept": 17,
-   "newest": "2026-10-25T09:02:57Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "fetched": 49,
+   "kept": 19,
+   "newest": "2026-10-25T14:24:14Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "fourfourtwo",
@@ -188,8 +188,8 @@
    "ok": true,
    "fetched": 50,
    "kept": 50,
-   "newest": "2026-10-25T09:00:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T14:00:00Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "goalazzo",
@@ -197,7 +197,7 @@
    "url": "https://goalazzo.substack.com/feed",
    "ok": false,
    "error": "HTTPError: HTTP Error 403: Forbidden",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "guardian-bundesliga",
@@ -207,7 +207,7 @@
    "fetched": 20,
    "kept": 10,
    "newest": "2026-10-24T21:21:11Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "guardian-championship",
@@ -215,9 +215,9 @@
    "url": "https://www.theguardian.com/football/championship/rss",
    "ok": true,
    "fetched": 20,
-   "kept": 9,
+   "kept": 8,
    "newest": "2026-10-24T18:11:23Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "guardian-cl",
@@ -227,7 +227,7 @@
    "fetched": 20,
    "kept": 20,
    "newest": "2026-10-22T13:42:43Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "guardian-football",
@@ -236,8 +236,8 @@
    "ok": true,
    "fetched": 60,
    "kept": 45,
-   "newest": "2026-10-25T08:49:43Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T14:14:16Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "guardian-laliga",
@@ -245,9 +245,9 @@
    "url": "https://www.theguardian.com/football/laligafootball/rss",
    "ok": true,
    "fetched": 20,
-   "kept": 10,
-   "newest": "2026-10-24T07:00:26Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 11,
+   "newest": "2026-10-25T14:00:05Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "guardian-ligue1",
@@ -257,7 +257,7 @@
    "fetched": 20,
    "kept": 5,
    "newest": "2026-10-19T14:30:55Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "guardian-pl",
@@ -266,8 +266,8 @@
    "ok": true,
    "fetched": 20,
    "kept": 20,
-   "newest": "2026-10-24T19:01:46Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T14:23:51Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "guardian-portugal",
@@ -277,7 +277,7 @@
    "fetched": 20,
    "kept": 2,
    "newest": "2026-10-21T12:40:41Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "guardian-seriea",
@@ -287,7 +287,7 @@
    "fetched": 20,
    "kept": 5,
    "newest": "2026-10-24T21:21:11Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "haaretz-sport",
@@ -295,9 +295,9 @@
    "url": "https://www.haaretz.co.il/srv/%D7%A1%D7%A4%D7%95%D7%A8%D7%98--%D7%94%D7%90%D7%A8%D7%A5-rss",
    "ok": true,
    "fetched": 50,
-   "kept": 4,
-   "newest": "2026-10-25T09:02:18Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 2,
+   "newest": "2026-10-25T13:04:23Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "intothecalderon",
@@ -306,8 +306,8 @@
    "ok": true,
    "fetched": 10,
    "kept": 10,
-   "newest": "2026-10-24T13:39:20Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-24T22:53:14Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "jpost-sport",
@@ -317,7 +317,7 @@
    "fetched": 30,
    "kept": 11,
    "newest": "2026-10-22T22:55:22Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "kicker",
@@ -325,9 +325,9 @@
    "url": "https://newsfeed.kicker.de/news/aktuell",
    "ok": true,
    "fetched": 20,
-   "kept": 6,
-   "newest": "2026-10-25T09:02:53Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 8,
+   "newest": "2026-10-25T14:17:56Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "leedslive",
@@ -335,9 +335,9 @@
    "url": "https://www.leeds-live.co.uk/?service=rss",
    "ok": true,
    "fetched": 25,
-   "kept": 19,
-   "newest": "2026-10-25T09:00:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 18,
+   "newest": "2026-10-25T13:40:37Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "lequipe-foot",
@@ -346,8 +346,8 @@
    "ok": true,
    "fetched": 50,
    "kept": 20,
-   "newest": "2026-10-25T08:00:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T14:06:06Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "maisfutebol",
@@ -355,9 +355,9 @@
    "url": "https://maisfutebol.iol.pt/rss",
    "ok": true,
    "fetched": 20,
-   "kept": 14,
-   "newest": "2026-10-25T09:00:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 7,
+   "newest": "2026-10-25T13:39:00Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "managingmadrid",
@@ -366,18 +366,18 @@
    "ok": true,
    "fetched": 10,
    "kept": 10,
-   "newest": "2026-10-24T10:41:27Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-24T19:08:59Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "marca",
    "name": "Marca",
    "url": "https://e00-marca.uecdn.es/rss/futbol/primera-division.xml",
    "ok": true,
-   "fetched": 45,
-   "kept": 45,
-   "newest": "2026-10-25T09:05:24Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "fetched": 46,
+   "kept": 46,
+   "newest": "2026-10-25T13:12:49Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "marca-en",
@@ -387,7 +387,7 @@
    "fetched": 50,
    "kept": 5,
    "newest": "2026-10-23T18:05:08Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "mundodeportivo",
@@ -395,9 +395,9 @@
    "url": "https://www.mundodeportivo.com/rss/futbol",
    "ok": true,
    "fetched": 100,
-   "kept": 67,
-   "newest": "2026-10-25T09:00:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 69,
+   "newest": "2026-10-25T13:46:02Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "nos",
@@ -406,8 +406,8 @@
    "ok": true,
    "fetched": 20,
    "kept": 9,
-   "newest": "2026-10-25T08:31:21Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T13:11:32Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "nu-voetbal",
@@ -415,9 +415,9 @@
    "url": "https://www.nu.nl/rss/Voetbal",
    "ok": true,
    "fetched": 30,
-   "kept": 9,
-   "newest": "2026-10-25T07:18:37Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 12,
+   "newest": "2026-10-25T13:12:05Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "observador",
@@ -425,9 +425,9 @@
    "url": "https://observador.pt/seccao/desporto/feed/",
    "ok": true,
    "fetched": 51,
-   "kept": 14,
-   "newest": "2026-10-25T09:04:02Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 11,
+   "newest": "2026-10-25T14:15:00Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "one",
@@ -435,9 +435,9 @@
    "url": "https://www.one.co.il/RSS",
    "ok": true,
    "fetched": 53,
-   "kept": 18,
-   "newest": "2026-10-25T08:43:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 16,
+   "newest": "2026-10-25T14:12:00Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "record",
@@ -445,9 +445,9 @@
    "url": "https://www.record.pt/rss",
    "ok": true,
    "fetched": 20,
-   "kept": 10,
-   "newest": "2026-10-25T08:53:20Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 3,
+   "newest": "2026-10-25T14:23:59Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "rmc-ligue1",
@@ -457,7 +457,7 @@
    "fetched": 30,
    "kept": 30,
    "newest": "2026-10-25T07:20:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "scouted",
@@ -467,7 +467,7 @@
    "fetched": 15,
    "kept": 1,
    "newest": "2026-10-15T08:04:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "sempremilan",
@@ -476,8 +476,8 @@
    "ok": true,
    "fetched": 100,
    "kept": 100,
-   "newest": "2026-10-25T09:00:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T14:00:00Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "sky-championship",
@@ -487,7 +487,7 @@
    "fetched": 20,
    "kept": 2,
    "newest": "2026-10-23T19:00:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "sky-pl",
@@ -495,9 +495,9 @@
    "url": "https://www.skysports.com/rss/12040",
    "ok": true,
    "fetched": 20,
-   "kept": 2,
-   "newest": "2026-10-25T08:15:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 5,
+   "newest": "2026-10-25T14:00:00Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "spielverlagerung",
@@ -507,17 +507,17 @@
    "fetched": 25,
    "kept": 2,
    "newest": "2026-10-24T19:28:16Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "sportschau",
    "name": "Sportschau",
    "url": "https://www.sportschau.de/fussball/index~rss2.xml",
    "ok": true,
-   "fetched": 36,
-   "kept": 18,
-   "newest": "2026-10-25T08:49:33Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "fetched": 33,
+   "kept": 20,
+   "newest": "2026-10-25T14:22:16Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "stretty",
@@ -526,8 +526,8 @@
    "ok": true,
    "fetched": 18,
    "kept": 18,
-   "newest": "2026-10-24T11:35:17Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T07:06:26Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "tgg",
@@ -537,7 +537,7 @@
    "fetched": 10,
    "kept": 10,
    "newest": "2026-10-23T12:12:39Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "theanalyst",
@@ -547,7 +547,7 @@
    "fetched": 70,
    "kept": 70,
    "newest": "2026-10-25T02:44:19Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "tuttosport",
@@ -555,9 +555,9 @@
    "url": "https://www.tuttosport.com/rss/calcio",
    "ok": true,
    "fetched": 30,
-   "kept": 26,
-   "newest": "2026-10-25T09:04:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 27,
+   "newest": "2026-10-25T14:00:38Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "vi",
@@ -565,9 +565,9 @@
    "url": "https://www.vi.nl/rss",
    "ok": true,
    "fetched": 24,
-   "kept": 12,
-   "newest": "2026-10-25T09:00:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 15,
+   "newest": "2026-10-25T14:18:33Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "voetbalprimeur",
@@ -575,9 +575,9 @@
    "url": "https://www.voetbalprimeur.nl/rss/nieuws.xml",
    "ok": true,
    "fetched": 24,
-   "kept": 15,
-   "newest": "2026-10-25T09:05:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 18,
+   "newest": "2026-10-25T14:17:22Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "wagnh",
@@ -586,8 +586,8 @@
    "ok": true,
    "fetched": 10,
    "kept": 10,
-   "newest": "2026-10-24T18:25:02Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T13:58:00Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "walla-il-football",
@@ -596,8 +596,8 @@
    "ok": true,
    "fetched": 30,
    "kept": 30,
-   "newest": "2026-10-25T11:52:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T16:50:00Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "walla-sport",
@@ -605,9 +605,9 @@
    "url": "https://rss.walla.co.il/feed/3?type=main",
    "ok": true,
    "fetched": 30,
-   "kept": 15,
-   "newest": "2026-10-25T11:52:00Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 16,
+   "newest": "2026-10-25T17:23:00Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "ynet-sport",
@@ -615,19 +615,19 @@
    "url": "https://www.ynet.co.il/Integration/StoryRss3.xml",
    "ok": true,
    "fetched": 30,
-   "kept": 6,
-   "newest": "2026-10-25T09:02:32Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 7,
+   "newest": "2026-10-25T14:09:15Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-bundesliga",
    "name": "Bundesliga (רשמי)",
    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC6UL29enLNe4mqwTfAyeNuw",
    "ok": true,
-   "fetched": 13,
-   "kept": 13,
+   "fetched": 12,
+   "kept": 12,
    "newest": "2026-10-24T21:16:47Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-ajax",
@@ -637,7 +637,7 @@
    "fetched": 2,
    "kept": 2,
    "newest": "2026-10-24T21:59:13Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-arsenal",
@@ -647,17 +647,17 @@
    "fetched": 6,
    "kept": 6,
    "newest": "2026-10-24T21:00:21Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-barcelona",
    "name": "Barcelona (רשמי)",
    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC14UlmYlSNiQCBe9Eookf_A",
    "ok": true,
-   "fetched": 6,
-   "kept": 6,
+   "fetched": 5,
+   "kept": 5,
    "newest": "2026-10-24T20:56:41Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-bayern",
@@ -667,17 +667,17 @@
    "fetched": 6,
    "kept": 6,
    "newest": "2026-10-24T08:19:54Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-benfica",
    "name": "Benfica (רשמי)",
    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC8zrah5cNf2c3jKKeD_Z3fw",
    "ok": true,
-   "fetched": 7,
-   "kept": 7,
-   "newest": "2026-10-22T21:41:12Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "fetched": 9,
+   "kept": 9,
+   "newest": "2026-10-25T14:01:04Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-dortmund",
@@ -686,8 +686,8 @@
    "ok": true,
    "fetched": 12,
    "kept": 12,
-   "newest": "2026-10-24T20:30:14Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T13:00:33Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-feyenoord",
@@ -697,17 +697,17 @@
    "fetched": 12,
    "kept": 10,
    "newest": "2026-10-24T09:29:18Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-inter",
    "name": "Inter (רשמי)",
    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCvXzEblUa0cfny4HAJ_ZOWw",
    "ok": true,
-   "fetched": 5,
-   "kept": 5,
-   "newest": "2026-10-25T05:11:53Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "fetched": 3,
+   "kept": 3,
+   "newest": "2026-10-25T11:31:37Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-juventus",
@@ -716,18 +716,18 @@
    "ok": true,
    "fetched": 2,
    "kept": 2,
-   "newest": "2026-10-24T12:00:34Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-24T15:14:24Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-liverpool",
    "name": "Liverpool (רשמי)",
    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC9LQwHZoucFT94I2h6JOcjw",
    "ok": true,
-   "fetched": 3,
-   "kept": 3,
-   "newest": "2026-10-23T12:46:13Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "fetched": 4,
+   "kept": 4,
+   "newest": "2026-10-25T13:29:43Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-mancity",
@@ -737,27 +737,27 @@
    "fetched": 9,
    "kept": 9,
    "newest": "2026-10-24T21:00:16Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-manutd",
    "name": "Manchester United (רשמי)",
    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC6yW44UGJJBvYTlfC7CRg2Q",
    "ok": true,
-   "fetched": 8,
-   "kept": 8,
+   "fetched": 7,
+   "kept": 7,
    "newest": "2026-10-24T13:26:20Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-milan",
    "name": "AC Milan (רשמי)",
    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCKcx1uK38H4AOkmfv4ywlrg",
    "ok": true,
-   "fetched": 3,
-   "kept": 3,
-   "newest": "2026-10-22T22:00:10Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "fetched": 2,
+   "kept": 2,
+   "newest": "2026-10-23T12:07:12Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-porto",
@@ -766,8 +766,8 @@
    "ok": true,
    "fetched": 10,
    "kept": 10,
-   "newest": "2026-10-24T22:15:38Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T12:33:13Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-psg",
@@ -777,7 +777,7 @@
    "fetched": 4,
    "kept": 4,
    "newest": "2026-10-24T12:50:21Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-psv",
@@ -787,7 +787,7 @@
    "fetched": 10,
    "kept": 10,
    "newest": "2026-10-25T08:00:16Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-realmadrid",
@@ -797,7 +797,7 @@
    "fetched": 4,
    "kept": 4,
    "newest": "2026-10-24T16:34:09Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-club-sporting",
@@ -807,7 +807,7 @@
    "fetched": 13,
    "kept": 13,
    "newest": "2026-10-25T00:44:43Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-coachesvoice",
@@ -817,7 +817,7 @@
    "fetched": 12,
    "kept": 0,
    "newest": "2026-10-08T12:20:19Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-espnnl",
@@ -827,7 +827,7 @@
    "fetched": 4,
    "kept": 3,
    "newest": "2026-10-24T22:00:39Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-laliga",
@@ -836,8 +836,8 @@
    "ok": true,
    "fetched": 6,
    "kept": 6,
-   "newest": "2026-10-24T21:49:23Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T13:01:28Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-ligaportugal",
@@ -847,37 +847,37 @@
    "fetched": 11,
    "kept": 3,
    "newest": "2026-10-20T23:00:11Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-ligue1",
    "name": "Ligue 1 (רשמי)",
    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCQsH5XtIc9hONE1BQjucM0g",
    "ok": true,
-   "fetched": 5,
-   "kept": 5,
+   "fetched": 4,
+   "kept": 4,
    "newest": "2026-10-24T15:00:36Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-premierleague",
    "name": "Premier League (רשמי)",
    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCG5qGWdu8nIRZqJ_GgDwQ-w",
    "ok": true,
-   "fetched": 5,
-   "kept": 5,
+   "fetched": 4,
+   "kept": 4,
    "newest": "2026-10-23T18:33:14Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-seriea",
    "name": "Serie A (רשמי)",
    "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCBJeMCIeLQos7wacox4hmLQ",
    "ok": true,
-   "fetched": 10,
-   "kept": 10,
+   "fetched": 8,
+   "kept": 8,
    "newest": "2026-10-25T00:44:10Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-sky-football",
@@ -887,7 +887,7 @@
    "fetched": 15,
    "kept": 8,
    "newest": "2026-10-24T20:36:13Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-tifo",
@@ -897,7 +897,7 @@
    "fetched": 5,
    "kept": 5,
    "newest": "2026-10-22T16:04:28Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "yt-uefa",
@@ -906,8 +906,8 @@
    "ok": true,
    "fetched": 3,
    "kept": 3,
-   "newest": "2026-10-23T13:12:39Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "newest": "2026-10-25T13:00:29Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   },
   {
    "id": "zerozero",
@@ -915,9 +915,9 @@
    "url": "https://www.zerozero.pt/rss/noticias.php",
    "ok": true,
    "fetched": 80,
-   "kept": 32,
-   "newest": "2026-10-25T09:00:02Z",
-   "checked_at": "2026-10-25T09:11:32Z"
+   "kept": 29,
+   "newest": "2026-10-25T14:23:18Z",
+   "checked_at": "2026-10-25T14:25:02Z"
   }
  ]
 }
