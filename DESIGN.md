@@ -1,6 +1,6 @@
 ---
 name: מגרש (Magrash)
-description: A Hebrew RTL football dashboard styled as a sticker album; reading an item sticks a sticker into today's tally.
+description: A Hebrew RTL football tactics and analysis app, with sticker-album material on a calm reading column.
 colors:
   ultramarine-shell: "#1f3bd6"
   ink-navy-ground: "#0c1440"
@@ -123,7 +123,9 @@ components:
 
 ## Overview
 
-**Creative North Star: "The Sticker Album"**
+**Creative North Star: "The Sticker Album, reading edition"**
+
+The app became tactics-only: the news feed, video, watchlist and the daily album tally were removed on the user's decision. Tally rules below no longer apply; stickers, palette, type and gold discipline remain.
 
 Reading is collecting. A saturated ultramarine shell holds the site name, view tabs and a per-day tally of dashed slots; below it an ink-navy ground carries a quiet, ruled list of articles. Each article owns a white-bordered, die-cut sticker thumbnail, and each item read fills one slot in the tally with a mini sticker in its league's colour. The loud colour lives in the shell, the stickers and the gold foil; the reading surface stays calm so Hebrew titles scan fast on a phone.
 

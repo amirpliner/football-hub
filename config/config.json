@@ -1,6 +1,6 @@
 {
   "settings": {
-    "keep_days": 14,
+    "keep_days": 30,
     "summary_max_chars": 300,
     "fetch_timeout_seconds": 25,
     "dedup_window_hours": 48
@@ -1238,7 +1238,7 @@
       "teams": {}
     }
   },
-  "_comment_sources": "category: news = חדשות, fan = בלוג אוהדים, analysis = ניתוח/טקטיקה. leagues = הפיד שייך תמיד לליגות האלה. match_leagues = פיד רחב: שומרים רק כתבות שמזכירות קבוצה מהליגות האלה. keep_unmatched = שומרים הכול גם בלי התאמה. teams = קבוצה קבועה (לבלוגי אוהדים). priority = מספר נמוך מנצח כשמאחדים כפילויות. enabled=false מכבה מקור. | וידאו: category=video, כתובת של פיד ה-RSS של ערוץ יוטיוב רשמי (channel_id). | exclude = מילים שמוציאות כתבה (למשל כדורסל, כי שמות כמו 'מכבי ת\"א' משותפים).",
+  "_comment_sources": "category: news = חדשות, fan = בלוג אוהדים, analysis = ניתוח/טקטיקה. leagues = הפיד שייך תמיד לליגות האלה. match_leagues = פיד רחב: שומרים רק כתבות שמזכירות קבוצה מהליגות האלה. keep_unmatched = שומרים הכול גם בלי התאמה. teams = קבוצה קבועה (לבלוגי אוהדים). priority = מספר נמוך מנצח כשמאחדים כפילויות. enabled=false מכבה מקור. | וידאו: category=video, כתובת של פיד ה-RSS של ערוץ יוטיוב רשמי (channel_id). | exclude = מילים שמוציאות כתבה (למשל כדורסל, כי שמות כמו 'מכבי ת\"א' משותפים). | include = נשמרות רק כתבות שהכותרת שלהן מכילה אחת מהמילים.",
   "sources": [
     {
       "id": "walla-il-football",
@@ -1249,7 +1249,8 @@
       "leagues": [
         "israel"
       ],
-      "priority": 4
+      "priority": 4,
+      "enabled": false
     },
     {
       "id": "walla-sport",
@@ -1281,7 +1282,8 @@
         "היכל הספורט",
         "על הפרקט",
         "סל "
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "ynet-sport",
@@ -1313,7 +1315,8 @@
         "היכל הספורט",
         "על הפרקט",
         "סל "
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "one",
@@ -1345,7 +1348,8 @@
         "היכל הספורט",
         "על הפרקט",
         "סל "
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "haaretz-sport",
@@ -1377,7 +1381,8 @@
         "היכל הספורט",
         "על הפרקט",
         "סל "
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "jpost-sport",
@@ -1397,7 +1402,8 @@
         "volleyball",
         "handball",
         "tennis"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "bbc-pl",
@@ -1408,7 +1414,8 @@
       "leagues": [
         "premier_league"
       ],
-      "priority": 2
+      "priority": 2,
+      "enabled": false
     },
     {
       "id": "guardian-pl",
@@ -1419,7 +1426,8 @@
       "leagues": [
         "premier_league"
       ],
-      "priority": 2
+      "priority": 2,
+      "enabled": false
     },
     {
       "id": "sky-pl",
@@ -1431,7 +1439,8 @@
         "premier_league",
         "championship"
       ],
-      "priority": 3
+      "priority": 3,
+      "enabled": false
     },
     {
       "id": "arseblog",
@@ -1445,7 +1454,8 @@
       "teams": [
         "arsenal"
       ],
-      "priority": 8
+      "priority": 8,
+      "enabled": false
     },
     {
       "id": "stretty",
@@ -1459,7 +1469,8 @@
       "teams": [
         "man_utd"
       ],
-      "priority": 8
+      "priority": 8,
+      "enabled": false
     },
     {
       "id": "wagnh",
@@ -1473,7 +1484,8 @@
       "teams": [
         "chelsea"
       ],
-      "priority": 8
+      "priority": 8,
+      "enabled": false
     },
     {
       "id": "guardian-laliga",
@@ -1484,7 +1496,8 @@
       "leagues": [
         "la_liga"
       ],
-      "priority": 2
+      "priority": 2,
+      "enabled": false
     },
     {
       "id": "marca",
@@ -1495,7 +1508,8 @@
       "leagues": [
         "la_liga"
       ],
-      "priority": 4
+      "priority": 4,
+      "enabled": false
     },
     {
       "id": "marca-en",
@@ -1506,7 +1520,8 @@
       "match_leagues": [
         "la_liga"
       ],
-      "priority": 3
+      "priority": 3,
+      "enabled": false
     },
     {
       "id": "mundodeportivo",
@@ -1517,7 +1532,8 @@
       "match_leagues": [
         "la_liga"
       ],
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "football-espana",
@@ -1528,7 +1544,8 @@
       "leagues": [
         "la_liga"
       ],
-      "priority": 3
+      "priority": 3,
+      "enabled": false
     },
     {
       "id": "blaugranes",
@@ -1542,7 +1559,8 @@
       "teams": [
         "barcelona"
       ],
-      "priority": 8
+      "priority": 8,
+      "enabled": false
     },
     {
       "id": "managingmadrid",
@@ -1556,7 +1574,8 @@
       "teams": [
         "real_madrid"
       ],
-      "priority": 8
+      "priority": 8,
+      "enabled": false
     },
     {
       "id": "intothecalderon",
@@ -1570,7 +1589,8 @@
       "teams": [
         "atletico"
       ],
-      "priority": 8
+      "priority": 8,
+      "enabled": false
     },
     {
       "id": "guardian-seriea",
@@ -1581,7 +1601,8 @@
       "leagues": [
         "serie_a"
       ],
-      "priority": 2
+      "priority": 2,
+      "enabled": false
     },
     {
       "id": "football-italia",
@@ -1592,7 +1613,8 @@
       "leagues": [
         "serie_a"
       ],
-      "priority": 3
+      "priority": 3,
+      "enabled": false
     },
     {
       "id": "corriere-seriea",
@@ -1603,7 +1625,8 @@
       "leagues": [
         "serie_a"
       ],
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "tuttosport",
@@ -1614,7 +1637,8 @@
       "match_leagues": [
         "serie_a"
       ],
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "goalazzo",
@@ -1639,7 +1663,8 @@
       "teams": [
         "milan"
       ],
-      "priority": 8
+      "priority": 8,
+      "enabled": false
     },
     {
       "id": "bwwro",
@@ -1653,7 +1678,8 @@
       "teams": [
         "juventus"
       ],
-      "priority": 8
+      "priority": 8,
+      "enabled": false
     },
     {
       "id": "guardian-bundesliga",
@@ -1664,7 +1690,8 @@
       "leagues": [
         "bundesliga"
       ],
-      "priority": 2
+      "priority": 2,
+      "enabled": false
     },
     {
       "id": "bundesliga-com",
@@ -1675,7 +1702,8 @@
       "leagues": [
         "bundesliga"
       ],
-      "priority": 1
+      "priority": 1,
+      "enabled": false
     },
     {
       "id": "kicker",
@@ -1686,7 +1714,8 @@
       "match_leagues": [
         "bundesliga"
       ],
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "sportschau",
@@ -1697,7 +1726,8 @@
       "match_leagues": [
         "bundesliga"
       ],
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "bfw",
@@ -1711,7 +1741,8 @@
       "teams": [
         "bayern"
       ],
-      "priority": 8
+      "priority": 8,
+      "enabled": false
     },
     {
       "id": "fearthewall",
@@ -1725,7 +1756,8 @@
       "teams": [
         "dortmund"
       ],
-      "priority": 8
+      "priority": 8,
+      "enabled": false
     },
     {
       "id": "guardian-ligue1",
@@ -1736,7 +1768,8 @@
       "leagues": [
         "ligue_1"
       ],
-      "priority": 2
+      "priority": 2,
+      "enabled": false
     },
     {
       "id": "rmc-ligue1",
@@ -1747,7 +1780,8 @@
       "leagues": [
         "ligue_1"
       ],
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "footmercato",
@@ -1758,7 +1792,8 @@
       "match_leagues": [
         "ligue_1"
       ],
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "lequipe-foot",
@@ -1769,7 +1804,8 @@
       "match_leagues": [
         "ligue_1"
       ],
-      "priority": 4
+      "priority": 4,
+      "enabled": false
     },
     {
       "id": "lequipe-ligue1",
@@ -1792,7 +1828,8 @@
       "leagues": [
         "championship"
       ],
-      "priority": 2
+      "priority": 2,
+      "enabled": false
     },
     {
       "id": "guardian-championship",
@@ -1803,7 +1840,8 @@
       "leagues": [
         "championship"
       ],
-      "priority": 2
+      "priority": 2,
+      "enabled": false
     },
     {
       "id": "sky-championship",
@@ -1814,7 +1852,8 @@
       "leagues": [
         "championship"
       ],
-      "priority": 3
+      "priority": 3,
+      "enabled": false
     },
     {
       "id": "flw",
@@ -1825,7 +1864,8 @@
       "leagues": [
         "championship"
       ],
-      "priority": 6
+      "priority": 6,
+      "enabled": false
     },
     {
       "id": "leedslive",
@@ -1837,7 +1877,8 @@
         "premier_league",
         "championship"
       ],
-      "priority": 7
+      "priority": 7,
+      "enabled": false
     },
     {
       "id": "guardian-portugal",
@@ -1848,7 +1889,8 @@
       "leagues": [
         "liga_portugal"
       ],
-      "priority": 2
+      "priority": 2,
+      "enabled": false
     },
     {
       "id": "record",
@@ -1859,7 +1901,8 @@
       "match_leagues": [
         "liga_portugal"
       ],
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "maisfutebol",
@@ -1870,7 +1913,8 @@
       "match_leagues": [
         "liga_portugal"
       ],
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "zerozero",
@@ -1881,7 +1925,8 @@
       "match_leagues": [
         "liga_portugal"
       ],
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "bolanarede",
@@ -1892,7 +1937,8 @@
       "match_leagues": [
         "liga_portugal"
       ],
-      "priority": 6
+      "priority": 6,
+      "enabled": false
     },
     {
       "id": "observador",
@@ -1903,7 +1949,8 @@
       "match_leagues": [
         "liga_portugal"
       ],
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "nos",
@@ -1914,7 +1961,8 @@
       "match_leagues": [
         "eredivisie"
       ],
-      "priority": 4
+      "priority": 4,
+      "enabled": false
     },
     {
       "id": "vi",
@@ -1925,7 +1973,8 @@
       "match_leagues": [
         "eredivisie"
       ],
-      "priority": 4
+      "priority": 4,
+      "enabled": false
     },
     {
       "id": "voetbalprimeur",
@@ -1936,7 +1985,8 @@
       "match_leagues": [
         "eredivisie"
       ],
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "ad-voetbal",
@@ -1947,7 +1997,8 @@
       "match_leagues": [
         "eredivisie"
       ],
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "nu-voetbal",
@@ -1958,7 +2009,8 @@
       "match_leagues": [
         "eredivisie"
       ],
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "dutchnews",
@@ -1969,7 +2021,8 @@
       "match_leagues": [
         "eredivisie"
       ],
-      "priority": 3
+      "priority": 3,
+      "enabled": false
     },
     {
       "id": "omroepbrabant",
@@ -1992,7 +2045,8 @@
       "leagues": [
         "champions_league"
       ],
-      "priority": 2
+      "priority": 2,
+      "enabled": false
     },
     {
       "id": "guardian-cl",
@@ -2003,7 +2057,8 @@
       "leagues": [
         "champions_league"
       ],
-      "priority": 2
+      "priority": 2,
+      "enabled": false
     },
     {
       "id": "spielverlagerung",
@@ -2021,7 +2076,26 @@
       "category": "analysis",
       "lang": "en",
       "keep_unmatched": true,
-      "priority": 6
+      "priority": 6,
+      "exclude": [
+        "Prediction",
+        "FCS",
+        "NFL",
+        "NBA",
+        "WNBA",
+        "NCAA",
+        "College Football",
+        "MLB",
+        "Scoreboard",
+        "Top 25",
+        "Cricket",
+        "Rugby",
+        "Ashes",
+        "Heisman",
+        "Quarterback",
+        "Fantasy",
+        "Power Rankings"
+      ]
     },
     {
       "id": "tgg",
@@ -2048,7 +2122,8 @@
       "category": "news",
       "lang": "en",
       "keep_unmatched": true,
-      "priority": 3
+      "priority": 3,
+      "enabled": false
     },
     {
       "id": "guardian-football",
@@ -2057,7 +2132,8 @@
       "category": "news",
       "lang": "en",
       "keep_unmatched": true,
-      "priority": 3
+      "priority": 3,
+      "enabled": false
     },
     {
       "id": "fourfourtwo",
@@ -2066,7 +2142,8 @@
       "category": "news",
       "lang": "en",
       "keep_unmatched": true,
-      "priority": 5
+      "priority": 5,
+      "enabled": false
     },
     {
       "id": "yt-premierleague",
@@ -2077,7 +2154,8 @@
       "priority": 5,
       "leagues": [
         "premier_league"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-laliga",
@@ -2088,7 +2166,8 @@
       "priority": 5,
       "leagues": [
         "la_liga"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-seriea",
@@ -2099,7 +2178,8 @@
       "priority": 5,
       "leagues": [
         "serie_a"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-bundesliga",
@@ -2110,7 +2190,8 @@
       "priority": 5,
       "leagues": [
         "bundesliga"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-ligue1",
@@ -2121,7 +2202,8 @@
       "priority": 5,
       "leagues": [
         "ligue_1"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-ligaportugal",
@@ -2132,7 +2214,8 @@
       "priority": 5,
       "leagues": [
         "liga_portugal"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-uefa",
@@ -2143,7 +2226,8 @@
       "priority": 5,
       "leagues": [
         "champions_league"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-sky-football",
@@ -2154,7 +2238,8 @@
       "priority": 6,
       "match_leagues": [
         "championship"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-espnnl",
@@ -2165,7 +2250,8 @@
       "priority": 6,
       "match_leagues": [
         "eredivisie"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-tifo",
@@ -2174,7 +2260,8 @@
       "category": "video",
       "lang": "en",
       "priority": 6,
-      "keep_unmatched": true
+      "keep_unmatched": true,
+      "enabled": false
     },
     {
       "id": "yt-coachesvoice",
@@ -2183,7 +2270,8 @@
       "category": "video",
       "lang": "en",
       "priority": 6,
-      "keep_unmatched": true
+      "keep_unmatched": true,
+      "enabled": false
     },
     {
       "id": "yt-club-arsenal",
@@ -2197,7 +2285,8 @@
       ],
       "teams": [
         "arsenal"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-mancity",
@@ -2211,7 +2300,8 @@
       ],
       "teams": [
         "man_city"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-manutd",
@@ -2225,7 +2315,8 @@
       ],
       "teams": [
         "man_utd"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-liverpool",
@@ -2239,7 +2330,8 @@
       ],
       "teams": [
         "liverpool"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-realmadrid",
@@ -2253,7 +2345,8 @@
       ],
       "teams": [
         "real_madrid"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-barcelona",
@@ -2267,7 +2360,8 @@
       ],
       "teams": [
         "barcelona"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-bayern",
@@ -2281,7 +2375,8 @@
       ],
       "teams": [
         "bayern"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-dortmund",
@@ -2295,7 +2390,8 @@
       ],
       "teams": [
         "dortmund"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-juventus",
@@ -2309,7 +2405,8 @@
       ],
       "teams": [
         "juventus"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-inter",
@@ -2323,7 +2420,8 @@
       ],
       "teams": [
         "inter"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-milan",
@@ -2337,7 +2435,8 @@
       ],
       "teams": [
         "milan"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-psg",
@@ -2351,7 +2450,8 @@
       ],
       "teams": [
         "psg"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-ajax",
@@ -2365,7 +2465,8 @@
       ],
       "teams": [
         "ajax"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-psv",
@@ -2379,7 +2480,8 @@
       ],
       "teams": [
         "psv"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-feyenoord",
@@ -2393,7 +2495,8 @@
       ],
       "teams": [
         "feyenoord"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-benfica",
@@ -2407,7 +2510,8 @@
       ],
       "teams": [
         "benfica"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-porto",
@@ -2421,7 +2525,8 @@
       ],
       "teams": [
         "porto"
-      ]
+      ],
+      "enabled": false
     },
     {
       "id": "yt-club-sporting",
@@ -2435,6 +2540,59 @@
       ],
       "teams": [
         "sporting"
+      ],
+      "enabled": false
+    },
+    {
+      "id": "mastermind",
+      "name": "The Mastermind",
+      "url": "https://themastermindsite.com/feed/",
+      "category": "analysis",
+      "lang": "en",
+      "keep_unmatched": true,
+      "priority": 3,
+      "exclude": [
+        "Vote for",
+        "Top 100"
+      ]
+    },
+    {
+      "id": "tfa-substack",
+      "name": "Total Football Analysis",
+      "url": "https://totalfootballanalysis.substack.com/feed",
+      "category": "analysis",
+      "lang": "en",
+      "keep_unmatched": true,
+      "priority": 3
+    },
+    {
+      "id": "false9",
+      "name": "The False 9",
+      "url": "https://thefalse9.com/feed/",
+      "category": "analysis",
+      "lang": "en",
+      "keep_unmatched": true,
+      "priority": 6,
+      "include": [
+        "Tactical",
+        "Tactics",
+        "Analysis",
+        "Scouting Report",
+        "How "
+      ]
+    },
+    {
+      "id": "coachingmanual",
+      "name": "The Coaching Manual",
+      "url": "https://www.thecoachingmanual.com/blog/rss.xml",
+      "category": "analysis",
+      "lang": "en",
+      "keep_unmatched": true,
+      "priority": 6,
+      "exclude": [
+        "Nexus",
+        "Session Plans",
+        "Manifesto"
       ]
     }
   ],
@@ -2477,11 +2635,20 @@
     "big_matches": {
       "top_rank": 6,
       "max_previews_per_run": 4,
-      "max_analyses_per_run": 3
+      "max_analyses_per_run": 15,
+      "analysis_leagues": [
+        "premier_league",
+        "la_liga",
+        "serie_a",
+        "bundesliga",
+        "ligue_1",
+        "champions_league"
+      ]
     },
     "tweets": {
       "max_per_run": 2,
       "language": "he"
-    }
+    },
+    "keep_days": 60
   }
 }

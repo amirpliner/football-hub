@@ -10,80 +10,44 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="מגרש">
-  <title>מגרש – מרכז הכדורגל שלי</title>
+  <title>מגרש – טקטיקה וניתוח</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Secular+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-view="all">
+<body data-view="analysis">
   <header class="top">
     <div class="wrap">
       <div class="brand-row">
         <h1>מגרש</h1>
         <div class="tools">
-          <button id="btn-filters" class="only-mobile" aria-expanded="false"><span data-icon="sliders"></span>סינון</button>
-          <button id="btn-keywords" title="מילות מעקב"><span data-icon="eye"></span>מעקב</button>
           <button id="btn-refresh" class="icon-only" title="רענן נתונים" aria-label="רענן נתונים"><span data-icon="refresh"></span></button>
           <button id="btn-theme" class="icon-only" title="מצב כהה / בהיר" aria-label="החלף מצב כהה/בהיר"><span data-icon="moon"></span></button>
         </div>
       </div>
 
       <nav class="views" id="views" aria-label="תצוגה">
-        <button data-view="all" class="on">חדשות</button>
+        <button data-view="analysis" class="on">ניתוחים</button>
+        <button data-view="concepts">מושגים</button>
+        <button data-view="reads">מאמרים</button>
         <button data-view="matches">משחקים</button>
         <button data-view="tables">טבלאות</button>
-        <button data-view="watch">מעקב <span class="n num" id="n-watch"></span></button>
-        <button data-view="saved">שמורים <span class="n num" id="n-saved"></span></button>
       </nav>
-
-      <div class="tally" id="tally" role="group" aria-label="אלבום היום">
-        <span class="tally-count num" id="tally-count"></span>
-        <div class="slots" id="slots"></div>
-      </div>
     </div>
   </header>
 
-  <div class="pages-bar">
-    <div class="wrap pages-row">
-      <div class="mini-tally" id="mini-tally" aria-hidden="true"><span class="num" id="mini-count"></span><span class="mini-slots" id="mini-slots"></span></div>
+  <div class="pages-bar" id="pages-bar">
+    <div class="wrap">
       <div class="chips" id="league-chips" role="tablist" aria-label="ליגה"></div>
     </div>
   </div>
 
   <main class="wrap">
-    <div class="filters" id="filters">
-      <input type="search" id="q" placeholder="חיפוש בכותרות ובתקצירים…" aria-label="חיפוש">
-      <select id="f-team" aria-label="קבוצה"></select>
-      <select id="f-source" aria-label="מקור"></select>
-      <select id="f-cat" aria-label="סוג">
-        <option value="">כל הסוגים</option>
-        <option value="video">וידאו</option>
-        <option value="news">חדשות</option>
-        <option value="analysis">ניתוח וטקטיקה</option>
-        <option value="fan">בלוגי אוהדים</option>
-      </select>
-      <label class="check"><input type="checkbox" id="f-dups"> הצג גם כפילויות</label>
-      <label class="check"><input type="checkbox" id="f-hide-read"> הסתר שנקראו</label>
-    </div>
-
     <p class="status" id="status" role="status">טוען…</p>
     <div id="list"></div>
     <button id="more" class="more" hidden>הצג עוד</button>
   </main>
-
-  <dialog id="dlg-keywords">
-    <form method="dialog" class="kw">
-      <h2>מילות מעקב</h2>
-      <p class="hint">שחקנים, קבוצות, מאמנים. כתבה שמזכירה אחת מהמילים מודגשת, ומופיעה בלשונית "מעקב".</p>
-      <div class="kw-add">
-        <input id="kw-input" type="text" placeholder="למשל: Mbappé" autocomplete="off">
-        <button type="button" id="kw-add">הוסף</button>
-      </div>
-      <ul id="kw-list" class="kw-list"></ul>
-      <button class="close">סגור</button>
-    </form>
-  </dialog>
 
   <script src="js/app.js"></script>
 </body>

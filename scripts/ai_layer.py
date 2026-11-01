@@ -15,6 +15,7 @@ import argparse
 import datetime as dt
 import json
 import os
+import re
 import sys
 import urllib.request
 from pathlib import Path
@@ -297,8 +298,8 @@ def pick(cfg, art, mt, ai, only, kind):
              and m["id"] not in ai["previews"] and is_big(m, standings, big["top_rank"])]
         return c[: big["max_previews_per_run"]]
     if kind == "analysis":
-        c = [m for m in ms if m["state"] == "post" and ts(m["date"]) >= now - dt.timedelta(hours=48)
-             and m["id"] not in ai["analyses"] and is_big(m, standings, big["top_rank"])]
+        c = [m for m in ms if m["state"] == "post" and ts(m["date"]) >= now - dt.timedelta(hours=72)
+             and m["id"] not in ai["analyses"] and m["league"] in big["analysis_leagues"]]
         return sorted(c, key=lambda m: m["date"], reverse=True)[: big["max_analyses_per_run"]]
     return []
 
@@ -372,7 +373,8 @@ def run_jobs(cfg, art, mt, ai, usage, args):
                 continue
             out = run("analysis", SYS_ANALYSIS, analysis_prompt(m, facts, items), 6000)
             if out:
-                ai["analyses"][m["id"]] = {**out, "at": now_utc().strftime("%Y-%m-%dT%H:%M:%SZ"), "week": week, "facts": facts, "date": m["date"]}
+                ai["analyses"][m["id"]] = {**out, "at": now_utc().strftime("%Y-%m-%dT%H:%M:%SZ"), "week": week, "facts": facts, "date": m["date"],
+                                        "match": {"league": m["league"], "home": m["home"]["name"], "away": m["away"]["name"], "hs": m["home"]["score"], "as": m["away"]["score"]}}
                 n += 1
         stats["analysis"] = f"{n}/{len(c)}"
 
@@ -399,12 +401,18 @@ def run_jobs(cfg, art, mt, ai, usage, args):
     return stats
 
 
-def prune(ai, art, mt):
+def prune(ai, art, mt, cfg_keep_days):
     ids = {i["id"] for i in art["items"]}
     ai["summaries"] = {k: v for k, v in ai["summaries"].items() if k in ids}
     keep_from = (now_utc() - dt.timedelta(days=14)).strftime("%Y-%m-%dT00:00:00Z")
+    archive_from = (now_utc() - dt.timedelta(days=cfg_keep_days)).strftime("%Y-%m-%dT00:00:00Z")
     ai["previews"] = {k: v for k, v in ai["previews"].items() if v.get("kickoff", "") >= keep_from}
-    ai["analyses"] = {k: v for k, v in ai["analyses"].items() if v.get("date", "") >= keep_from}
+    ai["analyses"] = {k: v for k, v in ai["analyses"].items() if v.get("date", "") >= archive_from}
+    for a in ai["analyses"].values():   # ניתוחים ישנים: משלימים פרטי משחק מתוך גיליון הנתונים
+        if "match" not in a:
+            m = re.match(r"Result: (.+?) (\d+)-(\d+) (.+?) \((\w+), ", a.get("facts", ""))
+            if m:
+                a["match"] = {"league": m.group(5), "home": m.group(1), "away": m.group(4), "hs": int(m.group(2)), "as": int(m.group(3))}
     ai["concepts"] = dict(sorted(ai["concepts"].items())[-8:])
     live = {"a": ids, "m": set(ai["analyses"]), "c": set(ai["concepts"])}
     ai["tweets"] = {k: v for k, v in ai["tweets"].items() if k[2:] in live.get(k[0], set())}
@@ -494,7 +502,7 @@ def main():
         # מפתח שגוי וכו': לא מפילים את שאר ה-Action, אבל כן מדווחים
         print(f"שגיאה: {type(e).__name__}: {e}")
         return 1
-    prune(ai, art, mt)
+    prune(ai, art, mt, cfg["ai"].get("keep_days", 60))
     print("תוצאות:", stats)
     m = usage.get("months", {}).get(month_key())
     if m:

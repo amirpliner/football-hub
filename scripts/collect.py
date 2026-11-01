@@ -416,6 +416,7 @@ def process_source(src, cfg, matcher):
     fixed_leagues = set(src.get("leagues", []))
     match_leagues = set(src.get("match_leagues", []))
     exclude = re.compile("|".join(re.escape(w) for w in src["exclude"])) if src.get("exclude") else None
+    include = re.compile("|".join(re.escape(w) for w in src["include"])) if src.get("include") else None
     kept = []
     for e in entries:
         published = e["published"] or NOW
@@ -424,6 +425,8 @@ def process_source(src, cfg, matcher):
         if published < cutoff:
             continue
         if exclude and exclude.search(e["title"] + " " + e["summary"]):
+            continue
+        if include and not include.search(e["title"]):
             continue
         teams, is_cl = matcher.analyze(e["title"] + " " + e["summary"])
         leagues = set(fixed_leagues)
@@ -508,6 +511,13 @@ def main():
 
     active_ids = {x["id"] for x in cfg["sources"] if x.get("enabled", True)}
     merged = {k: v for k, v in existing.items() if v["source_id"] in active_ids}
+    # כתבות ישנות חייבות לעמוד גם בכללי הסינון העדכניים של המקור
+    rules = {x["id"]: x for x in cfg["sources"]}
+    for k, v in list(merged.items()):
+        r = rules[v["source_id"]]
+        text = v["title"] + " " + v.get("summary", "")
+        if any(w in text for w in r.get("exclude", [])) or (r.get("include") and not any(w in v["title"] for w in r["include"])):
+            del merged[k]
 
     new_count = 0
     for res, kept in results:
