@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-01T19:41:40Z",
+ "generated_at": "2026-11-01T19:45:48Z",
  "sources": [
   {
    "id": "coachingmanual",
@@ -9,7 +9,7 @@
    "fetched": 10,
    "kept": 2,
    "newest": "2026-10-16T12:25:19Z",
-   "checked_at": "2026-11-01T19:41:40Z"
+   "checked_at": "2026-11-01T19:45:48Z"
   },
   {
    "id": "false9",
@@ -19,17 +19,15 @@
    "fetched": 10,
    "kept": 3,
    "newest": "2026-11-01T19:06:52Z",
-   "checked_at": "2026-11-01T19:41:40Z"
+   "checked_at": "2026-11-01T19:45:48Z"
   },
   {
    "id": "goalazzo",
    "name": "Goalazzo",
    "url": "https://goalazzo.substack.com/feed",
-   "ok": true,
-   "fetched": 20,
-   "kept": 8,
-   "newest": "2026-10-30T12:10:49Z",
-   "checked_at": "2026-11-01T19:41:40Z"
+   "ok": false,
+   "error": "HTTPError: HTTP Error 403: Forbidden",
+   "checked_at": "2026-11-01T19:45:48Z"
   },
   {
    "id": "mastermind",
@@ -39,7 +37,7 @@
    "fetched": 8,
    "kept": 7,
    "newest": "2026-11-01T03:14:15Z",
-   "checked_at": "2026-11-01T19:41:40Z"
+   "checked_at": "2026-11-01T19:45:48Z"
   },
   {
    "id": "scouted",
@@ -49,7 +47,7 @@
    "fetched": 15,
    "kept": 7,
    "newest": "2026-10-26T14:37:07Z",
-   "checked_at": "2026-11-01T19:41:40Z"
+   "checked_at": "2026-11-01T19:45:48Z"
   },
   {
    "id": "spielverlagerung",
@@ -59,17 +57,15 @@
    "fetched": 25,
    "kept": 2,
    "newest": "2026-10-24T19:28:16Z",
-   "checked_at": "2026-11-01T19:41:40Z"
+   "checked_at": "2026-11-01T19:45:48Z"
   },
   {
    "id": "tfa-substack",
    "name": "Total Football Analysis",
    "url": "https://totalfootballanalysis.substack.com/feed",
-   "ok": true,
-   "fetched": 20,
-   "kept": 20,
-   "newest": "2026-10-31T06:35:53Z",
-   "checked_at": "2026-11-01T19:41:40Z"
+   "ok": false,
+   "error": "HTTPError: HTTP Error 403: Forbidden",
+   "checked_at": "2026-11-01T19:45:48Z"
   },
   {
    "id": "tgg",
@@ -79,7 +75,7 @@
    "fetched": 10,
    "kept": 10,
    "newest": "2026-10-29T15:18:44Z",
-   "checked_at": "2026-11-01T19:41:40Z"
+   "checked_at": "2026-11-01T19:45:48Z"
   },
   {
    "id": "theanalyst",
@@ -89,7 +85,7 @@
    "fetched": 70,
    "kept": 35,
    "newest": "2026-11-01T18:48:52Z",
-   "checked_at": "2026-11-01T19:41:40Z"
+   "checked_at": "2026-11-01T19:45:48Z"
   }
  ]
 }
