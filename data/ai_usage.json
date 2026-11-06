@@ -42,15 +42,15 @@
    }
   },
   "2026-11": {
-   "cost_usd": 2.29365,
-   "calls": 193,
+   "cost_usd": 2.31355,
+   "calls": 197,
    "by_job": {
     "summaries": {
      "model": "claude-haiku-5-5",
-     "calls": 18,
-     "in": 38388,
-     "out": 25240,
-     "cost_usd": 0.01647
+     "calls": 19,
+     "in": 38943,
+     "out": 25368,
+     "cost_usd": 0.01659
     },
     "analysis": {
      "model": "claude-sonnet-5-5",
@@ -61,17 +61,17 @@
     },
     "tweets": {
      "model": "claude-sonnet-5-5",
-     "calls": 91,
-     "in": 227306,
-     "out": 61275,
-     "cost_usd": 1.06735
+     "calls": 93,
+     "in": 229033,
+     "out": 62536,
+     "cost_usd": 1.08342
     },
     "preview": {
      "model": "claude-sonnet-5-5",
-     "calls": 19,
-     "in": 15275,
-     "out": 8145,
-     "cost_usd": 0.112
+     "calls": 20,
+     "in": 15986,
+     "out": 8374,
+     "cost_usd": 0.11571
     }
    }
   }
