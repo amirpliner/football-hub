@@ -42,8 +42,8 @@
    }
   },
   "2026-11": {
-   "cost_usd": 3.17583,
-   "calls": 262,
+   "cost_usd": 3.183,
+   "calls": 264,
    "by_job": {
     "summaries": {
      "model": "claude-haiku-5-5",
@@ -61,10 +61,10 @@
     },
     "tweets": {
      "model": "claude-sonnet-5-5",
-     "calls": 126,
-     "in": 313573,
-     "out": 85234,
-     "cost_usd": 1.47947
+     "calls": 128,
+     "in": 315286,
+     "out": 85609,
+     "cost_usd": 1.48664
     },
     "preview": {
      "model": "claude-sonnet-5-5",
