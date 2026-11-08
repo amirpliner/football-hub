@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-08T11:19:37Z",
+ "generated_at": "2026-11-08T20:30:49Z",
  "sources": [
   {
    "id": "coachingmanual",
@@ -9,7 +9,7 @@
    "fetched": 10,
    "kept": 3,
    "newest": "2026-11-05T16:55:05Z",
-   "checked_at": "2026-11-08T11:19:37Z"
+   "checked_at": "2026-11-08T20:30:49Z"
   },
   {
    "id": "false9",
@@ -18,8 +18,8 @@
    "ok": true,
    "fetched": 10,
    "kept": 0,
-   "newest": "2026-11-08T11:16:56Z",
-   "checked_at": "2026-11-08T11:19:37Z"
+   "newest": "2026-11-08T20:15:23Z",
+   "checked_at": "2026-11-08T20:30:49Z"
   },
   {
    "id": "goalazzo",
@@ -27,7 +27,7 @@
    "url": "https://goalazzo.substack.com/feed",
    "ok": false,
    "error": "HTTPError: HTTP Error 403: Forbidden",
-   "checked_at": "2026-11-08T11:19:37Z"
+   "checked_at": "2026-11-08T20:30:49Z"
   },
   {
    "id": "mastermind",
@@ -37,7 +37,7 @@
    "fetched": 8,
    "kept": 3,
    "newest": "2026-11-07T03:06:56Z",
-   "checked_at": "2026-11-08T11:19:37Z"
+   "checked_at": "2026-11-08T20:30:49Z"
   },
   {
    "id": "scouted",
@@ -47,7 +47,7 @@
    "fetched": 15,
    "kept": 2,
    "newest": "2026-10-26T14:37:07Z",
-   "checked_at": "2026-11-08T11:19:37Z"
+   "checked_at": "2026-11-08T20:30:49Z"
   },
   {
    "id": "spielverlagerung",
@@ -57,7 +57,7 @@
    "fetched": 25,
    "kept": 2,
    "newest": "2026-10-24T19:28:16Z",
-   "checked_at": "2026-11-08T11:19:37Z"
+   "checked_at": "2026-11-08T20:30:49Z"
   },
   {
    "id": "tfa-substack",
@@ -65,7 +65,7 @@
    "url": "https://totalfootballanalysis.substack.com/feed",
    "ok": false,
    "error": "HTTPError: HTTP Error 403: Forbidden",
-   "checked_at": "2026-11-08T11:19:37Z"
+   "checked_at": "2026-11-08T20:30:49Z"
   },
   {
    "id": "tgg",
@@ -75,7 +75,7 @@
    "fetched": 10,
    "kept": 10,
    "newest": "2026-11-06T08:45:22Z",
-   "checked_at": "2026-11-08T11:19:37Z"
+   "checked_at": "2026-11-08T20:30:49Z"
   },
   {
    "id": "theanalyst",
@@ -83,7 +83,7 @@
    "url": "https://theanalyst.com/feed",
    "ok": false,
    "error": "HTTPError: HTTP Error 403: Forbidden",
-   "checked_at": "2026-11-08T11:19:37Z"
+   "checked_at": "2026-11-08T20:30:49Z"
   }
  ]
 }
