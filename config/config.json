@@ -2232,9 +2232,9 @@
       ]
     },
     "tweets": {
-      "max_per_run": 1,
+      "max_per_run": 0,
       "language": "he",
-      "max_analysis_angles_per_run": 1
+      "max_analysis_angles_per_run": 0
     },
     "keep_days": 60
   }

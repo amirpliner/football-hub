@@ -58,7 +58,7 @@ const state = {
   leagues: {},
   teamName: {},    // מזהה קבוצה -> שם (עברית בליגות ישראל)
   league: "",
-  view: "analysis",
+  view: "matches",     // Claude כבוי: ברירת המחדל היא המשחקים עם המערכים (בחינם)
   shown: PAGE,
 };
 
@@ -213,7 +213,9 @@ function tweetPanel(entry) {
 }
 
 // מוסיף כפתור "זווית לציוץ" ל-parent; הפאנל נפתח בתוך container
+const TWEETS_ON = false;   // המשתמש ויתר על זוויות לציוץ
 function addTweetButton(key, parent, container) {
+  if (!TWEETS_ON) return;
   const entry = state.ai.tweets[key];
   if (!entry || !entry.angles || !entry.angles.length) return;
   const btn = iconBtn("pen", "זווית לציוץ", "tw-btn");

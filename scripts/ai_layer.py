@@ -219,6 +219,8 @@ def tweet_prompt_concept(c):
 def tweet_todo(cfg, art, ai):
     """רשימת (מפתח, פרומפט) לזוויות שעדיין חסרות. ניתוחים ומושג תמיד; כתבות עד max_per_run."""
     todo = []
+    if not cfg["ai"]["tweets"]["max_per_run"] and not cfg["ai"]["tweets"].get("max_analysis_angles_per_run"):
+        return todo   # זוויות לציוץ כבויות
     for week, c in ai["concepts"].items():
         if f"c:{week}" not in ai["tweets"]:
             todo.append((f"c:{week}", tweet_prompt_concept(c)))
