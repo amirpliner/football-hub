@@ -203,6 +203,32 @@ body[data-view="concepts"] .pages-bar { display: none; }
 .concept h4 { margin: 14px 0 2px; font: 400 17px/1.3 var(--display); color: var(--gold-text); }
 .concept p { margin: 4px 0; line-height: 1.6; }
 
+/* מגרש עם המערכים */
+.pitch-wrap { margin: 12px 0 4px; }
+.pitch { display: block; width: 100%; height: auto; background: #123a2a; border-radius: var(--radius); }
+.pitch .pl { fill: none; stroke: rgba(255, 255, 255, .28); stroke-width: .6; }
+.pitch .ph { fill: var(--gold); stroke: #fff; stroke-width: .7; }
+.pitch .pa { fill: #fff; stroke: var(--shell); stroke-width: .7; }
+.pitch text { text-anchor: middle; font-family: var(--body); font-variant-numeric: tabular-nums; }
+.pitch .nh { fill: var(--gold-ink); font-size: 5.2px; font-weight: 700; }
+.pitch .na { fill: var(--shell); font-size: 5.2px; font-weight: 700; }
+.pitch .pn { fill: rgba(255, 255, 255, .9); font-size: 3.9px; }
+.pitch-wrap figcaption { display: flex; justify-content: space-between; gap: 12px; margin-top: 6px; font-size: .8rem; color: var(--muted); }
+.pitch-wrap .fc { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.pitch-wrap .fc b { color: var(--text); font-size: .95rem; font-variant-numeric: tabular-nums; }
+.pitch-wrap .fc-team { color: var(--text); }
+.pitch-wrap .fc-coach { font-size: .76rem; }
+.pitch-wrap .fc.a { align-items: flex-end; text-align: left; }
+.lesson { margin-top: 10px; padding: 12px 14px; background: var(--panel); border: 1.5px solid var(--gold); border-radius: var(--radius); }
+.lesson-k { display: block; font-size: .78rem; font-weight: 700; color: var(--gold-text); }
+.lesson strong { display: block; margin: 2px 0 4px; font: 400 18px/1.3 var(--display); }
+.lesson p { margin: 0; line-height: 1.6; }
+.an-body h4 { margin: 14px 0 2px; font: 400 16px/1.3 var(--display); }
+.an-body p { margin: 4px 0; line-height: 1.6; }
+.phases { margin: 6px 0; padding: 0; list-style: none; }
+.phases li { display: flex; gap: 10px; padding: 6px 0; line-height: 1.55; }
+.phases .min { flex: none; min-width: 2.6em; color: var(--gold-text); font-variant-numeric: tabular-nums; }
+
 /* ---------- משחקים ---------- */
 .sec { margin: 26px 0 2px; font: 400 20px/1.2 var(--display); }
 .lg { margin: 14px 0 2px; font-size: .82rem; font-weight: 700; color: var(--muted); display: flex; align-items: center; gap: 7px; }

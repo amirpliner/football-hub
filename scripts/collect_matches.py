@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """אוסף משחקים (תוצאות ולוח) וטבלאות ושומר ל-data/matches.json.
 
-המקור: ה-API הציבורי של ESPN (בלי מפתח). הוא לא רשמי/מתועד, ולכן כל כשל נתפס
-והנתונים הקודמים נשמרים. ה-API לא מקבל טווח תאריכים, אז שולחים בקשה לכל יום בנפרד.
+המקור: ה-API הציבורי של FotMob (בלי מפתח), שמכסה גם את ליגת העל והליגה הלאומית.
+הוא לא רשמי/מתועד, ולכן כל כשל נתפס והנתונים הקודמים נשמרים.
+מזהה הליגה ב-FotMob מוגדר בקובץ ההגדרות (leagues.<id>.fotmob_id).
 
 שימוש:
     python3 scripts/collect_matches.py
@@ -20,95 +21,80 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import collect  # noqa: E402  (משתמשים באותו Matcher ו-UA)
 
-ESPN_CODES = {
-    "premier_league": "eng.1", "la_liga": "esp.1", "serie_a": "ita.1", "bundesliga": "ger.1",
-    "ligue_1": "fra.1", "championship": "eng.2", "liga_portugal": "por.1", "eredivisie": "ned.1",
-    "champions_league": "uefa.champions",
-}
-DAYS_BACK = 3
-DAYS_AHEAD = 7
+DAYS_BACK = 4
+DAYS_AHEAD = 10
 OUT_PATH = collect.DATA_DIR / "matches.json"
-SCORE_URL = "https://site.api.espn.com/apis/site/v2/sports/soccer/{code}/scoreboard?dates={date}"
-TABLE_URL = "https://site.api.espn.com/apis/v2/sports/soccer/{code}/standings"
+LEAGUE_URL = "https://www.fotmob.com/api/data/leagues?id={id}"
+LOGO_URL = "https://images.fotmob.com/image_resources/logo/teamlogo/{id}_small.png"
 
 
 def get_json(url):
     last = None
     for _ in range(2):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": collect.UA, "Accept-Encoding": "identity"})
-            with urllib.request.urlopen(req, timeout=25) as r:
+            req = urllib.request.Request(url, headers={"User-Agent": collect.UA, "Accept": "application/json"})
+            with urllib.request.urlopen(req, timeout=30) as r:
                 return json.loads(r.read())
         except Exception as e:
             last = e
-            time.sleep(1.5)
+            time.sleep(2)
     raise last
 
 
-def iso(s):
-    """'2026-10-23T19:00Z' -> '2026-10-23T19:00:00Z'"""
-    return s if s.count(":") == 2 else s.replace("Z", ":00Z")
+def team_id(matcher, league, name):
+    teams, _ = matcher.analyze(name)
+    return next((t for t in teams if matcher.team_league[t] == league), teams[0] if teams else None)
 
 
-def parse_event(e, league, matcher):
-    comp = e["competitions"][0]
-    st = comp["status"]["type"]
-    sides = {}
-    for c in comp["competitors"]:
-        t = c["team"]
-        name = t.get("displayName") or t.get("name") or "?"
-        teams, _ = matcher.analyze(name)
-        sides[c["homeAway"]] = {
-            "name": name,
-            "short": t.get("shortDisplayName") or name,
-            "logo": t.get("logo"),
-            "score": int(c["score"]) if str(c.get("score", "")).isdigit() else None,
-            "form": c.get("form") or None,   # למשל "DWLLW" (החדש ביותר מימין)
-            "team_id": next((x for x in teams if matcher.team_league[x] == league), teams[0] if teams else None),
-        }
-    if "home" not in sides or "away" not in sides:
+def parse_fixture(f, league, matcher):
+    st = f.get("status", {})
+    if st.get("cancelled"):
         return None
-    link = next((l["href"] for l in e.get("links", []) if "summary" in l.get("rel", [])), None)
+    state = "post" if st.get("finished") else "in" if st.get("started") else "pre"
+    score = (st.get("scoreStr") or "").replace(" ", "").split("-")
+    sides = {}
+    for i, key in enumerate(("home", "away")):
+        t = f[key]
+        sides[key] = {
+            "name": t["name"],
+            "short": t.get("shortName") or t["name"],
+            "logo": LOGO_URL.format(id=t["id"]),
+            "fotmob_id": str(t["id"]),
+            "score": int(score[i]) if len(score) == 2 and score[i].isdigit() else None,
+            "team_id": team_id(matcher, league, t["name"]),
+        }
+    reason = (st.get("reason") or {}).get("short", "")
     return {
-        "id": e["id"],
+        "id": str(f["id"]),
         "league": league,
-        "date": iso(e["date"]),
-        "state": st["state"],                  # pre / in / post
-        "detail": st.get("shortDetail", ""),   # FT, 67', Postponed ...
+        "date": st.get("utcTime", "").replace(".000Z", "Z"),
+        "state": state,
+        "detail": "FT" if state == "post" else (st.get("liveTime") or {}).get("short", reason) if state == "in" else "",
         "home": sides["home"],
         "away": sides["away"],
-        "link": link,
+        "link": "https://www.fotmob.com" + f["pageUrl"] if f.get("pageUrl") else None,
     }
 
 
-def stat(entry, name, default=0):
-    for s in entry.get("stats", []):
-        if s.get("name") == name:
-            v = s.get("value")
-            return int(v) if isinstance(v, (int, float)) else default
-    return default
-
-
-def parse_tables(data, league, matcher):
+def parse_table(data, league, matcher):
     tables = []
-    for child in data.get("children", []):
-        rows = []
-        for en in child.get("standings", {}).get("entries", []):
-            t = en["team"]
-            name = t.get("displayName", "?")
-            teams, _ = matcher.analyze(name)
-            rows.append({
-                "rank": stat(en, "rank"),
-                "team": name,
-                "logo": (t.get("logos") or [{}])[0].get("href"),
-                "team_id": next((x for x in teams if matcher.team_league[x] == league), teams[0] if teams else None),
-                "gp": stat(en, "gamesPlayed"), "w": stat(en, "wins"), "d": stat(en, "ties"), "l": stat(en, "losses"),
-                "gf": stat(en, "pointsFor"), "ga": stat(en, "pointsAgainst"),
-                "gd": stat(en, "pointDifferential"), "pts": stat(en, "points"),
-            })
-        rows.sort(key=lambda r: (r["rank"] or 999, -r["pts"]))
-        if rows:
-            tables.append({"name": child.get("name", ""), "rows": rows})
+    for block in data.get("table", []):
+        d = block.get("data", {})
+        groups = d.get("tables") or [d]
+        for g in groups:
+            rows = []
+            for r in g.get("table", {}).get("all", []):
+                gf, _, ga = (r.get("scoresStr") or "0-0").partition("-")
+                rows.append({
+                    "rank": r.get("idx"),
+                    "team": r["name"],
+                    "logo": LOGO_URL.format(id=r["id"]),
+                    "team_id": team_id(matcher, league, r["name"]),
+                    "gp": r.get("played", 0), "w": r.get("wins", 0), "d": r.get("draws", 0), "l": r.get("losses", 0),
+                    "gf": int(gf or 0), "ga": int(ga or 0), "gd": r.get("goalConDiff", 0), "pts": r.get("pts", 0),
+                })
+            if rows:
+                tables.append({"name": g.get("leagueName", ""), "rows": rows})
     return tables
 
 
@@ -119,9 +105,10 @@ def main():
 
     cfg = json.loads(collect.CONFIG_PATH.read_text(encoding="utf-8"))
     matcher = collect.Matcher(cfg)
-    today = dt.datetime.now(dt.timezone.utc).date()
-    dates = [today + dt.timedelta(days=i) for i in range(-DAYS_BACK, DAYS_AHEAD + 1)]
-    start_iso = dates[0].strftime("%Y-%m-%dT00:00:00Z")
+    leagues = {lid: l["fotmob_id"] for lid, l in cfg["leagues"].items() if l.get("fotmob_id")}
+    now = dt.datetime.now(dt.timezone.utc)
+    start = (now - dt.timedelta(days=DAYS_BACK)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    end = (now + dt.timedelta(days=DAYS_AHEAD)).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     old = {}
     if OUT_PATH.exists():
@@ -129,63 +116,49 @@ def main():
             old = json.loads(OUT_PATH.read_text(encoding="utf-8"))
         except Exception:
             old = {}
-    matches = {m["id"]: m for m in old.get("matches", []) if m["date"] >= start_iso}
-    standings = dict(old.get("standings", {}))
+    # נתונים ישנים נשמרים רק לליגות שעדיין מוגדרות, וכגיבוי לליגה שהבקשה שלה נכשלה
+    matches = {m["id"]: m for m in old.get("matches", []) if m["league"] in leagues and m["date"] >= start}
+    standings = {k: v for k, v in old.get("standings", {}).items() if k in leagues}
 
-    jobs = [(lid, d) for lid in ESPN_CODES for d in dates]
-
-    def fetch_day(job):
-        lid, d = job
+    def fetch(lid):
         try:
-            data = get_json(SCORE_URL.format(code=ESPN_CODES[lid], date=d.strftime("%Y%m%d")))
-            return job, [m for m in (parse_event(e, lid, matcher) for e in data.get("events", [])) if m], None
-        except Exception as e:
-            return job, [], f"{type(e).__name__}: {e}"[:100]
-
-    def fetch_table(lid):
-        try:
-            return lid, parse_tables(get_json(TABLE_URL.format(code=ESPN_CODES[lid])), lid, matcher), None
+            return lid, get_json(LEAGUE_URL.format(id=leagues[lid])), None
         except Exception as e:
             return lid, None, f"{type(e).__name__}: {e}"[:100]
 
-    day_errors = []
-    with cf.ThreadPoolExecutor(max_workers=8) as ex:
-        day_results = list(ex.map(fetch_day, jobs))
-        table_results = list(ex.map(fetch_table, ESPN_CODES))
+    with cf.ThreadPoolExecutor(max_workers=4) as ex:
+        results = list(ex.map(fetch, leagues))
 
-    fresh = 0
-    for (lid, d), found, err in day_results:
+    errors = []
+    for lid, data, err in results:
         if err:
-            day_errors.append(f"{lid} {d}: {err}")
+            errors.append(f"{lid}: {err}")
             continue
-        day_key = d.strftime("%Y-%m-%d")
-        # משחקים של אותו יום שנעלמו מהתשובה (נדחו/בוטלו) לא נשארים בנתונים הישנים
-        for mid in [k for k, m in matches.items() if m["league"] == lid and m["date"][:10] == day_key]:
+        fixtures = (data.get("fixtures") or {}).get("allMatches", [])
+        for mid in [k for k, m in matches.items() if m["league"] == lid]:
             del matches[mid]
-        for m in found:
-            matches[m["id"]] = m
-            fresh += 1
-
-    table_errors = []
-    for lid, tables, err in table_results:
-        if err:
-            table_errors.append(f"{lid}: {err}")
-        elif tables:
+        for f in fixtures:
+            t = (f.get("status") or {}).get("utcTime", "")
+            if start <= t <= end:
+                m = parse_fixture(f, lid, matcher)
+                if m:
+                    matches[m["id"]] = m
+        tables = parse_table(data, lid, matcher)
+        if tables:
             standings[lid] = tables
 
     ordered = sorted(matches.values(), key=lambda m: (m["date"], m["id"]))
-    print(f"משחקים: {len(ordered)} (מהריצה: {fresh}) | טבלאות: {len(standings)}/{len(ESPN_CODES)}")
-    for e in day_errors[:10] + table_errors:
+    print(f"משחקים: {len(ordered)} | טבלאות: {len(standings)}/{len(leagues)}")
+    for e in errors:
         print("  כשל:", e)
-    if len(day_errors) == len(jobs) and len(table_errors) == len(ESPN_CODES):
+    if len(errors) == len(leagues):
         print("כל הבקשות נכשלו, לא דורס את הקובץ הקיים")
         return 1
     if args.dry_run:
         return 0
-
     out = {
-        "generated_at": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "source": "ESPN",
+        "generated_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "source": "FotMob",
         "matches": ordered,
         "standings": standings,
     }

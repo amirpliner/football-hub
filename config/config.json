@@ -29,10 +29,10 @@
         "mac_tlv": {
           "name": "מכבי תל אביב",
           "aliases": [
-            "Maccabi Tel Aviv",
             "Maccabi Tel-Aviv",
-            "מכבי תל אביב",
+            "Maccabi Tel Aviv",
             "מכבי תל-אביב",
+            "מכבי תל אביב",
             "מכבי ת\"א"
           ]
         },
@@ -70,8 +70,8 @@
           "aliases": [
             "Hapoel Be'er Sheva",
             "Hapoel Beer Sheva",
-            "הפועל באר-שבע",
             "הפועל באר שבע",
+            "הפועל באר-שבע",
             "Hapoel Be'er",
             "הפועל ב\"ש"
           ]
@@ -79,27 +79,20 @@
         "mac_pt": {
           "name": "מכבי פתח תקווה",
           "aliases": [
-            "Maccabi Petah Tikva",
+            "Maccabi Petach Tikva",
             "Maccabi Petah-Tikva",
+            "Maccabi Petah Tikva",
             "מכבי פתח-תקווה",
             "מכבי פתח תקווה",
             "מכבי פ\"ת"
           ]
         },
-        "ashdod": {
-          "name": "מ.ס. אשדוד",
-          "aliases": [
-            "Moadon Sport Ashdod",
-            "מועדון ספורט אשדוד",
-            "מ.ס. אשדוד",
-            "מ.ס אשדוד",
-            "Ashdod"
-          ]
-        },
         "kiryat_shmona": {
           "name": "הפועל קריית שמונה",
           "aliases": [
+            "Hapoel Ironi Kiryat Shmona",
             "Hapoel Kiryat Shmona",
+            "Ironi Kiryat Shmona",
             "הפועל קריית שמונה",
             "הפועל קרית שמונה",
             "קריית שמונה"
@@ -113,27 +106,12 @@
             "סכנין"
           ]
         },
-        "hap_hadera": {
-          "name": "הפועל חדרה",
-          "aliases": [
-            "Hapoel Hadera",
-            "הפועל חדרה"
-          ]
-        },
         "hap_jlm": {
           "name": "הפועל ירושלים",
           "aliases": [
+            "Hapoel Jerusalem FC",
             "Hapoel Jerusalem",
             "הפועל ירושלים"
-          ]
-        },
-        "raina": {
-          "name": "מכבי בני ריינה",
-          "aliases": [
-            "מכבי בני ריינה",
-            "Maccabi Raina",
-            "Bnei Raina",
-            "בני ריינה"
           ]
         },
         "tiberias": {
@@ -146,8 +124,8 @@
         "hap_tlv": {
           "name": "הפועל תל אביב",
           "aliases": [
-            "Hapoel Tel Aviv",
             "Hapoel Tel-Aviv",
+            "Hapoel Tel Aviv",
             "הפועל תל אביב",
             "הפועל תל-אביב",
             "הפועל ת\"א"
@@ -156,16 +134,28 @@
         "hap_pt": {
           "name": "הפועל פתח תקווה",
           "aliases": [
+            "Hapoel Petach Tikva",
             "Hapoel Petah-Tikva",
             "Hapoel Petah Tikva",
-            "הפועל פתח-תקווה",
             "הפועל פתח תקווה",
+            "הפועל פתח-תקווה",
             "הפועל פ\"ת"
+          ]
+        },
+        "hap_rg": {
+          "name": "הפועל רמת גן",
+          "aliases": [
+            "Hapoel Ramat Gan",
+            "הפועל רמת גן"
           ]
         }
       },
-      "no_match_data": true,
-      "_comment": "אין נתוני משחקים/טבלה: ה-API של ESPN לליגת העל תקוע על עונת 2024-25. רשימת הקבוצות לא אומתה מול מקור עדכני."
+      "fotmob_id": 127
+    },
+    "leumit": {
+      "name_he": "הליגה הלאומית",
+      "fotmob_id": 128,
+      "teams": {}
     },
     "premier_league": {
       "name_he": "פרמייר ליג",
@@ -297,7 +287,8 @@
             "Coventry"
           ]
         }
-      }
+      },
+      "fotmob_id": 47
     },
     "la_liga": {
       "name_he": "לה ליגה",
@@ -438,7 +429,8 @@
             "Malaga"
           ]
         }
-      }
+      },
+      "fotmob_id": 87
     },
     "serie_a": {
       "name_he": "סרייה A",
@@ -567,7 +559,8 @@
             "Venezia"
           ]
         }
-      }
+      },
+      "fotmob_id": 55
     },
     "bundesliga": {
       "name_he": "בונדסליגה",
@@ -700,7 +693,8 @@
             "Paderborn"
           ]
         }
-      }
+      },
+      "fotmob_id": 54
     },
     "ligue_1": {
       "name_he": "ליג 1",
@@ -825,417 +819,8 @@
             "Troyes"
           ]
         }
-      }
-    },
-    "championship": {
-      "name_he": "צ'מפיונשיפ",
-      "teams": {
-        "birmingham": {
-          "name": "Birmingham City",
-          "aliases": [
-            "Birmingham City"
-          ]
-        },
-        "blackburn": {
-          "name": "Blackburn",
-          "aliases": [
-            "Blackburn"
-          ]
-        },
-        "bristol_city": {
-          "name": "Bristol City",
-          "aliases": [
-            "Bristol City"
-          ]
-        },
-        "charlton": {
-          "name": "Charlton",
-          "aliases": [
-            "Charlton"
-          ]
-        },
-        "derby": {
-          "name": "Derby County",
-          "aliases": [
-            "Derby County",
-            "Derby"
-          ]
-        },
-        "middlesbrough": {
-          "name": "Middlesbrough",
-          "aliases": [
-            "Middlesbrough",
-            "Boro"
-          ]
-        },
-        "millwall": {
-          "name": "Millwall",
-          "aliases": [
-            "Millwall"
-          ]
-        },
-        "norwich": {
-          "name": "Norwich",
-          "aliases": [
-            "Norwich"
-          ]
-        },
-        "portsmouth": {
-          "name": "Portsmouth",
-          "aliases": [
-            "Portsmouth"
-          ]
-        },
-        "preston": {
-          "name": "Preston",
-          "aliases": [
-            "Preston North End",
-            "Preston"
-          ]
-        },
-        "qpr": {
-          "name": "QPR",
-          "aliases": [
-            "Queens Park Rangers",
-            "QPR"
-          ]
-        },
-        "sheff_utd": {
-          "name": "Sheffield United",
-          "aliases": [
-            "Sheffield United"
-          ]
-        },
-        "southampton": {
-          "name": "Southampton",
-          "aliases": [
-            "Southampton"
-          ]
-        },
-        "stoke": {
-          "name": "Stoke City",
-          "aliases": [
-            "Stoke City",
-            "Stoke"
-          ]
-        },
-        "swansea": {
-          "name": "Swansea",
-          "aliases": [
-            "Swansea"
-          ]
-        },
-        "watford": {
-          "name": "Watford",
-          "aliases": [
-            "Watford"
-          ]
-        },
-        "west_brom": {
-          "name": "West Brom",
-          "aliases": [
-            "West Bromwich",
-            "West Brom"
-          ]
-        },
-        "wrexham": {
-          "name": "Wrexham",
-          "aliases": [
-            "Wrexham"
-          ]
-        },
-        "burnley": {
-          "name": "Burnley",
-          "aliases": [
-            "Burnley"
-          ]
-        },
-        "west_ham": {
-          "name": "West Ham",
-          "aliases": [
-            "West Ham"
-          ]
-        },
-        "wolves": {
-          "name": "Wolves",
-          "aliases": [
-            "Wolves",
-            "Wolverhampton"
-          ]
-        },
-        "bolton": {
-          "name": "Bolton Wanderers",
-          "aliases": [
-            "Bolton Wanderers",
-            "Bolton"
-          ]
-        },
-        "lincoln": {
-          "name": "Lincoln City",
-          "aliases": [
-            "Lincoln City"
-          ]
-        },
-        "cardiff": {
-          "name": "Cardiff City",
-          "aliases": [
-            "Cardiff City",
-            "Cardiff"
-          ]
-        }
-      }
-    },
-    "liga_portugal": {
-      "name_he": "ליגה פורטוגלית",
-      "teams": {
-        "benfica": {
-          "name": "Benfica",
-          "aliases": [
-            "Benfica"
-          ]
-        },
-        "porto": {
-          "name": "FC Porto",
-          "aliases": [
-            "FC Porto",
-            "Porto"
-          ]
-        },
-        "sporting": {
-          "name": "Sporting CP",
-          "aliases": [
-            "Sporting CP",
-            "Sporting"
-          ]
-        },
-        "braga": {
-          "name": "Braga",
-          "aliases": [
-            "Sporting de Braga",
-            "SC Braga",
-            "Braga"
-          ]
-        },
-        "guimaraes": {
-          "name": "Vitória Guimarães",
-          "aliases": [
-            "Vitória de Guimarães",
-            "Vitória de Guimaraes",
-            "Vitória SC",
-            "Guimarães"
-          ]
-        },
-        "famalicao": {
-          "name": "Famalicão",
-          "aliases": [
-            "Famalicão",
-            "FC Famalicao",
-            "Famalicao"
-          ]
-        },
-        "estoril": {
-          "name": "Estoril",
-          "aliases": [
-            "Estoril"
-          ]
-        },
-        "moreirense": {
-          "name": "Moreirense",
-          "aliases": [
-            "Moreirense"
-          ]
-        },
-        "arouca": {
-          "name": "Arouca",
-          "aliases": [
-            "Arouca"
-          ]
-        },
-        "casa_pia": {
-          "name": "Casa Pia",
-          "aliases": [
-            "Casa Pia"
-          ]
-        },
-        "gil_vicente": {
-          "name": "Gil Vicente",
-          "aliases": [
-            "Gil Vicente"
-          ]
-        },
-        "rio_ave": {
-          "name": "Rio Ave",
-          "aliases": [
-            "Rio Ave"
-          ]
-        },
-        "santa_clara": {
-          "name": "Santa Clara",
-          "aliases": [
-            "Santa Clara"
-          ]
-        },
-        "nacional": {
-          "name": "Nacional",
-          "aliases": [
-            "Nacional da Madeira",
-            "CD Nacional",
-            "C.D. Nacional"
-          ]
-        },
-        "alverca": {
-          "name": "Alverca",
-          "aliases": [
-            "Alverca"
-          ]
-        },
-        "estrela": {
-          "name": "Estrela da Amadora",
-          "aliases": [
-            "Estrela da Amadora",
-            "Estrela"
-          ]
-        },
-        "viseu": {
-          "name": "Académico de Viseu",
-          "aliases": [
-            "Académico de Viseu",
-            "Academico de Viseu"
-          ]
-        },
-        "maritimo": {
-          "name": "Marítimo",
-          "aliases": [
-            "Marítimo",
-            "Maritimo"
-          ]
-        }
-      }
-    },
-    "eredivisie": {
-      "name_he": "ארדיביזי",
-      "teams": {
-        "ajax": {
-          "name": "Ajax",
-          "aliases": [
-            "Ajax"
-          ]
-        },
-        "psv": {
-          "name": "PSV",
-          "aliases": [
-            "PSV"
-          ]
-        },
-        "feyenoord": {
-          "name": "Feyenoord",
-          "aliases": [
-            "Feyenoord"
-          ]
-        },
-        "az": {
-          "name": "AZ",
-          "aliases": [
-            "AZ Alkmaar",
-            "AZ"
-          ]
-        },
-        "twente": {
-          "name": "FC Twente",
-          "aliases": [
-            "FC Twente",
-            "Twente"
-          ]
-        },
-        "utrecht": {
-          "name": "FC Utrecht",
-          "aliases": [
-            "FC Utrecht",
-            "Utrecht"
-          ]
-        },
-        "heerenveen": {
-          "name": "Heerenveen",
-          "aliases": [
-            "Heerenveen"
-          ]
-        },
-        "go_ahead": {
-          "name": "Go Ahead Eagles",
-          "aliases": [
-            "Go Ahead Eagles"
-          ]
-        },
-        "sparta": {
-          "name": "Sparta Rotterdam",
-          "aliases": [
-            "Sparta Rotterdam",
-            "Sparta"
-          ]
-        },
-        "nec": {
-          "name": "NEC",
-          "aliases": [
-            "NEC"
-          ]
-        },
-        "fortuna": {
-          "name": "Fortuna Sittard",
-          "aliases": [
-            "Fortuna Sittard"
-          ]
-        },
-        "groningen": {
-          "name": "FC Groningen",
-          "aliases": [
-            "FC Groningen",
-            "Groningen"
-          ]
-        },
-        "excelsior": {
-          "name": "Excelsior",
-          "aliases": [
-            "Excelsior"
-          ]
-        },
-        "pec": {
-          "name": "PEC Zwolle",
-          "aliases": [
-            "PEC Zwolle",
-            "Zwolle"
-          ]
-        },
-        "telstar": {
-          "name": "Telstar",
-          "aliases": [
-            "Telstar"
-          ]
-        },
-        "cambuur": {
-          "name": "SC Cambuur",
-          "aliases": [
-            "SC Cambuur",
-            "Cambuur"
-          ]
-        },
-        "den_haag": {
-          "name": "ADO Den Haag",
-          "aliases": [
-            "ADO Den Haag",
-            "Den Haag"
-          ]
-        },
-        "willem_ii": {
-          "name": "Willem II",
-          "aliases": [
-            "Willem II"
-          ]
-        }
-      }
-    },
-    "champions_league": {
-      "name_he": "ליגת האלופות",
-      "teams": {}
+      },
+      "fotmob_id": 53
     }
   },
   "_comment_sources": "category: news = חדשות, fan = בלוג אוהדים, analysis = ניתוח/טקטיקה. leagues = הפיד שייך תמיד לליגות האלה. match_leagues = פיד רחב: שומרים רק כתבות שמזכירות קבוצה מהליגות האלה. keep_unmatched = שומרים הכול גם בלי התאמה. teams = קבוצה קבועה (לבלוגי אוהדים). priority = מספר נמוך מנצח כשמאחדים כפילויות. enabled=false מכבה מקור. | וידאו: category=video, כתובת של פיד ה-RSS של ערוץ יוטיוב רשמי (channel_id). | exclude = מילים שמוציאות כתבה (למשל כדורסל, כי שמות כמו 'מכבי ת\"א' משותפים). | include = נשמרות רק כתבות שהכותרת שלהן מכילה אחת מהמילים.",
@@ -2637,17 +2222,19 @@
       "max_previews_per_run": 4,
       "max_analyses_per_run": 15,
       "analysis_leagues": [
+        "israel",
+        "leumit",
         "premier_league",
         "la_liga",
         "serie_a",
         "bundesliga",
-        "ligue_1",
-        "champions_league"
+        "ligue_1"
       ]
     },
     "tweets": {
-      "max_per_run": 2,
-      "language": "he"
+      "max_per_run": 1,
+      "language": "he",
+      "max_analysis_angles_per_run": 1
     },
     "keep_days": 60
   }

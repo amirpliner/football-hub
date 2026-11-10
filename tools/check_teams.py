@@ -1,40 +1,28 @@
 #!/usr/bin/env python3
-"""משווה את רשימות הקבוצות ב-config/config.json לטבלאות העדכניות של ESPN.
+"""משווה את רשימות הקבוצות ב-config/config.json לטבלאות העדכניות (FotMob, מתוך data/matches.json).
 
 מדפיס (1) קבוצות שיש בטבלה ואין להן הגדרה, ו-(2) קבוצות בהגדרות שכבר לא בליגה.
 כדאי להריץ בתחילת כל עונה:   python3 tools/check_teams.py
 """
 import json
 import sys
-import urllib.request
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 import collect  # noqa: E402
 
-ESPN_CODES = {
-    "premier_league": "eng.1", "la_liga": "esp.1", "serie_a": "ita.1", "bundesliga": "ger.1",
-    "ligue_1": "fra.1", "championship": "eng.2", "liga_portugal": "por.1", "eredivisie": "ned.1",
-}
-
-
-def get_json(url):
-    req = urllib.request.Request(url, headers={"User-Agent": collect.UA})
-    with urllib.request.urlopen(req, timeout=25) as r:
-        return json.loads(r.read())
-
-
 def main():
+    # הטבלאות העדכניות מגיעות מ-data/matches.json (FotMob); מריצים קודם scripts/collect_matches.py
     cfg = json.loads(collect.CONFIG_PATH.read_text(encoding="utf-8"))
     matcher = collect.Matcher(cfg)
-    for lid, code in ESPN_CODES.items():
-        d = get_json(f"https://site.api.espn.com/apis/v2/sports/soccer/{code}/standings")
-        names = [e["team"]["displayName"] for c in d["children"] for e in c["standings"]["entries"]]
-        found = set()
-        missing = []
+    standings = json.loads((collect.DATA_DIR / "matches.json").read_text(encoding="utf-8")).get("standings", {})
+    for lid, tables in standings.items():
+        if not cfg["leagues"].get(lid, {}).get("teams"):
+            continue
+        names = [r["team"] for t in tables for r in t["rows"]]
+        found, missing = set(), []
         for n in names:
-            teams, _ = matcher.analyze(n)
-            teams = [t for t in teams if matcher.team_league[t] == lid]
+            teams = [t for t in matcher.analyze(n)[0] if matcher.team_league[t] == lid]
             if teams:
                 found.update(teams)
             else:

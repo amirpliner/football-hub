@@ -34,7 +34,7 @@ function hydrateIcons() {
 
 // צבע לכל ליגה: נקודות ומדבקות
 const LEAGUE_COLORS = {
-  premier_league: "#a259ff", la_liga: "#ffb01f", serie_a: "#19a35b", bundesliga: "#e63a2e",
+  israel: "#3aa0ff", leumit: "#ff5fa2", premier_league: "#a259ff", la_liga: "#ffb01f", serie_a: "#19a35b", bundesliga: "#e63a2e",
   ligue_1: "#25c9e8", championship: "#ff5fa2", liga_portugal: "#0fbf9a", eredivisie: "#ff6f3c", champions_league: "#8fa6ff",
 };
 
@@ -55,6 +55,7 @@ const state = {
   standings: {},
   ai: { summaries: {}, previews: {}, analyses: {}, concepts: {}, tweets: {} },
   leagues: {},
+  teamName: {},    // מזהה קבוצה -> שם (עברית בליגות ישראל)
   league: "",
   view: "analysis",
   shown: PAGE,
@@ -114,6 +115,7 @@ async function load() {
     const cfg = await cfgRes.json();
     const data = await dataRes.json();
     state.leagues = cfg.leagues;
+    for (const league of Object.values(cfg.leagues)) for (const [tid, t] of Object.entries(league.teams || {})) state.teamName[tid] = t.name;
     state.items = data.items.filter((i) => !i.dup_of).map((it) => ({ ...it, date: new Date(it.published) }));
     state.generatedAt = new Date(data.generated_at);
     if (matchRes && matchRes.ok) {
@@ -219,6 +221,92 @@ function addTweetButton(key, parent, container) {
 }
 
 // ---------- ניתוחים ----------
+function displayName(league, t) {
+  const l = state.leagues[league];
+  return l && l.hebrew_names && t.team_id && state.teamName[t.team_id] ? state.teamName[t.team_id] : t.short || t.name;
+}
+
+// מגרש אופקי בכיוון הקריאה (RTL): הבית בצד ימין ותוקף שמאלה, החוץ בצד שמאל ותוקף ימינה (מיקומים מ-FotMob)
+function pitch(lu, m) {
+  if (!lu || !lu.home || !lu.away) return null;
+  const NS = SVG_NS, W = 200, H = 130, svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  svg.setAttribute("class", "pitch");
+  svg.setAttribute("role", "img");
+  svg.setAttribute("aria-label", `מערכים: ${m.home} ${lu.home.formation}, ${m.away} ${lu.away.formation}`);
+  const add = (tag, attrs, text) => {
+    const n = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+    if (text != null) n.textContent = text;
+    svg.append(n);
+    return n;
+  };
+  const line = { class: "pl" };
+  add("rect", { ...line, x: 3, y: 3, width: W - 6, height: H - 6, rx: 2 });
+  add("line", { ...line, x1: W / 2, y1: 3, x2: W / 2, y2: H - 3 });
+  add("circle", { ...line, cx: W / 2, cy: H / 2, r: 15 });
+  add("rect", { ...line, x: 3, y: H / 2 - 24, width: 26, height: 48 });
+  add("rect", { ...line, x: W - 29, y: H / 2 - 24, width: 26, height: 48 });
+  const place = (p, home) => {
+    const x = home ? W - 6 - p.x * 92 : 6 + p.x * 92;
+    const y = 8 + (home ? 1 - p.y : p.y) * (H - 16);
+    add("circle", { cx: x, cy: y, r: 5.6, class: home ? "ph" : "pa" });
+    add("text", { x, y: y + 2, class: home ? "nh" : "na" }, p.n || "");
+    add("text", { x, y: y + 10.5, class: "pn" }, (p.name || "").slice(0, 10));
+  };
+  lu.home.players.forEach((p) => place(p, true));
+  lu.away.players.forEach((p) => place(p, false));
+  const fig = el("figure", "pitch-wrap");
+  const cap = el("figcaption");
+  const side = (name, t, cls) => {
+    const s = el("span", "fc " + cls);
+    const f = el("b", null, t.formation || "?");
+    f.dir = "ltr";
+    s.append(f, el("span", "fc-team", name));
+    if (t.coach) s.append(el("span", "fc-coach", t.coach));
+    return s;
+  };
+  cap.append(side(m.home, lu.home, "h"), side(m.away, lu.away, "a"));
+  fig.append(svg, cap);
+  return fig;
+}
+
+// גוף הניתוח: בפורמט הטקטי החדש, או בפורמט הישן לניתוחים מלפני השינוי
+function analysisBody(an, full) {
+  const box = el("div", "an-body");
+  if (an.lesson) {
+    const ls = el("div", "lesson");
+    ls.append(el("span", "lesson-k", "מה לומדים מהמשחק"), el("strong", null, an.lesson.concept), el("p", null, an.lesson.explain));
+    box.append(ls);
+    if (full) {
+      box.append(el("h4", null, "איך הן עלו למגרש"), el("p", null, an.setup));
+      if (an.phases && an.phases.length) {
+        box.append(el("h4", null, "רגעים שבהם המשחק השתנה"));
+        const ol = el("ol", "phases");
+        for (const ph of an.phases) { const li = el("li"); li.append(el("b", "min", ph.minute + "'"), el("span", null, ph.text)); ol.append(li); }
+        box.append(ol);
+      }
+      box.append(el("h4", null, "בפעם הבאה שתצפה"), el("p", null, an.lesson.watch_next));
+      box.append(el("p", "caveat", "מה הנתונים לא מראים: " + an.caveat));
+    }
+  } else {
+    box.append(el("p", "an-sum", an.summary || ""));
+    if (full) {
+      const ul = el("ul");
+      for (const k of an.key_points || []) ul.append(el("li", null, k));
+      box.append(ul, el("p", "caveat", "מה הנתונים לא מראים: " + an.caveat));
+    }
+  }
+  return box;
+}
+
+// מפתח למשחק שלא תלוי במקור הנתונים: ליגה, יום, תוצאה ותחילת שם קבוצת הבית
+function matchKey(a) {
+  const m = a.match || {};
+  const fold = (x) => (x || "").normalize("NFD").replace(/[^a-z]/gi, "").toLowerCase().slice(0, 4);
+  return `${m.league}|${(a.date || "").slice(0, 10)}|${m.hs}-${m.as}|${fold(m.home)}`;
+}
+
 function analysisCard(id, an) {
   const card = el("article", "an");
   const m = an.match || {};
@@ -232,18 +320,18 @@ function analysisCard(id, an) {
     score.append(el("span", "side", m.home), res, el("span", "side end", m.away));
     card.append(score);
   }
-  card.append(el("h2", null, an.headline), el("p", "an-sum", an.summary));
+  card.append(el("h2", null, an.headline));
+  const fig = pitch(an.lineups, m);
+  if (fig) card.append(fig);
+  let body = analysisBody(an, false);
+  card.append(body);
   const acts = el("div", "acts");
-  const more = iconBtn("list", "קרא הכול");
+  const more = iconBtn("list", "הניתוח המלא");
   more.addEventListener("click", () => {
-    card.classList.toggle("open");
-    const open = card.querySelector(":scope > .an-more");
-    if (open) { open.remove(); return; }
-    const box = el("div", "an-more");
-    const ul = el("ul");
-    for (const k of an.key_points) ul.append(el("li", null, k));
-    box.append(ul, el("p", "caveat", "מה הנתונים לא מראים: " + an.caveat));
-    card.insertBefore(box, acts);
+    const open = card.classList.toggle("open");
+    const nb = analysisBody(an, open);
+    body.replaceWith(nb);
+    body = nb;
   });
   acts.append(more);
   addTweetButton("m:" + id, acts, card);
@@ -286,9 +374,14 @@ function renderAnalysis() {
     list.append(el("h3", "sec", "על מה לשים לב"));
     for (const m of upcoming.slice(0, 4)) list.append(previewCard(m, state.ai.previews[m.id]));
   }
-  const rows = Object.entries(state.ai.analyses)
-    .filter(([, a]) => !lg || (a.match && a.match.league === lg))
-    .sort(([, a], [, b]) => (b.date || "").localeCompare(a.date || ""));
+  const seen = new Map();
+  for (const [id, a] of Object.entries(state.ai.analyses)) {
+    if (lg && !(a.match && a.match.league === lg)) continue;
+    const k = matchKey(a);
+    const prev = seen.get(k);
+    if (!prev || (!prev[1].lineups && a.lineups)) seen.set(k, [id, a]);
+  }
+  const rows = [...seen.values()].sort(([, a], [, b]) => (b.date || "").localeCompare(a.date || ""));
   if (rows.length) list.append(el("h3", "sec", "ניתוחי משחקים"));
   let lastDay = "";
   for (const [id, an] of rows.slice(0, state.shown)) {
@@ -401,7 +494,7 @@ function matchRow(m) {
   const side = (t, cls) => {
     const s = el("span", "team " + cls);
     if (t.logo) s.append(logoImg(t.logo));
-    s.append(el("span", "nm", t.short));
+    s.append(el("span", "nm", displayName(m.league, t)));
     return s;
   };
   const sc = (v) => el("span", "sc", v == null ? "" : String(v));
@@ -424,10 +517,9 @@ function aiPanel(m) {
     const src = an || pv;
     p.append(el("h4", null, src.headline));
     if (an) {
-      p.append(el("p", null, an.summary));
-      const ul = el("ul");
-      for (const k of an.key_points) ul.append(el("li", null, k));
-      p.append(ul, el("p", "caveat", "מה הנתונים לא מראים: " + an.caveat));
+      const fig = pitch(an.lineups, an.match || {});
+      if (fig) p.append(fig);
+      p.append(analysisBody(an, true));
     } else {
       for (const pt of pv.points) {
         const d = el("div", "pt");
@@ -489,7 +581,7 @@ function renderTables() {
         tr.append(el("td", "r", r.rank));
         const td = el("td", "t");
         if (r.logo) td.append(logoImg(r.logo));
-        td.append(el("span", null, r.team));
+        td.append(el("span", null, displayName(lid, { name: r.team, short: r.team, team_id: r.team_id })));
         tr.append(td);
         const ltr = (cls, text) => { const c = el("td", cls, text); c.dir = "ltr"; return c; };  // כדי ש-"+12" לא יתהפך ל-"12+"
         tr.append(el("td", "", r.gp), el("td", "x", r.w), el("td", "x", r.d), el("td", "x", r.l),

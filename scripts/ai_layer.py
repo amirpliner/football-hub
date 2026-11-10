@@ -17,6 +17,7 @@ import json
 import os
 import re
 import sys
+import unicodedata
 import urllib.request
 from pathlib import Path
 
@@ -26,11 +27,7 @@ import collect  # noqa: E402
 DATA = collect.DATA_DIR
 AI_PATH = DATA / "ai.json"
 USAGE_PATH = DATA / "ai_usage.json"
-ESPN_CODES = {
-    "premier_league": "eng.1", "la_liga": "esp.1", "serie_a": "ita.1", "bundesliga": "ger.1",
-    "ligue_1": "fra.1", "championship": "eng.2", "liga_portugal": "por.1", "eredivisie": "ned.1",
-    "champions_league": "uefa.champions",
-}
+MATCH_URL = "https://www.fotmob.com/api/data/matchDetails?matchId={id}"
 JOBS = ("summaries", "preview", "analysis", "concept", "tweets")
 
 # ---------- פרומפטים ----------
@@ -44,26 +41,36 @@ SYS_SUMMARY = COMMON + (
     " Task: for each article (title + feed snippet, often in another language) write a 1-2 sentence neutral Hebrew summary "
     "of what the article says. No opinions, no added facts. Return JSON only."
 )
-SYS_PREVIEW = COMMON + (
-    " Task: a pre-match note titled 'what to watch'. Give 3 specific points grounded in the standings, recent form "
-    "(form string: newest result on the right, W/D/L) and the recent news snippets. Each point: a short title and 1-2 sentences. "
-    "Do not predict a score."
+TEACH = (
+    " The reader wants to LEARN TACTICS, not read statistics: explain structures, roles, spaces and decisions in plain Hebrew, "
+    "and use at most two numbers in the whole text, only where a number explains a tactical point. "
+    "General explanations of what a formation, role or substitution usually does are welcome as teaching, but phrase them as general "
+    "('בדרך כלל', 'מערך כזה נועד ל...') and never as something you saw in this match."
 )
-SYS_ANALYSIS = COMMON + (
-    " Task: a short tactical/statistical read of a finished match from the box-score stats, key events and match-report snippets. "
-    "Explain what the numbers and event timeline suggest (control vs. efficiency, game state effects, set pieces, discipline). "
-    "You cannot see the match: state clearly in 'caveat' what the data cannot show, and do not claim specific tactical shapes unless the data says so."
+SYS_PREVIEW = COMMON + TEACH + (
+    " Task: a pre-match tactical note titled 'what to watch'. Use each team's most recent known formation and coach (if given), the table "
+    "position and recent results. Give 3 points about the tactical battle: likely shapes, the zones or matchups where the game may be decided, "
+    "and how each side may try to hurt the other. Each point: a short title and 1-2 sentences. Do not predict a score."
 )
-SYS_CONCEPT = COMMON + (
-    " Task: 'tactical concept of the week'. Pick ONE tactical concept (e.g. pressing triggers, half-spaces, rest defence, low block) "
-    "that the supplied data from this week's matches and analysis articles can illustrate. Explain it simply, then give an example "
-    "taken ONLY from the supplied match facts (cite the match and minute from the key events if you use one) and say honestly how "
+SYS_ANALYSIS = COMMON + TEACH + (
+    " Task: a TACTICAL read of a finished match. Inputs: both lineups as lines from back to front (left to right), coaches, substitutions "
+    "with minutes (who came on for whom), goals and cards with minutes, momentum by period (who had the upper hand), and any match-report "
+    "snippets. Fields: 'setup' = how each team lined up and what that structure is built to do, naming the key roles; 'phases' = 2-4 moments "
+    "where the game changed tactically (minute + what changed and why it matters, e.g. a substitution that changed the shape, a goal that "
+    "changed who needed the ball); 'lesson' = one tactical concept this match illustrates, explained simply for a learner, plus 'watch_next' = "
+    "what to look for the next time you watch a match. You cannot see the match: in 'caveat' say plainly what the data cannot show "
+    "(pressing height, distances between lines, individual movements) and do not claim them."
+)
+SYS_CONCEPT = COMMON + TEACH + (
+    " Task: 'tactical concept of the week'. Pick ONE tactical concept (e.g. pressing triggers, half-spaces, rest defence, low block, "
+    "inverted full-backs, back three vs back four) that this week's lineups, substitutions and analysis articles can illustrate. Explain it "
+    "simply, then give an example taken ONLY from the supplied match sheets (cite the match and minute if you use one) and say honestly how "
     "well the data supports the link. Add 'how_to_spot': what to look for when watching."
 )
 
 SYS_TWEET = COMMON + (
-    " Task: help the user find tweet angles about football that OTHER accounts are probably NOT talking about: a counter-intuitive number, "
-    "a structural observation, an overlooked detail, a link between two events. Give 2 distinct angles (1 if the data supports only one). "
+    " Task: help the user find TACTICAL tweet angles that OTHER accounts are probably NOT talking about: a structural observation, a role "
+    "or substitution that changed the game, a link between a shape and an event. Prefer ideas over numbers. Give 2 distinct angles (1 if the data supports only one). "
     "For each: 'tweet' = ready-to-post text in {lang}, at most 270 characters, no hashtag spam, no clickbait, sounds like a thoughtful fan, not a press release; "
     "'why' = one line on why this angle is less obvious than the mainstream take; 'verify' = one line listing what the user must double-check before posting. "
     "Every number or claim in a tweet must appear in the supplied data. If nothing interesting is supported, return fewer angles rather than inventing one."
@@ -82,9 +89,13 @@ SCHEMAS = {
                                               "required": ["title", "text"], "additionalProperties": False}}},
         "required": ["headline", "points"], "additionalProperties": False},
     "analysis": {"type": "object", "properties": {
-        "headline": {"type": "string"}, "summary": {"type": "string"},
-        "key_points": {"type": "array", "items": {"type": "string"}}, "caveat": {"type": "string"}},
-        "required": ["headline", "summary", "key_points", "caveat"], "additionalProperties": False},
+        "headline": {"type": "string"}, "setup": {"type": "string"},
+        "phases": {"type": "array", "items": {"type": "object", "properties": {"minute": {"type": "string"}, "text": {"type": "string"}},
+                                              "required": ["minute", "text"], "additionalProperties": False}},
+        "lesson": {"type": "object", "properties": {"concept": {"type": "string"}, "explain": {"type": "string"}, "watch_next": {"type": "string"}},
+                   "required": ["concept", "explain", "watch_next"], "additionalProperties": False},
+        "caveat": {"type": "string"}},
+        "required": ["headline", "setup", "phases", "lesson", "caveat"], "additionalProperties": False},
     "concept": {"type": "object", "properties": {
         "concept": {"type": "string"}, "explanation": {"type": "string"}, "example": {"type": "string"},
         "how_to_spot": {"type": "string"}, "data_support": {"type": "string"}},
@@ -140,11 +151,21 @@ def team_snippets(items, team_id, since, limit=6):
     return out
 
 
-def preview_prompt(m, standings, items):
+def last_shape(ai, name):
+    """המערך והמאמן האחרונים שידועים לנו לקבוצה, מתוך ניתוחים קודמים."""
+    for a in sorted(ai["analyses"].values(), key=lambda a: a.get("date", ""), reverse=True):
+        for side in ("home", "away"):
+            if (a.get("match") or {}).get(side) == name and (a.get("lineups") or {}).get(side):
+                lu = a["lineups"][side]
+                return f"last known formation {lu.get('formation')}, coach {lu.get('coach') or '?'} ({a['date'][:10]})"
+    return "last formation unknown"
+
+
+def preview_prompt(m, standings, items, ai=None):
     def side(s):
         r = team_rank(standings, m["league"], s)
-        row = f"table: #{r['rank']} {r['pts']}pts, {r['gp']} played, GD {r['gd']:+d}, GF {r['gf']} GA {r['ga']}" if r else "table: n/a"
-        return f"{s['name']} | {row} | form: {s.get('form') or 'n/a'}"
+        row = f"table: #{r['rank']} {r['pts']}pts, {r['gp']} played" if r else "table: n/a"
+        return f"{s['name']} | {row} | {last_shape(ai, s['name']) if ai else ''}"
     since = now_utc() - dt.timedelta(days=3)
     lines = [f"Match: {m['home']['name']} (home) vs {m['away']['name']} (away), {m['league']}, kickoff {m['date']}",
              "HOME " + side(m["home"]), "AWAY " + side(m["away"]), "", "Recent news snippets (home):"]
@@ -153,25 +174,63 @@ def preview_prompt(m, standings, items):
     return "\n".join(lines)
 
 
-_STAT_KEYS = ["possessionPct", "totalShots", "shotsOnTarget", "wonCorners", "foulsCommitted", "yellowCards", "redCards",
-              "accuratePasses", "totalPasses", "accurateCrosses", "totalCrosses", "totalTackles", "interceptions", "saves", "offsides", "accurateLongBalls", "totalLongBalls"]
+def _lines(players):
+    """הרכב כשורות מאחור לקדימה; בכל שורה משמאל לימין (לפי מיקום FotMob)."""
+    rows = {}
+    for p in players:
+        lay = p.get("horizontalLayout") or {}
+        rows.setdefault(round(lay.get("x", 0), 1), []).append((lay.get("y", 0), p))
+    out = []
+    for x in sorted(rows):
+        names = [f"{p['name']} ({p.get('shirtNumber', '')})" for _, p in sorted(rows[x], key=lambda t: t[0])]
+        out.append(", ".join(names))
+    return out
 
 
-def fetch_facts(m):
-    url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{ESPN_CODES[m['league']]}/summary?event={m['id']}"
-    req = urllib.request.Request(url, headers={"User-Agent": collect.UA})
-    r = json.loads(urllib.request.urlopen(req, timeout=25).read())
+def fetch_match(m):
+    """מחזיר (גיליון עובדות טקסטואלי, הרכבים לציור) למשחק שהסתיים, מתוך FotMob."""
+    req = urllib.request.Request(MATCH_URL.format(id=m["id"]), headers={"User-Agent": collect.UA, "Accept": "application/json"})
+    md = json.loads(urllib.request.urlopen(req, timeout=30).read())
+    c = md.get("content", {})
     lines = [f"Result: {m['home']['name']} {m['home']['score']}-{m['away']['score']} {m['away']['name']} ({m['league']}, {m['date'][:10]})"]
-    for t in r.get("boxscore", {}).get("teams", []):
-        st = {s["name"]: s["displayValue"] for s in t.get("statistics", [])}
-        lines.append(f"{t['team']['displayName']}: " + ", ".join(f"{k}={st[k]}" for k in _STAT_KEYS if k in st))
-    for ro in r.get("rosters", []):
-        if ro.get("formation"):
-            lines.append(f"Formation {ro.get('team', {}).get('displayName', '?')}: {ro['formation']}")
-    evs = [k for k in r.get("keyEvents", []) if k.get("type", {}).get("text") in ("Goal", "Yellow Card", "Red Card", "Substitution", "Penalty - Scored", "Own Goal")]
-    for k in evs[:25]:
-        lines.append(f"{k.get('clock', {}).get('displayValue', '')} {k['type']['text']}: {k.get('text', '')[:140]}")
-    return "\n".join(lines)
+    lineups = {}
+    lu = c.get("lineup") or {}
+    for side, key in (("home", "homeTeam"), ("away", "awayTeam")):
+        t = lu.get(key) or {}
+        starters = t.get("starters") or []
+        coach = (t.get("coach") or {}).get("name") if isinstance(t.get("coach"), dict) else None
+        if not starters:
+            continue
+        lines.append(f"{t.get('name', m[side]['name'])} ({side}) formation {t.get('formation', '?')}, coach {coach or '?'}:")
+        lines += [f"  line {i + 1}: {row}" for i, row in enumerate(_lines(starters))]
+        lineups[side] = {
+            "formation": t.get("formation"), "coach": coach,
+            "players": [{"n": p.get("shirtNumber"), "name": p.get("lastName") or p["name"],
+                         "x": round((p.get("horizontalLayout") or {}).get("x", 0), 3), "y": round((p.get("horizontalLayout") or {}).get("y", 0), 3)}
+                        for p in starters],
+        }
+    ev = ((c.get("matchFacts") or {}).get("events") or {}).get("events") or []
+    for e in ev:
+        who = "home" if e.get("isHome") else "away"
+        if e.get("type") == "Substitution" and e.get("swap"):
+            names = [x.get("name") for x in e["swap"]]
+            lines.append(f"{e.get('time')}' sub ({who}): {names[0]} on for {names[1] if len(names) > 1 else '?'}")
+        elif e.get("type") == "Goal":
+            lines.append(f"{e.get('time')}' goal ({who}): {e.get('nameStr')}{' (pen)' if e.get('isPenalty') else ''}{' (own goal)' if e.get('ownGoal') else ''}")
+        elif e.get("type") == "Card" and e.get("card") in ("Red", "YellowRed"):
+            lines.append(f"{e.get('time')}' red card ({who}): {e.get('nameStr')}")
+    mo = c.get("momentum")
+    if isinstance(mo, dict):
+        data = (mo.get("main") or {}).get("data") or []
+        blocks = []
+        for start in range(0, 90, 15):
+            vals = [d["value"] for d in data if start <= d.get("minute", 0) < start + 15]
+            if vals:
+                avg = sum(vals) / len(vals)
+                blocks.append(f"{start}-{start + 15}': " + ("home on top" if avg > 12 else "away on top" if avg < -12 else "balanced"))
+        if blocks:
+            lines.append("Momentum by period: " + "; ".join(blocks))
+    return "\n".join(lines), lineups
 
 
 def analysis_prompt(m, facts, items):
@@ -203,8 +262,12 @@ def tweet_prompt_article(i, ai):
 
 
 def tweet_prompt_analysis(a):
-    return (f"Match analysis headline: {a['headline']}\nSummary: {a['summary']}\nKey points: " + "; ".join(a["key_points"])
-            + f"\nCaveat: {a['caveat']}\n\nRaw match facts:\n{a.get('facts', '')[:2500]}")
+    if "setup" in a:
+        body = (f"Setup: {a['setup']}\nPhases: " + "; ".join(f"{p['minute']}: {p['text']}" for p in a["phases"])
+                + f"\nLesson: {a['lesson']['concept']} - {a['lesson']['explain']}")
+    else:
+        body = f"Summary: {a.get('summary', '')}\nKey points: " + "; ".join(a.get("key_points", []))
+    return (f"Match analysis headline: {a['headline']}\n{body}\nCaveat: {a['caveat']}\n\nRaw match facts:\n{a.get('facts', '')[:2500]}")
 
 
 def tweet_prompt_concept(c):
@@ -218,9 +281,10 @@ def tweet_todo(cfg, art, ai):
     for week, c in ai["concepts"].items():
         if f"c:{week}" not in ai["tweets"]:
             todo.append((f"c:{week}", tweet_prompt_concept(c)))
-    for mid, a in ai["analyses"].items():
-        if f"m:{mid}" not in ai["tweets"]:
-            todo.append((f"m:{mid}", tweet_prompt_analysis(a)))
+    newest = sorted(ai["analyses"].items(), key=lambda kv: kv[1].get("date", ""), reverse=True)
+    pending = [(mid, a) for mid, a in newest if f"m:{mid}" not in ai["tweets"]]
+    for mid, a in pending[: cfg["ai"]["tweets"].get("max_analysis_angles_per_run", 4)]:
+        todo.append((f"m:{mid}", tweet_prompt_analysis(a)))
     cap = cfg["ai"]["tweets"]["max_per_run"]
     arts = [i for i in art["items"] if i["category"] != "video" and not i["dup_of"] and f"a:{i['id']}" not in ai["tweets"]
             and (i["category"] == "analysis" or i.get("also"))]
@@ -298,8 +362,14 @@ def pick(cfg, art, mt, ai, only, kind):
              and m["id"] not in ai["previews"] and is_big(m, standings, big["top_rank"])]
         return c[: big["max_previews_per_run"]]
     if kind == "analysis":
+        def key(league, date, hs, as_, home):
+            fold = "".join(ch for ch in unicodedata.normalize("NFD", home or "") if ch.isascii() and ch.isalpha()).lower()[:4]
+            return f"{league}|{date[:10]}|{hs}-{as_}|{fold}"
+        done = {key(a["match"]["league"], a.get("date", ""), a["match"]["hs"], a["match"]["as"], a["match"]["home"])
+                for a in ai["analyses"].values() if a.get("match")}
         c = [m for m in ms if m["state"] == "post" and ts(m["date"]) >= now - dt.timedelta(hours=72)
-             and m["id"] not in ai["analyses"] and m["league"] in big["analysis_leagues"]]
+             and m["id"] not in ai["analyses"] and m["league"] in big["analysis_leagues"]
+             and key(m["league"], m["date"], m["home"]["score"], m["away"]["score"], m["home"]["name"]) not in done]
         return sorted(c, key=lambda m: m["date"], reverse=True)[: big["max_analyses_per_run"]]
     return []
 
@@ -320,7 +390,8 @@ def run_jobs(cfg, art, mt, ai, usage, args):
     def fake(job, **kw):
         return {"summaries": {"summaries": [{"id": i, "he": "[דוגמה] תקציר בעברית לבדיקת התצוגה באתר."} for i in kw.get("ids", [])]},
                 "preview": {"headline": "[דוגמה] על מה לשים לב", "points": [{"title": "נקודה 1", "text": "טקסט לדוגמה."}, {"title": "נקודה 2", "text": "טקסט לדוגמה."}, {"title": "נקודה 3", "text": "טקסט לדוגמה."}]},
-                "analysis": {"headline": "[דוגמה] ניתוח", "summary": "סיכום לדוגמה.", "key_points": ["נקודה א", "נקודה ב"], "caveat": "זהו טקסט לדוגמה."},
+                "analysis": {"headline": "[דוגמה] ניתוח", "setup": "מערך לדוגמה.", "phases": [{"minute": "60", "text": "שינוי לדוגמה."}],
+                             "lesson": {"concept": "מושג לדוגמה", "explain": "הסבר.", "watch_next": "מה לחפש."}, "caveat": "זהו טקסט לדוגמה."},
                 "tweets": {"angles": [{"tweet": "[דוגמה] ציוץ לדוגמה על עובדה שאף אחד לא מדבר עליה.", "why": "זווית פחות מובנת מאליה.", "verify": "לבדוק את המספרים במקור."},
                                        {"tweet": "[דוגמה] זווית שנייה לציוץ.", "why": "קישור בין שני אירועים.", "verify": "לוודא שהמשחק אכן התקיים כך."}]},
                 "concept": {"concept": "[דוגמה] לחץ גבוה", "explanation": "הסבר לדוגמה.", "example": "דוגמה לדוגמה.", "how_to_spot": "לחפש...", "data_support": "בדיקה"}}[job]
@@ -355,7 +426,7 @@ def run_jobs(cfg, art, mt, ai, usage, args):
         c = pick(cfg, art, mt, ai, args.only, "preview")
         n = 0
         for m in c:
-            out = run("preview", SYS_PREVIEW, preview_prompt(m, standings, items), 4000)
+            out = run("preview", SYS_PREVIEW, preview_prompt(m, standings, items, ai), 4000)
             if out:
                 ai["previews"][m["id"]] = {**out, "at": now_utc().strftime("%Y-%m-%dT%H:%M:%SZ"), "kickoff": m["date"]}
                 n += 1
@@ -367,13 +438,13 @@ def run_jobs(cfg, art, mt, ai, usage, args):
         n = 0
         for m in c:
             try:
-                facts = fetch_facts(m)
+                facts, lineups = fetch_match(m)
             except Exception as e:
                 print(f"  לא הצלחתי להביא נתוני משחק {m['id']}: {e}")
                 continue
-            out = run("analysis", SYS_ANALYSIS, analysis_prompt(m, facts, items), 6000)
+            out = run("analysis", SYS_ANALYSIS, analysis_prompt(m, facts, items), 8000)
             if out:
-                ai["analyses"][m["id"]] = {**out, "at": now_utc().strftime("%Y-%m-%dT%H:%M:%SZ"), "week": week, "facts": facts, "date": m["date"],
+                ai["analyses"][m["id"]] = {**out, "at": now_utc().strftime("%Y-%m-%dT%H:%M:%SZ"), "week": week, "facts": facts, "lineups": lineups, "date": m["date"],
                                         "match": {"league": m["league"], "home": m["home"]["name"], "away": m["away"]["name"], "hs": m["home"]["score"], "as": m["away"]["score"]}}
                 n += 1
         stats["analysis"] = f"{n}/{len(c)}"

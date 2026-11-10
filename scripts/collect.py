@@ -438,7 +438,7 @@ def process_source(src, cfg, matcher):
             teams = matched + [t for t in teams if t not in matched]
         elif not fixed_leagues:  # keep_unmatched / ניתוח: ליגות לפי הקבוצות שהוזכרו
             leagues |= {matcher.team_league[t] for t in teams}
-        if is_cl:
+        if is_cl and "champions_league" in cfg["leagues"]:
             leagues.add("champions_league")
         for t in src.get("teams", []):
             if t not in teams:
