@@ -486,7 +486,7 @@ function renderReads() {
 
 // ---------- משחקים וטבלאות ----------
 function updatedLabel() {
-  return state.matchesAt ? `עודכן ${fmtDay.format(state.matchesAt)} ${fmtTime.format(state.matchesAt)} · נתוני ESPN, לא בזמן אמת` : "";
+  return state.matchesAt ? `עודכן ${fmtDay.format(state.matchesAt)} ${fmtTime.format(state.matchesAt)} · נתוני FotMob, לא בזמן אמת` : "";
 }
 
 function matchRow(m) {
