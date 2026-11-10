@@ -6,8 +6,8 @@
 - `config/config.json` – **קובץ ההגדרות היחיד**: ליגות, קבוצות (לזיהוי אוטומטי), מקורות RSS, כמה ימים לשמור.
 - `scripts/collect.py` – אוסף את הכתבות ושומר ל-`data/articles.json` (ו-`data/status.json` עם מצב כל מקור).
 - `.github/workflows/collect.yml` – מריץ את הסקריפט 4 פעמים ביום, וגם ידנית.
-- `scripts/collect_matches.py` – משחקים וטבלאות מ-FotMob (API לא רשמי) ל-`data/matches.json`. מזהה כל ליגה ב-FotMob: `leagues.<id>.fotmob_id`.
-- `scripts/ai_layer.py` – שכבת Claude (ניתוח משחק, על מה לשים לב, מושג שבועי, תקצירי מאמרים, זוויות לציוץ). `--estimate` מחשב עלות חודשית מהנתונים האמיתיים.
+- `scripts/collect_matches.py` – משחקים וטבלאות מ-FotMob (API לא רשמי) ל-`data/matches.json`, והרכבים, מערכים וחילופים של משחקים שהסתיימו ל-`data/lineups.json` (בחינם, בלי Claude). מזהה כל ליגה ב-FotMob: `leagues.<id>.fotmob_id`.
+- `scripts/ai_layer.py` – שכבת Claude (**כבויה כרגע, כדי שלא תהיה עלות**) (ניתוח משחק, על מה לשים לב, מושג שבועי, תקצירי מאמרים, זוויות לציוץ). `--estimate` מחשב עלות חודשית מהנתונים האמיתיים.
 - `tools/check_teams.py` – בדיקת רשימות הקבוצות מול הטבלאות.
 - `tools/check_feeds.py` – בודק אם כתובת RSS חדשה באמת עובדת, לפני שמוסיפים אותה.
 

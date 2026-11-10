@@ -53,6 +53,7 @@ const state = {
   items: [],
   matches: [],
   standings: {},
+  lineups: {},     // מזהה משחק -> הרכבים ואירועים (FotMob, בחינם)
   ai: { summaries: {}, previews: {}, analyses: {}, concepts: {}, tweets: {} },
   leagues: {},
   teamName: {},    // מזהה קבוצה -> שם (עברית בליגות ישראל)
@@ -111,6 +112,10 @@ async function load() {
       fetch("data/matches.json", { cache: "no-cache" }).catch(() => null),
       fetch("data/ai.json", { cache: "no-cache" }).catch(() => null),
     ]);
+    fetch("data/lineups.json", { cache: "no-cache" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((l) => { if (l) { state.lineups = l; if (state.view === "matches") render(); } })
+      .catch(() => {});
     if (!cfgRes.ok || !dataRes.ok) throw new Error(`HTTP ${cfgRes.status}/${dataRes.status}`);
     const cfg = await cfgRes.json();
     const data = await dataRes.json();
@@ -505,10 +510,44 @@ function matchRow(m) {
   return row;
 }
 
+// ציר האירועים של המשחק: חילופים, שערים ואדומים
+function eventsList(events, m) {
+  if (!events || !events.length) return null;
+  const team = (side) => displayName(m.league, m[side]);
+  const ol = el("ol", "phases");
+  const iso = (t) => el("bdi", null, t);    // שמות לועזיים בתוך משפט עברי בלי בלבול כיוונים
+  for (const e of events) {
+    const li = el("li");
+    const span = el("span");
+    if (e.type === "sub") span.append("חילוף · ", iso(team(e.side)), ": ", iso(e.in), " נכנס במקום ", iso(e.out));
+    else if (e.type === "goal") span.append("שער · ", iso(team(e.side)), ": ", iso(e.name), e.pen ? " (פנדל)" : "", e.og ? " (שער עצמי)" : "");
+    else span.append("כרטיס אדום · ", iso(team(e.side)), ": ", iso(e.name));
+    li.append(el("b", "min", e.t + "'"), span);
+    ol.append(li);
+  }
+  return ol;
+}
+
 function aiPanel(m) {
-  const pv = state.ai.previews[m.id], an = state.ai.analyses[m.id];
-  if (!pv && !an) return null;
+  const pv = state.ai.previews[m.id], an = state.ai.analyses[m.id], lu = state.lineups[m.id];
+  if (!pv && !an && !lu) return null;
   const wrap = el("div", "ai-wrap");
+  if (!pv && !an) {
+    // בלי Claude: המערכים והאירועים מתוך נתוני המשחק
+    const btn = iconBtn("list", "מערכים וחילופים", "ai-btn");
+    btn.addEventListener("click", () => {
+      const open = wrap.querySelector(".ai-panel");
+      if (open) { open.remove(); return; }
+      const p = el("div", "ai-panel");
+      const fig = pitch(lu.lineups, { home: displayName(m.league, m.home), away: displayName(m.league, m.away) });
+      if (fig) p.append(fig);
+      const evs = eventsList(lu.events, m);
+      if (evs) p.append(el("h4", null, "חילופים ואירועים"), evs);
+      wrap.append(p);
+    });
+    wrap.append(btn);
+    return wrap;
+  }
   const btn = iconBtn("spark", an ? "ניתוח המשחק" : "על מה לשים לב", "ai-btn");
   btn.addEventListener("click", () => {
     const open = wrap.querySelector(".ai-panel");

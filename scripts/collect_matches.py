@@ -26,6 +26,8 @@ DAYS_AHEAD = 10
 OUT_PATH = collect.DATA_DIR / "matches.json"
 LEAGUE_URL = "https://www.fotmob.com/api/data/leagues?id={id}"
 LOGO_URL = "https://images.fotmob.com/image_resources/logo/teamlogo/{id}_small.png"
+MATCH_URL = "https://www.fotmob.com/api/data/matchDetails?matchId={id}"
+LINEUPS_PATH = collect.DATA_DIR / "lineups.json"
 
 
 def get_json(url):
@@ -39,6 +41,69 @@ def get_json(url):
             last = e
             time.sleep(2)
     raise last
+
+
+def _lines(players):
+    """הרכב כשורות מאחור לקדימה; בכל שורה משמאל לימין (לפי מיקום FotMob)."""
+    rows = {}
+    for p in players:
+        lay = p.get("horizontalLayout") or {}
+        rows.setdefault(round(lay.get("x", 0), 1), []).append((lay.get("y", 0), p))
+    out = []
+    for x in sorted(rows):
+        names = [f"{p['name']} ({p.get('shirtNumber', '')})" for _, p in sorted(rows[x], key=lambda t: t[0])]
+        out.append(", ".join(names))
+    return out
+
+
+def fetch_match(m):
+    """מחזיר (גיליון עובדות טקסטואלי, הרכבים לציור, אירועים) למשחק, מתוך FotMob."""
+    md = get_json(MATCH_URL.format(id=m["id"]))
+    c = md.get("content", {})
+    lines = [f"Result: {m['home']['name']} {m['home']['score']}-{m['away']['score']} {m['away']['name']} ({m['league']}, {m['date'][:10]})"]
+    lineups = {}
+    lu = c.get("lineup") or {}
+    for side, key in (("home", "homeTeam"), ("away", "awayTeam")):
+        t = lu.get(key) or {}
+        starters = t.get("starters") or []
+        coach = (t.get("coach") or {}).get("name") if isinstance(t.get("coach"), dict) else None
+        if not starters:
+            continue
+        lines.append(f"{t.get('name', m[side]['name'])} ({side}) formation {t.get('formation', '?')}, coach {coach or '?'}:")
+        lines += [f"  line {i + 1}: {row}" for i, row in enumerate(_lines(starters))]
+        lineups[side] = {
+            "formation": t.get("formation"), "coach": coach,
+            "players": [{"n": p.get("shirtNumber"), "name": p.get("lastName") or p["name"],
+                         "x": round((p.get("horizontalLayout") or {}).get("x", 0), 3), "y": round((p.get("horizontalLayout") or {}).get("y", 0), 3)}
+                        for p in starters],
+        }
+    events = []
+    ev = ((c.get("matchFacts") or {}).get("events") or {}).get("events") or []
+    for e in ev:
+        who = "home" if e.get("isHome") else "away"
+        if e.get("type") == "Substitution" and e.get("swap"):
+            names = [x.get("name") for x in e["swap"]]
+            inn, out = names[0], names[1] if len(names) > 1 else "?"
+            lines.append(f"{e.get('time')}' sub ({who}): {inn} on for {out}")
+            events.append({"t": e.get("time"), "type": "sub", "side": who, "in": inn, "out": out})
+        elif e.get("type") == "Goal":
+            lines.append(f"{e.get('time')}' goal ({who}): {e.get('nameStr')}{' (pen)' if e.get('isPenalty') else ''}{' (own goal)' if e.get('ownGoal') else ''}")
+            events.append({"t": e.get("time"), "type": "goal", "side": who, "name": e.get("nameStr"), "pen": bool(e.get("isPenalty")), "og": bool(e.get("ownGoal"))})
+        elif e.get("type") == "Card" and e.get("card") in ("Red", "YellowRed"):
+            lines.append(f"{e.get('time')}' red card ({who}): {e.get('nameStr')}")
+            events.append({"t": e.get("time"), "type": "red", "side": who, "name": e.get("nameStr")})
+    mo = c.get("momentum")
+    if isinstance(mo, dict):
+        data = (mo.get("main") or {}).get("data") or []
+        blocks = []
+        for start in range(0, 90, 15):
+            vals = [d["value"] for d in data if start <= d.get("minute", 0) < start + 15]
+            if vals:
+                avg = sum(vals) / len(vals)
+                blocks.append(f"{start}-{start + 15}': " + ("home on top" if avg > 12 else "away on top" if avg < -12 else "balanced"))
+        if blocks:
+            lines.append("Momentum by period: " + "; ".join(blocks))
+    return "\n".join(lines), lineups, events
 
 
 def team_id(matcher, league, name):
@@ -148,6 +213,29 @@ def main():
             standings[lid] = tables
 
     ordered = sorted(matches.values(), key=lambda m: (m["date"], m["id"]))
+
+    # הרכבים, מערכים ואירועים למשחקים שהסתיימו: רק כאלה שעוד לא נשמרו
+    lineups = {}
+    if LINEUPS_PATH.exists():
+        try:
+            lineups = json.loads(LINEUPS_PATH.read_text(encoding="utf-8"))
+        except Exception:
+            lineups = {}
+    lineups = {k: v for k, v in lineups.items() if k in matches}
+    todo = [m for m in ordered if m["state"] == "post" and m["id"] not in lineups]
+
+    def details(m):
+        try:
+            _, lu, ev = fetch_match(m)
+            return m["id"], {"lineups": lu, "events": ev} if lu else None
+        except Exception:
+            return m["id"], None
+
+    with cf.ThreadPoolExecutor(max_workers=4) as ex:
+        for mid, entry in ex.map(details, todo):
+            if entry:
+                lineups[mid] = entry
+    print(f"הרכבים: {len(lineups)} משחקים ({len([1 for m in todo if m['id'] in lineups])} חדשים)")
     print(f"משחקים: {len(ordered)} | טבלאות: {len(standings)}/{len(leagues)}")
     for e in errors:
         print("  כשל:", e)
@@ -164,6 +252,7 @@ def main():
     }
     collect.DATA_DIR.mkdir(exist_ok=True)
     OUT_PATH.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    LINEUPS_PATH.write_text(json.dumps(lineups, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     return 0
 
 

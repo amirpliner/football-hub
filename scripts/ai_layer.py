@@ -23,11 +23,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import collect  # noqa: E402
+from collect_matches import fetch_match  # noqa: E402  (הרכבים ואירועים מ-FotMob)
 
 DATA = collect.DATA_DIR
 AI_PATH = DATA / "ai.json"
 USAGE_PATH = DATA / "ai_usage.json"
-MATCH_URL = "https://www.fotmob.com/api/data/matchDetails?matchId={id}"
 JOBS = ("summaries", "preview", "analysis", "concept", "tweets")
 
 # ---------- פרומפטים ----------
@@ -172,65 +172,6 @@ def preview_prompt(m, standings, items, ai=None):
     lines += team_snippets(items, m["home"].get("team_id"), since) or ["- none"]
     lines += ["Recent news snippets (away):"] + (team_snippets(items, m["away"].get("team_id"), since) or ["- none"])
     return "\n".join(lines)
-
-
-def _lines(players):
-    """הרכב כשורות מאחור לקדימה; בכל שורה משמאל לימין (לפי מיקום FotMob)."""
-    rows = {}
-    for p in players:
-        lay = p.get("horizontalLayout") or {}
-        rows.setdefault(round(lay.get("x", 0), 1), []).append((lay.get("y", 0), p))
-    out = []
-    for x in sorted(rows):
-        names = [f"{p['name']} ({p.get('shirtNumber', '')})" for _, p in sorted(rows[x], key=lambda t: t[0])]
-        out.append(", ".join(names))
-    return out
-
-
-def fetch_match(m):
-    """מחזיר (גיליון עובדות טקסטואלי, הרכבים לציור) למשחק שהסתיים, מתוך FotMob."""
-    req = urllib.request.Request(MATCH_URL.format(id=m["id"]), headers={"User-Agent": collect.UA, "Accept": "application/json"})
-    md = json.loads(urllib.request.urlopen(req, timeout=30).read())
-    c = md.get("content", {})
-    lines = [f"Result: {m['home']['name']} {m['home']['score']}-{m['away']['score']} {m['away']['name']} ({m['league']}, {m['date'][:10]})"]
-    lineups = {}
-    lu = c.get("lineup") or {}
-    for side, key in (("home", "homeTeam"), ("away", "awayTeam")):
-        t = lu.get(key) or {}
-        starters = t.get("starters") or []
-        coach = (t.get("coach") or {}).get("name") if isinstance(t.get("coach"), dict) else None
-        if not starters:
-            continue
-        lines.append(f"{t.get('name', m[side]['name'])} ({side}) formation {t.get('formation', '?')}, coach {coach or '?'}:")
-        lines += [f"  line {i + 1}: {row}" for i, row in enumerate(_lines(starters))]
-        lineups[side] = {
-            "formation": t.get("formation"), "coach": coach,
-            "players": [{"n": p.get("shirtNumber"), "name": p.get("lastName") or p["name"],
-                         "x": round((p.get("horizontalLayout") or {}).get("x", 0), 3), "y": round((p.get("horizontalLayout") or {}).get("y", 0), 3)}
-                        for p in starters],
-        }
-    ev = ((c.get("matchFacts") or {}).get("events") or {}).get("events") or []
-    for e in ev:
-        who = "home" if e.get("isHome") else "away"
-        if e.get("type") == "Substitution" and e.get("swap"):
-            names = [x.get("name") for x in e["swap"]]
-            lines.append(f"{e.get('time')}' sub ({who}): {names[0]} on for {names[1] if len(names) > 1 else '?'}")
-        elif e.get("type") == "Goal":
-            lines.append(f"{e.get('time')}' goal ({who}): {e.get('nameStr')}{' (pen)' if e.get('isPenalty') else ''}{' (own goal)' if e.get('ownGoal') else ''}")
-        elif e.get("type") == "Card" and e.get("card") in ("Red", "YellowRed"):
-            lines.append(f"{e.get('time')}' red card ({who}): {e.get('nameStr')}")
-    mo = c.get("momentum")
-    if isinstance(mo, dict):
-        data = (mo.get("main") or {}).get("data") or []
-        blocks = []
-        for start in range(0, 90, 15):
-            vals = [d["value"] for d in data if start <= d.get("minute", 0) < start + 15]
-            if vals:
-                avg = sum(vals) / len(vals)
-                blocks.append(f"{start}-{start + 15}': " + ("home on top" if avg > 12 else "away on top" if avg < -12 else "balanced"))
-        if blocks:
-            lines.append("Momentum by period: " + "; ".join(blocks))
-    return "\n".join(lines), lineups
 
 
 def analysis_prompt(m, facts, items):
@@ -438,7 +379,7 @@ def run_jobs(cfg, art, mt, ai, usage, args):
         n = 0
         for m in c:
             try:
-                facts, lineups = fetch_match(m)
+                facts, lineups, _ = fetch_match(m)
             except Exception as e:
                 print(f"  לא הצלחתי להביא נתוני משחק {m['id']}: {e}")
                 continue
