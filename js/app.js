@@ -33,9 +33,9 @@ function hydrateIcons() {
 }
 
 // צבע לכל ליגה: נקודות ומדבקות
-const LEAGUE_COLORS = {
-  israel: "#3aa0ff", leumit: "#ff5fa2", premier_league: "#a259ff", la_liga: "#ffb01f", serie_a: "#19a35b", bundesliga: "#e63a2e",
-  ligue_1: "#25c9e8", championship: "#ff5fa2", liga_portugal: "#0fbf9a", eredivisie: "#ff6f3c", champions_league: "#8fa6ff",
+const LEAGUE_COLORS = {   // רק גוונים מסקאלת הכחול של העולם
+  israel: "#eef2ff", leumit: "#c9d4ff", premier_league: "#3f6bff", la_liga: "#7f9dff",
+  serie_a: "#5d84ff", bundesliga: "#2f56e0", ligue_1: "#a9bcff",
 };
 
 // ---------- אחסון מקומי (localStorage) ----------
@@ -233,33 +233,39 @@ function displayName(league, t) {
   return l && l.hebrew_names && t.team_id && state.teamName[t.team_id] ? state.teamName[t.team_id] : t.short || t.name;
 }
 
-// מגרש אופקי בכיוון הקריאה (RTL): הבית בצד ימין ותוקף שמאלה, החוץ בצד שמאל ותוקף ימינה (מיקומים מ-FotMob)
+// מגרש אופקי בכיוון הקריאה (RTL): הבית בצד ימין ותוקף שמאלה, החוץ בצד שמאל ותוקף ימינה (מיקומים מ-FotMob).
+// כל שחקן הוא עיגול. כשהמגרש נפתח, השחקנים יוצאים מנקודת האמצע אל המקום שלהם, שורה אחרי שורה.
 function pitch(lu, m) {
   if (!lu || !lu.home || !lu.away) return null;
-  const NS = SVG_NS, W = 200, H = 130, svg = document.createElementNS(NS, "svg");
+  const NS = SVG_NS, W = 340, H = 210, svg = document.createElementNS(NS, "svg");
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
   svg.setAttribute("class", "pitch");
   svg.setAttribute("role", "img");
   svg.setAttribute("aria-label", `מערכים: ${m.home} ${lu.home.formation}, ${m.away} ${lu.away.formation}`);
-  const add = (tag, attrs, text) => {
+  const add = (parent, tag, attrs, text) => {
     const n = document.createElementNS(NS, tag);
     for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
     if (text != null) n.textContent = text;
-    svg.append(n);
+    parent.append(n);
     return n;
   };
   const line = { class: "pl" };
-  add("rect", { ...line, x: 3, y: 3, width: W - 6, height: H - 6, rx: 2 });
-  add("line", { ...line, x1: W / 2, y1: 3, x2: W / 2, y2: H - 3 });
-  add("circle", { ...line, cx: W / 2, cy: H / 2, r: 15 });
-  add("rect", { ...line, x: 3, y: H / 2 - 24, width: 26, height: 48 });
-  add("rect", { ...line, x: W - 29, y: H / 2 - 24, width: 26, height: 48 });
+  add(svg, "rect", { ...line, x: 4, y: 4, width: W - 8, height: H - 8, rx: 4 });
+  add(svg, "line", { ...line, x1: W / 2, y1: 4, x2: W / 2, y2: H - 4 });
+  add(svg, "circle", { ...line, cx: W / 2, cy: H / 2, r: 24 });
+  add(svg, "rect", { ...line, x: 4, y: H / 2 - 37, width: 32, height: 74 });
+  add(svg, "rect", { ...line, x: W - 36, y: H / 2 - 37, width: 32, height: 74 });
   const place = (p, home) => {
-    const x = home ? W - 6 - p.x * 92 : 6 + p.x * 92;
-    const y = 8 + (home ? 1 - p.y : p.y) * (H - 16);
-    add("circle", { cx: x, cy: y, r: 5.6, class: home ? "ph" : "pa" });
-    add("text", { x, y: y + 2, class: home ? "nh" : "na" }, p.n || "");
-    add("text", { x, y: y + 10.5, class: "pn" }, (p.name || "").slice(0, 10));
+    const x = home ? W - 10 - p.x * (W / 2 - 16) : 10 + p.x * (W / 2 - 16);
+    const y = 12 + (home ? 1 - p.y : p.y) * (H - 24);
+    const g = add(svg, "g", { class: "pd" });
+    g.style.setProperty("--dx", `${W / 2 - x}px`);
+    g.style.setProperty("--dy", `${H / 2 - y}px`);
+    g.style.setProperty("--d", `${(p.x * 0.45).toFixed(2)}s`);
+    g.style.transformOrigin = `${x}px ${y}px`;
+    add(g, "circle", { cx: x, cy: y, r: 10, class: home ? "ph" : "pa" });
+    add(g, "text", { x, y: y + 3.4, class: home ? "nh" : "na" }, p.n || "");
+    add(g, "text", { x, y: y + 18, class: "pn" }, (p.name || "").slice(0, 11));
   };
   lu.home.players.forEach((p) => place(p, true));
   lu.away.players.forEach((p) => place(p, false));
@@ -283,14 +289,19 @@ function analysisBody(an, full) {
   const box = el("div", "an-body");
   if (an.lesson) {
     const ls = el("div", "lesson");
-    ls.append(el("span", "lesson-k", "מה לומדים מהמשחק"), el("strong", null, an.lesson.concept), el("p", null, an.lesson.explain));
+    ls.append(el("strong", null, "מה לומדים: " + an.lesson.concept), el("p", null, an.lesson.explain));
     box.append(ls);
     if (full) {
       box.append(el("h4", null, "איך הן עלו למגרש"), el("p", null, an.setup));
       if (an.phases && an.phases.length) {
         box.append(el("h4", null, "רגעים שבהם המשחק השתנה"));
         const ol = el("ol", "phases");
-        for (const ph of an.phases) { const li = el("li"); li.append(el("b", "min", ph.minute + "'"), el("span", null, ph.text)); ol.append(li); }
+        for (const ph of an.phases) {
+          const li = el("li");
+          const min = String(ph.minute).replace(/['׳]+/g, "");   // Claude לפעמים כבר מוסיף גרש
+          li.append(el("b", "min", min + "'"), el("span", null, ph.text));
+          ol.append(li);
+        }
         box.append(ol);
       }
       box.append(el("h4", null, "בפעם הבאה שתצפה"), el("p", null, an.lesson.watch_next));
@@ -424,7 +435,7 @@ function renderConcepts() {
 // ---------- מאמרים טקטיים חיצוניים ----------
 function readCard(it) {
   const card = el("article", "card");
-  const color = LEAGUE_COLORS[(it.leagues || []).find((l) => l !== "champions_league")] || "var(--panel-2)";
+  const color = "var(--panel-a)";
   if (it.image) {
     const a = el("a", "stk");
     a.href = it.link; a.target = "_blank"; a.rel = "noopener noreferrer"; a.tabIndex = -1;
@@ -494,21 +505,26 @@ function matchRow(m) {
   row.className = "match " + m.state;
   if (m.link) { row.href = m.link; row.target = "_blank"; row.rel = "noopener noreferrer"; }
   const date = new Date(m.date);
-  const when = el("span", "when");
-  if (m.state === "pre") when.textContent = fmtTime.format(date);
-  else if (m.state === "in") { when.textContent = m.detail; when.classList.add("live"); }
-  else when.textContent = m.detail === "FT" ? "סיום" : m.detail;
+  const meta = el("div", "mmeta");
+  meta.append(leagueTag(m.league), el("span", null, fmtTime.format(date)));   // היום כבר מופיע בכותרת מעל
+  const st = el("span", "st");
+  if (m.state === "in") { st.textContent = m.detail; st.classList.add("live"); }
+  else if (m.state === "post") st.textContent = "סיום";
+  if (st.textContent) meta.append(st);
   const side = (t, cls) => {
     const s = el("span", "team " + cls);
     if (t.logo) s.append(logoImg(t.logo));
-    s.append(el("span", "nm", displayName(m.league, t)));
+    const nm = el("span", "nm", displayName(m.league, t));
+    nm.dir = "auto";   // כדי ששם לועזי ייחתך בסופו ולא בהתחלה
+    s.append(nm);
     return s;
   };
-  const sc = (v) => el("span", "sc", v == null ? "" : String(v));
-  const hasScore = m.state !== "pre";
   const mid = el("span", "mid");
-  mid.append(hasScore ? sc(m.home.score) : el("span", "sc", ""), el("span", "dash", hasScore ? "–" : "נגד"), hasScore ? sc(m.away.score) : el("span", "sc", ""));
-  row.append(when, side(m.home, "home"), mid, side(m.away, "away"));
+  if (m.state === "pre") mid.append(el("span", "dash", "נגד"));
+  else mid.append(el("span", "sc", String(m.home.score ?? "")), el("span", "dash", "–"), el("span", "sc", String(m.away.score ?? "")));
+  const line = el("div", "mline");
+  line.append(side(m.home, "home"), mid, side(m.away, "away"));
+  row.append(meta, line);
   return row;
 }
 
@@ -534,6 +550,8 @@ function aiPanel(m) {
   const pv = state.ai.previews[m.id], an = state.ai.analyses[m.id], lu = state.lineups[m.id];
   if (!pv && !an && !lu) return null;
   const wrap = el("div", "ai-wrap");
+  if ((lu && lu.lineups && lu.lineups.home) || (an && an.lineups && an.lineups.home)) wrap.dataset.lineup = "1";
+  if (pv || an) wrap.dataset.ai = "1";
   if (!pv && !an) {
     // בלי Claude: המערכים והאירועים מתוך נתוני המשחק
     const btn = iconBtn("list", "מערכים וחילופים", "ai-btn");
@@ -588,19 +606,24 @@ function renderMatches() {
   const section = (title, arr) => {
     if (!arr.length) return;
     list.append(el("h3", "sec", title));
-    let lastDay = "", lastLeague = "";
+    let lastDay = "";
     for (const m of arr) {
       const label = dayLabel(new Date(m.date));
-      if (label !== lastDay) { list.append(el("div", "day", label)); lastDay = label; lastLeague = ""; }
-      if (!lg && m.league !== lastLeague) { const l = el("div", "lg"); l.append(leagueTag(m.league)); list.append(l); lastLeague = m.league; }
+      if (label !== lastDay) { list.append(el("div", "day", label)); lastDay = label; }
       list.append(matchRow(m));
       const panel = aiPanel(m);
       if (panel) list.append(panel);
     }
   };
+  // המערכים הם העיקר: המשחק האחרון שיש לו הרכב עולה לראש הדף, והמגרש שלו פתוח מראש
+  const hasLu = (m) => { const lu = state.lineups[m.id]; return lu && lu.lineups && lu.lineups.home && !state.ai.analyses[m.id] && !state.ai.previews[m.id]; };
+  const featured = done.find(hasLu);
+  if (featured) section("המשחק במוקד", [featured]);
   section("משחקים חיים", live);
-  section("תוצאות אחרונות", done);
+  section("תוצאות אחרונות", done.filter((m) => m !== featured));
   section("משחקים קרובים", upcoming);
+  const first = list.querySelector(".ai-wrap[data-lineup]:not([data-ai]) .ai-btn");
+  if (first) first.click();
 }
 
 function renderTables() {
@@ -621,8 +644,10 @@ function renderTables() {
         const tr = el("tr");
         tr.append(el("td", "r", r.rank));
         const td = el("td", "t");
-        if (r.logo) td.append(logoImg(r.logo));
-        td.append(el("span", null, displayName(lid, { name: r.team, short: r.team, team_id: r.team_id })));
+        const cell = el("span", "tcell");
+        if (r.logo) cell.append(logoImg(r.logo));
+        cell.append(el("span", null, displayName(lid, { name: r.team, short: r.team, team_id: r.team_id })));
+        td.append(cell);
         tr.append(td);
         const ltr = (cls, text) => { const c = el("td", cls, text); c.dir = "ltr"; return c; };  // כדי ש-"+12" לא יתהפך ל-"12+"
         tr.append(el("td", "", r.gp), el("td", "x", r.w), el("td", "x", r.d), el("td", "x", r.l),

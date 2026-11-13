@@ -5,24 +5,24 @@ primary_target: "index.html"
 related_targets: ["css/style.css","js/app.js"]
 ---
 
-# Surface brief: מגרש (feed, matches, tables)
+# Surface brief: מגרש (matches, tables, analyses, concepts, reads)
 
-Mode: Operate. Personal football dashboard for one Hebrew-speaking fan, mostly on a phone in short glances, sometimes at a desk. Static HTML/CSS/JS, RTL, source-language article text inside a Hebrew UI.
+Mode: Operate. Personal Hebrew RTL tactics-learning app for one fan, mostly on a phone. Plain HTML/CSS/JS on GitHub Pages. Seven leagues (Ligat Ha'Al, Leumit, top five). Claude is off; matches with free FotMob lineups are the main surface.
 
-Job: see what is new across ten leagues in seconds, learn tactics from analysis items, keep or turn items into tweet angles. Content: articles (with Hebrew summaries), videos, fixtures/results, tables, watchlist, saved. Constraints: no frameworks, mixed Hebrew/Latin text must stay correct, AI text is labeled as AI.
+Job: scan results and fixtures, open a match to see both formations and the substitutions, read tables, revisit the stored analyses and concepts, open tactical articles. Constraints: RTL with mixed Latin names, AI text labeled, no news feed.
 
-Unresolved: none. The user picked the sticker-album sketch (.impeccable/mocks/decision/assigned.html).
+User steer (binding): formations drawn as circles; luxurious deep blue palette. Chosen card: "לילות אירופה" (.impeccable/mocks/decision2/g-night.html).
 
 ## Direction contract
 
-THESIS: Reading is collecting. Every article is a die-cut sticker, and every item read sticks one sticker into tonight's album tally; it refuses the generic dark news list with one flat accent.
+THESIS: A European night under floodlights. The app is a stadium lit from above, and formations glow on the pitch as circles; it refuses the flat dark score list.
 
-OWN-WORLD: Ultramarine shell (#1f3bd6) over an ink-navy ground (#0c1440); stickers carry a 3-4px white die-cut border with a soft offset shadow and a faint gloss; foil gold (#f2c230) for progress, active page tab and live state; signal red and pitch green as league swatches. Display face Secular One, body Heebo, tabular figures for every score, time and table number; drawn SVG icons in one stroke weight; native selection, scrollbar, focus and caret themed from the palette.
+OWN-WORLD: Midnight navy ground (#060b2e) with a floodlight bloom (#1b3fa8) falling from the top; deep blue panels (#0f1d66 to #0a1347) with a hairline periwinkle edge; electric blue (#3f6bff) as the only saturated colour, for active state and the away side; ice white (#eef2ff) for text and the home side; periwinkle (#c9d4ff / #8ea0e6) for secondary text. Assistant 600-800 for all type, tabular figures. Player discs are the signature shape; tabs are a pill segmented control.
 
-STORY: At a glance the visitor knows how much is new and which league it belongs to; scans titles on a phone, opens the source, and watches the album fill. Saved and watchlist items stay one tap away, and an angle button turns analysis into tweet drafts.
+STORY: The visitor lands on matches, scans results by day and league, opens a match and watches both teams walk out to their shapes, then reads the coaches, formations and substitution timeline. Tables, analyses and concepts share the same lit panels.
 
-FIRST VIEWPORT: 390px wide. A full-width ultramarine band: site name in Secular One 28px with the view tabs (news, matches, tables, watch, saved) beneath it; below that the album tally, twenty dashed slots, filled slots show a mini white-bordered sticker in the league's colour, with the count "היום 7/20". Then the league page tabs as pills with a colour dot, gold when active. Then the first cards: title in Secular One, a meta line below it, the Hebrew summary, actions, and the sticker thumbnail at the inline end. No kicker above any heading.
+FIRST VIEWPORT: 390px. Brand row: "מגרש" in Assistant 800 at 30px with two round icon buttons. A full-width pill segmented control for the five views. Outlined league pills, the active one filled. Then match cards on deep blue panels: a meta line (league, day, time or "סיום"), home team, score at 34px, away team, and a lineup button that opens the lit pitch inside the card.
 
-FORM: Sticker Album, candidate 5 of 7 on the grounded list, seed:a5ed7fdf811124ce.
+FORM: "לילות אירופה", grounded candidate from the user-requested safer re-roll (round 1), seed:c207995fc94760b2. Signature interaction: lineup reveal, the discs travel from the centre spot to their positions, staggered by line, under the floodlight bloom.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

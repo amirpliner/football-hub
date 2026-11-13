@@ -1,37 +1,40 @@
-/* מגרש: טקטיקה וניתוח. מעטפת כחולה, קרקע כחול-דיו, מדבקות עם מסגרת לבנה, זהב למצב פעיל. */
+/* מגרש: לילות אירופה. אצטדיון מואר בלילה, כחול עמוק, ומערכים שזוהרים כעיגולים על הדשא. */
 
 :root {
-  --ground: #0c1440;
-  --shell: #1f3bd6;
-  --shell-ink: #ffffff;
-  --panel: #131e5b;
-  --panel-2: #1a2776;
-  --text: #f2f4ff;
-  --muted: #a9b6ff;
-  --line: rgba(169, 182, 255, .22);
-  --gold: #f2c230;
-  --gold-ink: #0c1440;
-  --gold-text: #f2c230;
-  --sticker: #ffffff;
-  --sticker-shadow: 0 3px 8px rgba(0, 0, 0, .4), 0 1px 1px rgba(0, 0, 0, .3);
-  --live: #ff6b5e;
-  --mark: #f2c230;
-  --radius: 12px;
-  --display: "Secular One", "Arial Hebrew", "Heebo", system-ui, sans-serif;
-  --body: "Heebo", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-  --ease: cubic-bezier(.16, 1, .3, 1);
+  --ground: #060b2e;
+  --bloom: #1b3fa8;
+  --panel-a: #0f1d66;
+  --panel-b: #0a1347;
+  --panel-flat: #0c1854;
+  --edge: rgba(201, 212, 255, .18);
+  --edge-strong: rgba(201, 212, 255, .42);
+  --text: #eef2ff;
+  --soft: #c9d4ff;
+  --muted: #8ea0e6;
+  --electric: #3f6bff;
+  --electric-ink: #ffffff;
+  --live: #ff6b6b;
+  --pitch-a: #16308f;
+  --pitch-b: #0b1756;
+  --radius: 22px;
+  --font: "Assistant", "Arial Hebrew", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --out: cubic-bezier(.16, 1, .3, 1);
   color-scheme: dark;
 }
 :root[data-theme="light"] {
-  --ground: #eef1ff;
-  --panel: #ffffff;
-  --panel-2: #e3e8ff;
-  --text: #0c1440;
-  --muted: #3a4799;
-  --line: rgba(12, 20, 64, .16);
-  --gold-text: #7a5600;
-  --sticker-shadow: 0 3px 8px rgba(12, 20, 64, .3), 0 1px 1px rgba(12, 20, 64, .25);
-  --live: #c2271a;
+  /* משחק יום: אותו עולם, באור יום */
+  --ground: #e9eeff;
+  --bloom: #c3d0ff;
+  --panel-a: #ffffff;
+  --panel-b: #f3f6ff;
+  --panel-flat: #ffffff;
+  --edge: rgba(10, 27, 110, .14);
+  --edge-strong: rgba(10, 27, 110, .35);
+  --text: #0a1b6e;
+  --soft: #2a3f9e;
+  --muted: #4a5aa0;
+  --electric: #2d55f0;
+  --live: #c62828;
   color-scheme: light;
 }
 
@@ -39,234 +42,211 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  background: var(--ground);
+  min-height: 100vh;
   color: var(--text);
-  font: 400 16px/1.5 var(--body);
-  caret-color: var(--gold);
-  accent-color: var(--gold);
+  font: 500 16px/1.5 var(--font);
+  background: radial-gradient(90% 420px at 50% -60px, var(--bloom) 0%, transparent 72%) no-repeat fixed, var(--ground);
+  caret-color: var(--electric);
+  accent-color: var(--electric);
 }
 button, input, select, textarea { font: inherit; color: inherit; }
 button { cursor: pointer; }
 a { color: inherit; }
-.num, time, .sc, .tbl td, .tbl th { font-variant-numeric: tabular-nums; }
-.wrap { max-width: 860px; margin: 0 auto; padding-inline: 16px; }
-
-::selection { background: var(--gold); color: var(--gold-ink); }
-:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 6px; }
-* { scrollbar-width: thin; scrollbar-color: var(--panel-2) transparent; }
+.num, time, .sc, .tbl td, .tbl th, .min { font-variant-numeric: tabular-nums; }
+.wrap { max-width: 760px; margin: 0 auto; padding-inline: 16px; }
+::selection { background: var(--electric); color: #fff; }
+:focus-visible { outline: 2px solid var(--soft); outline-offset: 3px; border-radius: 10px; }
+* { scrollbar-width: thin; scrollbar-color: var(--panel-a) transparent; }
 ::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-thumb { background: var(--panel-2); border-radius: 8px; }
+::-webkit-scrollbar-thumb { background: var(--panel-a); border-radius: 8px; }
+.ico { width: 1.1em; height: 1.1em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 
-.ico { width: 1.15em; height: 1.15em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
-.ico.fill { fill: currentColor; }
-
-/* ---------- מעטפת עליונה ---------- */
-.top { background: var(--shell); color: var(--shell-ink); padding: calc(env(safe-area-inset-top) + 12px) 0 14px; }
-.brand-row { display: flex; align-items: center; gap: 12px; }
-h1 { margin: 0; font: 400 30px/1 var(--display); letter-spacing: .01em; }
-.tools { margin-inline-start: auto; display: flex; gap: 6px; }
+/* ---------- ראש העמוד ---------- */
+.top { padding: calc(env(safe-area-inset-top) + 18px) 0 6px; }
+.brand-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+h1 { margin: 0; font: 800 30px/1 var(--font); letter-spacing: .01em; }
+.tools { display: flex; gap: 8px; }
 .tools button {
-  display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 12px;
-  background: rgba(255, 255, 255, .14); border: 0; border-radius: 99px; color: inherit; font-size: .9rem; font-weight: 500;
+  display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border-radius: 50%;
+  background: transparent; border: 2px solid var(--edge-strong); color: var(--soft);
 }
-.tools button.icon-only { padding: 0; width: 36px; justify-content: center; }
-.tools button:hover { background: rgba(255, 255, 255, .24); }
+.tools button:hover { color: var(--text); border-color: var(--soft); }
 .tools button:disabled { opacity: .5; cursor: progress; }
 
-.views { display: flex; gap: 4px; margin-top: 12px; overflow-x: auto; scrollbar-width: none; }
-.views::-webkit-scrollbar { display: none; }
-.views button {
-  flex: none; min-height: 38px; padding: 0 16px; border: 0; border-radius: 99px; background: transparent; color: rgba(255, 255, 255, .8);
-  font-weight: 500;
+.views {
+  display: flex; gap: 4px; margin-top: 16px; padding: 4px; border-radius: 999px;
+  background: var(--panel-flat); box-shadow: inset 0 0 0 1px var(--edge);
 }
-.views button:hover { color: #fff; }
-.views button.on { background: #fff; color: var(--shell); font-weight: 700; }
-.views .n:not(:empty) { font-size: .8em; margin-inline-start: 2px; }
+.views button {
+  flex: 1; min-height: 38px; padding: 0 6px; border: 0; border-radius: 999px; background: transparent;
+  color: var(--muted); font-weight: 700; font-size: .92rem; white-space: nowrap;
+  transition: background .25s var(--out), color .25s var(--out);
+}
+.views button:hover { color: var(--text); }
+.views button.on { background: var(--text); color: var(--panel-b); }
+:root[data-theme="light"] .views button.on { background: var(--text); color: #fff; }
 
 /* ---------- ליגות ---------- */
-.pages-bar { position: sticky; top: 0; z-index: 10; background: var(--ground); border-bottom: 1px solid var(--line); }
-.chips { display: flex; gap: 8px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+.pages-bar { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--ground) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.chips { display: flex; gap: 8px; overflow-x: auto; padding: 12px 0; scrollbar-width: none; }
 .chips::-webkit-scrollbar { display: none; }
 .chip {
-  flex: none; display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 0 14px;
-  background: var(--panel); border: 1px solid var(--line); border-radius: 10px; color: var(--text); font-weight: 500; white-space: nowrap;
+  flex: none; display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 14px;
+  background: transparent; border: 1px solid var(--edge-strong); border-radius: 999px; color: var(--soft);
+  font-weight: 700; font-size: .88rem; white-space: nowrap;
 }
-.chip .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c, var(--muted)); border: 1.5px solid #fff; }
-.chip .ct { color: var(--muted); font-size: .8rem; }
-.chip.on { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); font-weight: 700; }
-.chip.on .ct { color: var(--gold-ink); }
+.chip.on { background: var(--panel-a); border-color: var(--soft); color: var(--text); }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--c, var(--muted)); flex: none; }
 
-main { padding-bottom: 72px; }
-.status { color: var(--muted); font-size: .88rem; margin: 12px 0 4px; }
-
-/* ---------- רשימה ---------- */
-.day { margin: 24px 0 4px; font: 400 15px/1.3 var(--display); color: var(--muted); display: flex; align-items: center; gap: 12px; }
-.day::after { content: ""; flex: 1; height: 1px; background: var(--line); }
-
-.card { display: grid; grid-template-columns: 1fr auto; column-gap: 16px; row-gap: 4px; padding: 16px 0; border-bottom: 1px solid var(--line); }
-.card .stk { grid-column: 2; grid-row: 1 / span 5; align-self: start; }
-.card.read { opacity: .78; }
-.card.read h2 a { color: var(--muted); }
-.card.dup { padding-inline-start: 14px; }
-.card h2 { margin: 0; font: 400 19px/1.3 var(--display); text-wrap: balance; }
-.card h2 a { text-decoration: none; }
-.card h2 a:hover { text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 4px; text-decoration-thickness: 2px; }
-.meta { font-size: .82rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: center; }
-.meta .src { color: var(--text); font-weight: 700; }
-.tag { display: inline-flex; align-items: center; gap: 5px; }
-.tag .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--c, var(--muted)); border: 1.5px solid #fff; }
-.tag.cat { color: var(--gold-ink); background: var(--gold); border-radius: 5px; padding: 0 7px; font-weight: 700; font-size: .75rem; }
-.ai-tag { display: inline-flex; align-items: center; gap: 4px; margin-inline-end: 8px; color: var(--gold-text); font-size: .76rem; font-weight: 700; white-space: nowrap; }
-.ai-tag .ico { width: 13px; height: 13px; }
-.sum-he { margin: 4px 0 0; padding: 7px 10px; background: rgba(242, 194, 48, .12); border-radius: 8px; font-size: .96rem; }
-:root[data-theme="light"] .sum-he { background: rgba(242, 194, 48, .3); }
-.card .sum { margin: 2px 0 0; color: var(--muted); font-size: .9rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-mark { background: var(--mark); color: var(--gold-ink); border-radius: 3px; padding: 0 2px; }
-
-/* מדבקה: תמונה עם מסגרת חתוכה */
-.stk {
-  position: relative; display: block; width: 104px; height: 78px; padding: 0; background: var(--c, var(--panel-2));
-  border: 3px solid var(--sticker); border-radius: 10px; overflow: hidden; box-shadow: var(--sticker-shadow);
-}
-.stk img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.stk.tile { display: grid; place-items: center; padding: 6px; color: #fff; font: 400 14px/1.15 var(--display); text-align: center; }
-.stk.tile .plate { background: rgba(12, 20, 64, .88); border-radius: 6px; padding: 3px 8px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
-
-/* פעולות */
-.acts { grid-column: 1; display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-.acts button, .ai-btn, .tw-btn {
-  display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 11px;
-  background: transparent; border: 1px solid var(--line); border-radius: 8px; color: var(--muted); font-size: .84rem; font-weight: 500;
-}
-.acts button:hover, .ai-btn:hover, .tw-btn:hover { color: var(--text); border-color: var(--muted); }
-.acts button.on { background: var(--gold); border-color: var(--gold); color: var(--gold-ink); font-weight: 700; }
-.tw-btn, .ai-btn { color: var(--gold-text); border-color: rgba(242, 194, 48, .55); }
-:root[data-theme="light"] .tw-btn, :root[data-theme="light"] .ai-btn { border-color: #b58a00; }
-
-.also { grid-column: 1 / -1; margin: 8px 0 0; padding: 0; list-style: none; font-size: .87rem; }
-.also li { padding: 4px 0; color: var(--muted); }
-.also a { color: var(--text); }
-.more { display: block; margin: 28px auto 0; min-height: 44px; padding: 0 32px; border-radius: 99px; background: var(--panel); border: 1px solid var(--line); font-weight: 500; }
-
-/* ---------- Claude: פאנלים, מושג שבועי, ציוצים ---------- */
-.ai-wrap { padding: 2px 0 8px; border-bottom: 1px solid var(--line); }
-.ai-panel { margin-top: 8px; padding: 14px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); font-size: .94rem; }
-.ai-panel h4 { margin: 12px 0 2px; font: 400 16px/1.3 var(--display); }
-.ai-panel h4:first-child { margin-top: 0; }
-.ai-panel p { margin: 4px 0; }
-.ai-panel ul { margin: 6px 0; padding-inline-start: 20px; }
-.ai-panel .pt strong { font-family: var(--display); font-weight: 400; color: var(--gold-text); }
+/* ---------- טקסטים כלליים ---------- */
+main { padding-bottom: 80px; }
+.status { color: var(--soft); font-size: .86rem; margin: 6px 0 2px; }
+.sec { margin: 26px 0 4px; font: 800 22px/1.2 var(--font); }
+.day { margin: 20px 0 6px; font-weight: 800; font-size: .95rem; color: var(--soft); }
+.tag { display: inline-flex; align-items: center; gap: 6px; }
+.meta { font-size: .8rem; font-weight: 600; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; }
+.meta .src { color: var(--text); font-weight: 800; }
 .caveat { color: var(--muted); font-size: .86rem; }
 .ai-note { color: var(--muted); font-size: .76rem; margin-top: 10px; }
-.tweets { grid-column: 1 / -1; margin-top: 10px; display: grid; gap: 10px; }
-.ai-panel .tweets, .concept .tweets, .an .tweets { margin-top: 12px; }
-.angle { background: var(--panel-2); border-radius: var(--radius); padding: 12px; }
-.tw-text { width: 100%; resize: vertical; background: var(--ground); border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px; line-height: 1.5; }
-.tw-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
-.tw-row button, .tw-open {
-  display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 0 14px; background: var(--gold); color: var(--gold-ink);
-  border: 0; border-radius: 8px; font-size: .86rem; font-weight: 700; text-decoration: none;
+
+/* כרטיס מואר: הבסיס של כל משטח */
+.match, .an, .pv, .concept, .card, .tbl-wrap, .ai-wrap {
+  background: linear-gradient(180deg, var(--panel-a), var(--panel-b));
+  box-shadow: inset 0 0 0 1px var(--edge);
 }
-.tw-count { margin-inline-start: auto; font-size: .8rem; color: var(--muted); }
-.tw-count.over { color: var(--live); font-weight: 700; }
-.tw-why, .tw-verify { margin: 8px 0 0; font-size: .86rem; color: var(--muted); }
-.tw-verify { color: var(--text); }
-
-
-/* ---------- ניתוחים ---------- */
-body[data-view="concepts"] .pages-bar { display: none; }
-.an { padding: 18px 0; border-bottom: 1px solid var(--line); }
-.an .meta { margin-bottom: 8px; }
-.score { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); font: 400 18px/1.2 var(--display); }
-.score .side { flex: 1; min-width: 0; }
-.score .side.end { text-align: left; }
-.score .res { flex: none; display: flex; gap: 8px; font-size: 26px; color: var(--gold-text); }
-.score .res b { font-weight: 400; }
-.score .res i { font-style: normal; opacity: .7; }
-.an h2 { margin: 12px 0 4px; font: 400 21px/1.3 var(--display); text-wrap: balance; }
-.an-sum { margin: 0; font-size: 1rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
-.an.open .an-sum { display: block; }
-.an-more { margin-top: 10px; padding: 12px 14px; background: var(--panel); border-radius: var(--radius); font-size: .96rem; line-height: 1.55; }
-.an-more ul { margin: 0 0 8px; padding-inline-start: 20px; }
-.an-more li + li { margin-top: 6px; }
-.pv { margin-top: 8px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); }
-.pv-head { display: flex; flex-direction: column; gap: 2px; width: 100%; padding: 12px 14px; background: none; border: 0; text-align: start; }
-.pv-title { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
-.pv-title strong { font: 400 18px/1.25 var(--display); }
-.pv-when { flex: none; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
-.pv-line { font-size: .92rem; color: var(--muted); }
-.pv-body { padding: 0 14px 12px; font-size: .95rem; }
-.pv-body p { margin: 2px 0 10px; }
-.pv-body strong { font-family: var(--display); font-weight: 400; color: var(--gold-text); }
-.concept { margin: 14px 0; padding: 16px; background: var(--panel); border: 1.5px solid var(--gold); border-radius: 14px; }
-.concept h2 { margin: 0 0 8px; font: 400 23px/1.25 var(--display); }
-.concept h4 { margin: 14px 0 2px; font: 400 17px/1.3 var(--display); color: var(--gold-text); }
-.concept p { margin: 4px 0; line-height: 1.6; }
-
-/* מגרש עם המערכים */
-.pitch-wrap { margin: 12px 0 4px; }
-.pitch { display: block; width: 100%; height: auto; background: #123a2a; border-radius: var(--radius); }
-.pitch .pl { fill: none; stroke: rgba(255, 255, 255, .28); stroke-width: .6; }
-.pitch .ph { fill: var(--gold); stroke: #fff; stroke-width: .7; }
-.pitch .pa { fill: #fff; stroke: var(--shell); stroke-width: .7; }
-.pitch text { text-anchor: middle; font-family: var(--body); font-variant-numeric: tabular-nums; }
-.pitch .nh { fill: var(--gold-ink); font-size: 5.2px; font-weight: 700; }
-.pitch .na { fill: var(--shell); font-size: 5.2px; font-weight: 700; }
-.pitch .pn { fill: rgba(255, 255, 255, .9); font-size: 3.9px; }
-.pitch-wrap figcaption { display: flex; justify-content: space-between; gap: 12px; margin-top: 6px; font-size: .8rem; color: var(--muted); }
-.pitch-wrap .fc { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-.pitch-wrap .fc b { color: var(--text); font-size: .95rem; font-variant-numeric: tabular-nums; }
-.pitch-wrap .fc-team { color: var(--text); }
-.pitch-wrap .fc-coach { font-size: .76rem; }
-.pitch-wrap .fc.a { align-items: flex-end; text-align: left; }
-.lesson { margin-top: 10px; padding: 12px 14px; background: var(--panel); border: 1.5px solid var(--gold); border-radius: var(--radius); }
-.lesson-k { display: block; font-size: .78rem; font-weight: 700; color: var(--gold-text); }
-.lesson strong { display: block; margin: 2px 0 4px; font: 400 18px/1.3 var(--display); }
-.lesson p { margin: 0; line-height: 1.6; }
-.an-body h4 { margin: 14px 0 2px; font: 400 16px/1.3 var(--display); }
-.an-body p { margin: 4px 0; line-height: 1.6; }
-.phases { margin: 6px 0; padding: 0; list-style: none; }
-.phases li { display: flex; gap: 10px; padding: 6px 0; line-height: 1.55; }
-.phases .min { flex: none; min-width: 2.6em; color: var(--gold-text); font-variant-numeric: tabular-nums; }
 
 /* ---------- משחקים ---------- */
-.sec { margin: 26px 0 2px; font: 400 20px/1.2 var(--display); }
-.lg { margin: 14px 0 2px; font-size: .82rem; font-weight: 700; color: var(--muted); display: flex; align-items: center; gap: 7px; }
-.lg .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c, var(--muted)); border: 1.5px solid #fff; }
-.match { display: grid; grid-template-columns: 52px 1fr auto 1fr; align-items: center; gap: 8px; min-height: 52px; padding: 8px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
-a.match:hover { background: var(--panel); }
-.match .when { color: var(--muted); font-size: .82rem; }
-.match .when.live { color: var(--live); font-weight: 700; }
-.match .team { display: flex; align-items: center; gap: 8px; min-width: 0; }
-.match .team.away { justify-content: flex-end; flex-direction: row-reverse; }
-.match .team img, .tbl img { width: 22px; height: 22px; object-fit: contain; flex: none; }
-.match .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
-.match .mid { display: flex; gap: 6px; align-items: center; justify-content: center; min-width: 72px; font: 400 20px/1 var(--display); }
-.match .dash { color: var(--muted); font: 400 .8rem var(--body); }
+.match { display: block; margin-top: 10px; padding: 12px 16px 14px; border-radius: var(--radius); text-decoration: none; }
+.match:has(+ .ai-wrap) { border-radius: var(--radius) var(--radius) 0 0; }
+a.match:hover { box-shadow: inset 0 0 0 1px var(--edge-strong); }
+.mmeta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: .78rem; font-weight: 700; color: var(--muted); }
+.mmeta .st { margin-inline-start: auto; color: var(--soft); }
+.mmeta .st.live { color: var(--live); }
+.mline { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; margin-top: 8px; }
+.match .team { display: flex; align-items: center; gap: 8px; min-width: 0; font-weight: 800; font-size: 1rem; line-height: 1.25; }
+.match .team.away { flex-direction: row-reverse; text-align: left; }
+.match .team img, .tbl img { width: 24px; height: 24px; object-fit: contain; flex: none; }
+.match .nm { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.match .mid { display: flex; gap: 8px; align-items: center; justify-content: center; min-width: 84px; font: 800 34px/1 var(--font); }
+.match .dash { color: var(--muted); font: 700 .85rem var(--font); }
 .match .sc { min-width: 1ch; text-align: center; }
-.tbl-wrap { overflow-x: auto; }
+
+.ai-wrap { margin-top: -1px; padding: 0 14px 14px; border-radius: 0 0 var(--radius) var(--radius); }
+.ai-btn {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 0 16px;
+  background: transparent; border: 1px solid var(--edge-strong); border-radius: 999px; color: var(--soft); font-weight: 700; font-size: .86rem;
+}
+.ai-btn:hover { color: var(--text); border-color: var(--soft); }
+.ai-panel { margin-top: 12px; }
+.ai-panel h4, .an-body h4 { margin: 16px 0 4px; font: 800 17px/1.3 var(--font); }
+.ai-panel h4:first-child { margin-top: 0; }
+.ai-panel p, .an-body p { margin: 4px 0; line-height: 1.65; }
+
+/* ---------- המגרש המואר: חתימת העולם ---------- */
+.pitch-wrap { margin: 12px 0 4px; }
+.pitch { display: block; width: 100%; height: auto; border-radius: 16px;
+  background: linear-gradient(180deg, rgba(238, 242, 255, .12), transparent 38%), radial-gradient(70% 70% at 50% 50%, var(--pitch-a), var(--pitch-b)); }
+:root[data-theme="light"] .pitch { --pitch-a: #1d3fb0; --pitch-b: #0f2470; }
+.pitch .pl { fill: none; stroke: rgba(201, 212, 255, .35); stroke-width: 1.2; }
+.pitch .ph { fill: #eef2ff; }
+.pitch .pa { fill: #3f6bff; stroke: #c9d4ff; stroke-width: 1; }
+.pitch text { text-anchor: middle; font-family: var(--font); font-variant-numeric: tabular-nums; }
+.pitch .nh { fill: #0a1b6e; font-size: 9.5px; font-weight: 800; }
+.pitch .na { fill: #fff; font-size: 9.5px; font-weight: 800; }
+.pitch .pn { fill: rgba(238, 242, 255, .85); font-size: 6.6px; font-weight: 600; }
+/* השחקנים יוצאים מנקודת האמצע אל המקום שלהם, שורה אחרי שורה */
+.pitch .pd { animation: walkout .7s var(--out) both; animation-delay: var(--d, 0s); filter: drop-shadow(0 3px 2px rgba(0, 0, 0, .45)); }
+@keyframes walkout { from { transform: translate(var(--dx), var(--dy)) scale(.4); opacity: 0; } }
+.pitch-wrap figcaption { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; font-size: .82rem; color: var(--soft); }
+.pitch-wrap .fc { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.pitch-wrap .fc b { color: var(--text); font-size: 1.05rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.pitch-wrap .fc-team { color: var(--text); font-weight: 700; }
+.pitch-wrap .fc-coach { font-size: .76rem; color: var(--muted); }
+.pitch-wrap .fc.a { align-items: flex-end; text-align: left; }
+
+.phases { margin: 6px 0; padding: 0; list-style: none; }
+.phases li { display: flex; gap: 12px; padding: 7px 0; line-height: 1.55; border-bottom: 1px solid var(--edge); }
+.phases li:last-child { border-bottom: 0; }
+.phases .min { flex: none; min-width: 2.7em; height: 1.7em; display: grid; place-items: center; border-radius: 999px; background: var(--electric); color: #fff; font-weight: 800; font-size: .8rem; }
+
+/* ---------- ניתוחים ---------- */
+.an { margin-top: 10px; padding: 16px; border-radius: var(--radius); }
+.an .meta { margin-bottom: 10px; }
+.score { display: flex; align-items: center; justify-content: space-between; gap: 12px; font: 800 19px/1.2 var(--font); }
+.score .side { flex: 1; min-width: 0; }
+.score .side.end { text-align: left; }
+.score .res { flex: none; display: flex; gap: 8px; font-size: 34px; }
+.score .res i { font-style: normal; color: var(--muted); }
+.an h2 { margin: 12px 0 2px; font: 800 20px/1.35 var(--font); text-wrap: balance; }
+.an-sum { margin: 0; line-height: 1.65; }
+.lesson { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--edge-strong); }
+.lesson strong { display: block; margin-bottom: 4px; font: 800 18px/1.3 var(--font); color: var(--soft); }
+.lesson p { margin: 0; line-height: 1.65; }
+.acts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.acts button {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px;
+  background: transparent; border: 1px solid var(--edge-strong); border-radius: 999px; color: var(--soft); font-weight: 700; font-size: .86rem;
+}
+.acts button:hover { color: var(--text); border-color: var(--soft); }
+
+.pv { margin-top: 8px; border-radius: 18px; }
+.pv-head { display: flex; flex-direction: column; gap: 2px; width: 100%; padding: 14px 16px; background: none; border: 0; text-align: start; }
+.pv-title { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.pv-title strong { font-weight: 800; font-size: 1.05rem; }
+.pv-when { flex: none; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pv-line { font-size: .92rem; color: var(--soft); }
+.pv-body { padding: 0 16px 14px; }
+.pv-body p { margin: 2px 0 10px; }
+.pv-body strong, .ai-panel .pt strong { font-weight: 800; color: var(--soft); }
+
+/* ---------- מושגים ---------- */
+.concept { margin: 14px 0; padding: 18px; border-radius: var(--radius); box-shadow: inset 0 0 0 1px rgba(63, 107, 255, .55); }
+.concept h2 { margin: 0 0 8px; font: 800 23px/1.25 var(--font); }
+.concept h4 { margin: 16px 0 2px; font-weight: 800; color: var(--soft); }
+.concept p { margin: 4px 0; line-height: 1.65; }
+
+/* ---------- מאמרים ---------- */
+.card { display: grid; grid-template-columns: 1fr auto; column-gap: 14px; row-gap: 4px; margin-top: 8px; padding: 14px; border-radius: var(--radius); }
+.card .stk { grid-column: 2; grid-row: 1 / span 5; align-self: start; }
+.card h2 { margin: 0; font: 800 17px/1.35 var(--font); text-wrap: balance; }
+.card h2 a { text-decoration: none; }
+.card h2 a:hover { text-decoration: underline; text-decoration-color: var(--electric); text-underline-offset: 4px; }
+.stk { position: relative; display: block; width: 92px; height: 92px; border-radius: 50%; overflow: hidden; background: var(--c, var(--panel-a)); box-shadow: 0 0 0 2px var(--edge-strong), 0 6px 14px rgba(0, 0, 0, .35); }
+.stk img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.stk.tile { display: grid; place-items: center; padding: 8px; text-align: center; color: #fff; font-weight: 800; font-size: .8rem; }
+.stk.tile .plate { background: rgba(6, 11, 46, .8); border-radius: 999px; padding: 3px 8px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sum { margin: 2px 0 0; color: var(--muted); font-size: .9rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.sum-he { margin: 6px 0 0; padding: 8px 12px; border-radius: 14px; background: rgba(63, 107, 255, .14); font-size: .95rem; }
+.ai-tag { display: inline-flex; align-items: center; gap: 4px; margin-inline-end: 8px; color: var(--soft); font-size: .76rem; font-weight: 800; white-space: nowrap; }
+.ai-tag .ico { width: 13px; height: 13px; }
+
+/* ---------- טבלאות ---------- */
+.tbl-wrap { margin-top: 12px; padding: 4px 14px 10px; border-radius: var(--radius); overflow-x: auto; }
+.tbl-wrap .sec { margin: 12px 2px 6px; font-size: 18px; }
 .tbl { width: 100%; border-collapse: collapse; font-size: .92rem; }
-.tbl th { color: var(--muted); font-weight: 500; font-size: .76rem; text-align: center; padding: 6px; border-bottom: 1px solid var(--line); }
-.tbl td { padding: 8px 6px; text-align: center; border-bottom: 1px solid var(--line); }
+.tbl th { color: var(--muted); font-weight: 700; font-size: .74rem; text-align: center; padding: 6px; border-bottom: 1px solid var(--edge); }
+.tbl td { padding: 9px 6px; text-align: center; border-bottom: 1px solid var(--edge); }
+.tbl tr:last-child td { border-bottom: 0; }
 .tbl .t { text-align: start; width: 100%; }
-.tbl td.t { display: flex; align-items: center; gap: 8px; }
+.tbl td.t { font-weight: 700; }
+.tbl .tcell { display: flex; align-items: center; gap: 8px; }
 .tbl th.t { text-align: start; }
 .tbl .r { color: var(--muted); width: 1%; }
-.tbl .p { font: 400 17px/1 var(--display); }
+.tbl .p { font-weight: 800; font-size: 1.05rem; }
 
-/* ---------- רספונסיבי ---------- */
+.more { display: block; margin: 28px auto 0; min-height: 44px; padding: 0 32px; border-radius: 999px; background: transparent; border: 1px solid var(--edge-strong); color: var(--soft); font-weight: 700; }
+
+/* ---------- טלפון ---------- */
 @media (max-width: 560px) {
   h1 { font-size: 27px; }
-  .views { gap: 0; }
-  .views button { padding: 0 8px; font-size: .9rem; }
-  .card h2 { font-size: 18px; }
-  .stk { width: 92px; height: 70px; }
-  .match { grid-template-columns: 44px 1fr auto 1fr; gap: 6px; font-size: .9rem; }
-  .match .team img { width: 18px; height: 18px; }
-  .match .mid { font-size: 18px; min-width: 60px; }
+  .views button { font-size: .84rem; padding: 0 2px; }
+  .match .team { font-size: .92rem; }
+  .match .mid { min-width: 72px; }
+  .match .team img { width: 20px; height: 20px; }
   .tbl .x { display: none; }
-  .acts button, .ai-btn, .tw-btn { min-height: 40px; }
+  .stk { width: 76px; height: 76px; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; }
+  .pitch .pd { animation: none; }
 }

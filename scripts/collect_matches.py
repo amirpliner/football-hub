@@ -21,7 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import collect  # noqa: E402  (משתמשים באותו Matcher ו-UA)
 
-DAYS_BACK = 4
+DAYS_BACK = 10   # מספיק כדי שהמחזור האחרון יישאר גלוי גם בפגרת נבחרות
 DAYS_AHEAD = 10
 OUT_PATH = collect.DATA_DIR / "matches.json"
 LEAGUE_URL = "https://www.fotmob.com/api/data/leagues?id={id}"
