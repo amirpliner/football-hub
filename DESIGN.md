@@ -1,251 +1,267 @@
 ---
 name: מגרש (Magrash)
-description: A Hebrew RTL football tactics and analysis app, with sticker-album material on a calm reading column.
+description: A Hebrew RTL football tactics app set on a European night under floodlights; formations glow on the pitch as discs.
 colors:
-  ultramarine-shell: "#1f3bd6"
-  ink-navy-ground: "#0c1440"
-  panel-navy: "#131e5b"
-  panel-navy-raised: "#1a2776"
-  text-ice: "#f2f4ff"
-  muted-periwinkle: "#a9b6ff"
-  foil-gold: "#f2c230"
-  gold-ink: "#0c1440"
-  sticker-white: "#ffffff"
-  live-coral: "#ff6b5e"
-  light-ground: "#eef1ff"
-  light-panel: "#ffffff"
-  light-panel-raised: "#e3e8ff"
-  light-text-ink: "#0c1440"
-  light-muted: "#3a4799"
-  light-gold-text: "#7a5600"
-  light-live-red: "#c2271a"
+  midnight-ground: "#060b2e"
+  floodlight-bloom: "#1b3fa8"
+  lit-panel-top: "#0f1d66"
+  lit-panel-base: "#0a1347"
+  flat-panel: "#0c1854"
+  hairline-edge: "rgba(201, 212, 255, .18)"
+  strong-edge: "rgba(201, 212, 255, .42)"
+  ice-text: "#eef2ff"
+  periwinkle-soft: "#c9d4ff"
+  periwinkle-muted: "#8ea0e6"
+  electric-blue: "#3f6bff"
+  electric-ink: "#ffffff"
+  live-coral: "#ff6b6b"
+  pitch-centre: "#16308f"
+  pitch-edge: "#0b1756"
+  day-ground: "#e9eeff"
+  day-bloom: "#c3d0ff"
+  day-panel: "#ffffff"
+  day-panel-base: "#f3f6ff"
+  day-text: "#0a1b6e"
+  day-soft: "#2a3f9e"
+  day-muted: "#4a5aa0"
+  day-electric: "#2d55f0"
+  day-live: "#c62828"
 typography:
   display:
-    fontFamily: "Secular One, Arial Hebrew, Heebo, system-ui, sans-serif"
+    fontFamily: "Assistant, Arial Hebrew, system-ui, -apple-system, Segoe UI, Arial, sans-serif"
     fontSize: "30px"
-    fontWeight: 400
+    fontWeight: 800
     lineHeight: 1
     letterSpacing: "0.01em"
+  score:
+    fontFamily: "Assistant, Arial Hebrew, system-ui, sans-serif"
+    fontSize: "34px"
+    fontWeight: 800
+    lineHeight: 1
+    fontFeature: "tabular-nums"
   headline:
-    fontFamily: "Secular One, Arial Hebrew, Heebo, system-ui, sans-serif"
-    fontSize: "19px"
-    fontWeight: 400
-    lineHeight: 1.3
+    fontFamily: "Assistant, Arial Hebrew, system-ui, sans-serif"
+    fontSize: "22px"
+    fontWeight: 800
+    lineHeight: 1.2
   title:
-    fontFamily: "Secular One, Arial Hebrew, Heebo, system-ui, sans-serif"
-    fontSize: "15px"
-    fontWeight: 400
-    lineHeight: 1.3
+    fontFamily: "Assistant, Arial Hebrew, system-ui, sans-serif"
+    fontSize: "17px"
+    fontWeight: 800
+    lineHeight: 1.35
   body:
-    fontFamily: "Heebo, system-ui, -apple-system, Segoe UI, Arial, sans-serif"
+    fontFamily: "Assistant, Arial Hebrew, system-ui, -apple-system, Segoe UI, Arial, sans-serif"
     fontSize: "16px"
-    fontWeight: 400
+    fontWeight: 500
     lineHeight: 1.5
   label:
-    fontFamily: "Heebo, system-ui, -apple-system, Segoe UI, Arial, sans-serif"
-    fontSize: "0.82rem"
-    fontWeight: 500
+    fontFamily: "Assistant, Arial Hebrew, system-ui, sans-serif"
+    fontSize: "0.8rem"
+    fontWeight: 700
     lineHeight: 1.5
     fontFeature: "tabular-nums"
 rounded:
-  xs: "4px"
-  sm: "8px"
-  md: "10px"
-  lg: "12px"
-  xl: "16px"
-  pill: "99px"
+  inset: "14px"
+  pitch: "16px"
+  preview: "18px"
+  panel: "22px"
+  pill: "999px"
 spacing:
   xs: "4px"
   sm: "8px"
   md: "12px"
   lg: "16px"
-  xl: "24px"
 components:
-  tab-view:
-    backgroundColor: "transparent"
-    textColor: "{colors.sticker-white}"
+  view-switch:
+    backgroundColor: "{colors.flat-panel}"
     rounded: "{rounded.pill}"
-    padding: "0 16px"
+    padding: "4px"
+  view-tab:
+    backgroundColor: "transparent"
+    textColor: "{colors.periwinkle-muted}"
+    rounded: "{rounded.pill}"
+    padding: "0 6px"
     height: "38px"
-  tab-view-active:
-    backgroundColor: "{colors.sticker-white}"
-    textColor: "{colors.ultramarine-shell}"
+  view-tab-active:
+    backgroundColor: "{colors.ice-text}"
+    textColor: "{colors.lit-panel-base}"
   chip-league:
-    backgroundColor: "{colors.panel-navy}"
-    textColor: "{colors.text-ice}"
-    rounded: "{rounded.md}"
+    backgroundColor: "transparent"
+    textColor: "{colors.periwinkle-soft}"
+    rounded: "{rounded.pill}"
     padding: "0 14px"
     height: "36px"
   chip-league-active:
-    backgroundColor: "{colors.foil-gold}"
-    textColor: "{colors.gold-ink}"
-  button-action:
+    backgroundColor: "{colors.lit-panel-top}"
+    textColor: "{colors.ice-text}"
+  button-outline:
     backgroundColor: "transparent"
-    textColor: "{colors.muted-periwinkle}"
-    rounded: "{rounded.sm}"
-    padding: "0 11px"
-    height: "32px"
-  button-action-on:
-    backgroundColor: "{colors.foil-gold}"
-    textColor: "{colors.gold-ink}"
-  button-primary:
-    backgroundColor: "{colors.foil-gold}"
-    textColor: "{colors.gold-ink}"
-    rounded: "{rounded.sm}"
-    padding: "0 14px"
-    height: "34px"
-  input-field:
-    backgroundColor: "{colors.panel-navy}"
-    textColor: "{colors.text-ice}"
-    rounded: "{rounded.md}"
-    padding: "0 12px"
+    textColor: "{colors.periwinkle-soft}"
+    rounded: "{rounded.pill}"
+    padding: "0 16px"
     height: "40px"
-  sticker:
-    backgroundColor: "{colors.panel-navy-raised}"
-    rounded: "{rounded.md}"
-    width: "104px"
-    height: "78px"
-  concept-panel:
-    backgroundColor: "{colors.panel-navy}"
-    rounded: "14px"
-  ai-panel:
-    backgroundColor: "{colors.panel-navy}"
-    textColor: "{colors.text-ice}"
-    rounded: "{rounded.lg}"
-    padding: "14px"
-  album-slot:
-    rounded: "{rounded.xs}"
-    width: "20px"
-    height: "27px"
+  button-icon:
+    backgroundColor: "transparent"
+    textColor: "{colors.periwinkle-soft}"
+    rounded: "{rounded.pill}"
+    width: "40px"
+    height: "40px"
+  lit-panel:
+    backgroundColor: "{colors.lit-panel-top}"
+    textColor: "{colors.ice-text}"
+    rounded: "{rounded.panel}"
+    padding: "16px"
+  match-card:
+    backgroundColor: "{colors.lit-panel-top}"
+    textColor: "{colors.ice-text}"
+    typography: "{typography.score}"
+    rounded: "{rounded.panel}"
+    padding: "12px 16px 14px"
+  player-disc-home:
+    backgroundColor: "{colors.ice-text}"
+    textColor: "{colors.day-text}"
+    rounded: "{rounded.pill}"
+    size: "20px"
+  player-disc-away:
+    backgroundColor: "{colors.electric-blue}"
+    textColor: "{colors.electric-ink}"
+    rounded: "{rounded.pill}"
+    size: "20px"
+  minute-pill:
+    backgroundColor: "{colors.electric-blue}"
+    textColor: "{colors.electric-ink}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
 ---
 
 # Design System: מגרש (Magrash)
 
 ## Overview
 
-**Creative North Star: "The Sticker Album, reading edition"**
+**Creative North Star: "European Nights" (לילות אירופה)**
 
-The app became tactics-only: the news feed, video, watchlist and the daily album tally were removed on the user's decision. Tally rules below no longer apply; stickers, palette, type and gold discipline remain.
+The app is a stadium lit from above at night. A midnight-navy ground carries a soft floodlight bloom that falls from the top of the viewport and stays fixed while the content scrolls; every surface below it is a lit panel, a vertical gradient from a brighter navy at the top to a deeper one at the base, outlined by a single periwinkle hairline. Formations are the signature: on the pitch both teams appear as round discs, home in ice white and away in electric blue, and when a lineup opens they walk out from the centre spot to their positions, line by line.
 
-Reading is collecting. A saturated ultramarine shell holds the site name, view tabs and a per-day tally of dashed slots; below it an ink-navy ground carries a quiet, ruled list of articles. Each article owns a white-bordered, die-cut sticker thumbnail, and each item read fills one slot in the tally with a mini sticker in its league's colour. The loud colour lives in the shell, the stickers and the gold foil; the reading surface stays calm so Hebrew titles scan fast on a phone.
-
-The system is dense but not cramped: hairline-ruled rows instead of cards-in-boxes, a single 860px reading column, 16px side padding. Gold foil is the only progress and active-state colour, so wherever gold appears it means "you are here" or "this is done". There are two themes, dark (default) and light, that share the shell, the gold and the stickers and swap only ground, panels, text and the two text-on-gold-sensitive tones.
+Colour is disciplined. Everything is blue: ground, panels, text tints, league dots. Electric blue is the only saturated hue and means "active" or "the away side"; coral appears only for a live match state. Type is a single family, Assistant, held mostly at 700 to 800, so headings, scores and labels share one confident voice and Hebrew with mixed Latin names stays legible on a phone. A day theme keeps the same world in daylight: pale blue ground, white panels, navy text, while the pitch itself stays a night pitch.
 
 **Key Characteristics:**
-- Ultramarine shell over ink-navy ground; gold foil reserved for active, progress, primary action.
-- White 3px die-cut border on every sticker; league identity carried by a coloured dot with a white ring.
-- Secular One for titles, scores and numerals-as-display; Heebo for everything else; tabular figures on all numbers.
-- RTL by default; layout uses logical properties (inline-start/end).
-- Drawn SVG icons at one stroke weight (1.75) inheriting currentColor.
+- Midnight ground with a fixed floodlight bloom; lit gradient panels with a 1px inset hairline instead of borders or drop shadows.
+- One saturated colour (electric blue); league identity carried by small dots drawn only from the world's blue scale.
+- Assistant only, 500 to 800, tabular figures on every number.
+- Pills for every control: segmented view switcher, outlined league chips, outlined actions, round icon buttons.
+- Player discs on a lit pitch, with a staggered walkout from the centre spot.
+- RTL by default; layout uses logical properties.
 
 ## Colors
 
-A blue-on-blue field with one metallic accent; league colours appear only as small swatches and sticker fills.
+A blue-on-blue night with one electric accent; nothing outside the blue scale except the live state.
 
 ### Primary
-- **Ultramarine Shell** (#1f3bd6): the top band, the theme-color, and the active-tab text colour on white. Same in both themes.
-- **Foil Gold** (#f2c230): active league chip, on-state action buttons, primary buttons, the full-day tally, hover underline on titles, focus ring, selection, caret and accent-color, search highlights.
+- **Electric Blue** (electric-blue; day theme day-electric): active and selected accent, the away team's discs, the substitution minute pill, caret, selection, accent-color, the title-hover underline, and the concept panel's ring at 55% alpha. Translucent at 14% it tints the Hebrew summary block in articles.
 
 ### Secondary
-- **Live Coral** (#ff6b5e, light theme #c2271a): live match minute and over-limit tweet counter only.
+- **Live Coral** (live-coral; day theme day-live): the status of a match in progress. Nothing else.
 
 ### Neutral
-- **Ink-Navy Ground** (#0c1440; light #eef1ff): page background and sticky league bar.
-- **Panel Navy** (#131e5b; light #ffffff): chips, inputs, AI panels, concept box, dialogs.
-- **Raised Panel Navy** (#1a2776; light #e3e8ff): sticker placeholder, keyword pills, tweet angle blocks, scrollbar thumb.
-- **Ice Text** (#f2f4ff; light #0c1440): primary text.
-- **Muted Periwinkle** (#a9b6ff; light #3a4799): meta lines, read-item titles, secondary buttons, hints.
-- **Sticker White** (#ffffff): sticker borders, tally slot borders, dot rings, the active view tab.
-- **Gold Text** (#f2c230; light #7a5600): gold used as text or outline on panels, darkened in light theme for contrast.
-- **Hairline** (rgba(169,182,255,.22); light rgba(12,20,64,.16)): all row rules and borders.
+- **Midnight Ground** (midnight-ground): page background and theme-color; the sticky league bar is the ground at 88% with a 10px backdrop blur.
+- **Floodlight Bloom** (floodlight-bloom): a radial glow (90% by 420px, centred 60px above the top edge, fading out by 72%) fixed to the viewport.
+- **Lit Panel** (lit-panel-top to lit-panel-base): the 180deg gradient on every content surface: match cards, AI panels, analyses, previews, concepts, article cards, tables.
+- **Flat Panel** (flat-panel): the track of the view switcher.
+- **Hairline Edge** and **Strong Edge** (periwinkle at 18% and 42%): panel outlines, row rules, outlined control borders, the lesson rule; strong edge on hover and on outlined controls.
+- **Ice Text** (ice-text): primary text, the active view tab fill, the home team's discs.
+- **Periwinkle Soft** (periwinkle-soft): secondary text, control labels, lesson and sub-heads, focus ring.
+- **Periwinkle Muted** (periwinkle-muted): meta lines, table headers, idle view tabs, dashes between scores.
+- **Night Pitch** (pitch-centre to pitch-edge): radial pitch turf; in day theme the pitch deepens to #1d3fb0 / #0f2470 so it remains a lit night pitch.
 
-### League swatches
-Ten league colours are assigned in js/app.js (israel #3aa0ff, premier league #a259ff, la liga #ffb01f, serie a #19a35b, bundesliga #e63a2e, ligue 1 #25c9e8, championship #ff5fa2, liga portugal #0fbf9a, eredivisie #ff6f3c, champions league #8fa6ff) and injected as `--c`. They are data, not UI chrome.
+### League dots
+Seven league colours in js/app.js, all taken from the world's own blue scale (ice, periwinkle, electric and its tints #7f9dff, #5d84ff, #2f56e0, #a9bcff), injected as `--c` on a 9px dot.
 
 ### Named Rules
-**The Foil Rule.** Gold means active, progress or primary action; nothing decorative is gold. Gold text on light panels uses the darker #7a5600.
-**The League Dot Rule.** League identity is a small dot or sticker fill with a white ring, never a coloured card, border-left stripe or full-row tint.
+**The One Light Rule.** Electric blue is the only saturated colour. It marks active state, the away side and substitution minutes; coral is reserved for live.
+**The Blue Scale Rule.** League identity is a small dot in a blue from the world's own scale; never a rainbow swatch, a coloured card, a side stripe or a row tint.
 
 ## Typography
 
-**Display Font:** Secular One (with Arial Hebrew, Heebo, system-ui)
-**Body Font:** Heebo (with system-ui, Segoe UI, Arial)
+**Display Font:** Assistant (with Arial Hebrew, system-ui, Segoe UI, Arial)
+**Body Font:** Assistant, the same family
 
-**Character:** Secular One gives titles and scores a chunky, sticker-label voice; Heebo keeps running Hebrew and Latin text neutral and legible. Both load from Google Fonts.
+**Character:** One humanist sans at heavy weights. 800 gives the brand, scores and headings a floodlit, stadium-board weight; 500 keeps running Hebrew calm. Loaded from Google Fonts at 500, 600, 700 and 800.
 
 ### Hierarchy
-- **Display** (400, 30px / 27px under 560px, line-height 1, +0.01em): site name in the shell.
-- **Headline** (400, 20px, 1.2; card titles 19px / 18px mobile, 1.3, balanced wrapping): section headings and article titles.
-- **Title** (400, 15-18px, 1.3): day dividers, tally count, concept head, AI panel sub-heads.
-- **Body** (400, 16px, 1.5): base text; summaries 0.9-0.96rem.
-- **Label** (500/700, 0.76-0.88rem): meta lines, action buttons, table headers, tag text. Score digits use Secular One 20px.
+- **Display** (800, 30px / 27px under 560px, line-height 1, +0.01em): the site name.
+- **Score** (800, 34px, line-height 1, tabular): match card and analysis scores.
+- **Headline** (800, 20 to 23px, 1.2 to 1.35, balanced wrap): section heads (22px), analysis titles (20px), concept titles (23px).
+- **Title** (800, 17 to 19px, 1.3 to 1.35): article titles, AI panel sub-heads, the lesson heading (18px), analysis team row (19px).
+- **Body** (500, 16px, 1.5; reading paragraphs at 1.65): base text.
+- **Label** (600 to 800, 0.76 to 0.92rem): meta lines, chips, view tabs, buttons, table headers, figcaptions.
 
 ### Named Rules
-**The Tabular Rule.** Every score, time, count and table number uses tabular figures.
-**The Two-Face Rule.** Secular One only for titles, scores, counts and headings; Heebo for all interface text. No third family.
+**The One Family Rule.** Assistant for everything; hierarchy comes from weight and size, not from a second face.
+**The Tabular Rule.** Scores, times, minutes, formations and table numbers all use tabular figures.
 
 ## Layout
 
-A single centred column, max-width 860px with 16px inline padding. The shell band is full-bleed, followed by a sticky bar (league chips plus a compact mini-tally that appears once scrolled). Article rows are a two-column grid: text at the inline start, sticker at the inline end (104x78, video 128x84; 92x70 and 112x74 under 560px). Match rows use a 52px / 1fr / auto / 1fr grid; tables scroll horizontally. Spacing rhythm: 4, 8, 12, 16, 24px, with 16px row padding and 24px day-divider top margin. Breakpoints: 700px (filters collapse behind a toggle), 560px (smaller type, stickers and slots; 40px minimum touch height on action buttons). Primary touch targets are 32-44px.
+A single centred column, max-width 760px, 16px inline padding. The header holds the brand row (name plus two 40px round icon buttons) and a full-width segmented view switcher; below it a sticky, blurred league bar scrolls its chips horizontally with no visible scrollbar. Content is a vertical stack of lit panels with 8 to 14px gaps. Match cards use a three-column line (home, score, away) with the away team mirrored; the pitch figure sits inside the card with a two-sided figcaption (formation, team, coach). Article cards are a two-column grid with a round thumbnail at the inline end. Spacing rhythm: 4, 8, 12, 16px, with 20 to 28px before day and section heads. One breakpoint at 560px tightens type, the score column and thumbnails. Touch targets are 36 to 44px.
 
 ## Elevation & Depth
 
-Flat by default: rows are separated by 1px hairlines and panels by tonal steps (ground, panel, raised panel). Depth is reserved for the sticker, which sits above the page with a soft two-layer shadow, and for filled tally slots.
+Depth is light, not lift. Panels are separated from the ground by their own gradient and a 1px inset hairline (`box-shadow: inset 0 0 0 1px`), never by an outer shadow. Hover strengthens the hairline rather than raising the card. Real shadows exist only on objects that sit on a surface: player discs and round thumbnails.
 
 ### Shadow Vocabulary
-- **Sticker Lift** (`0 3px 8px rgba(0,0,0,.4), 0 1px 1px rgba(0,0,0,.3)`; light theme uses rgba(12,20,64,.3/.25)): sticker thumbnails.
-- **Slot Lift** (`0 2px 4px rgba(0,0,0,.35)`): filled tally slots.
-- **Stick Landing** (`0 10px 18px rgba(0,0,0,.45)` fading to rest): start frame of the stick animation.
+- **Panel Edge** (`inset 0 0 0 1px` hairline edge; strong edge on hover): every lit panel.
+- **Concept Ring** (`inset 0 0 0 1px rgba(63, 107, 255, .55)`): the concept panel.
+- **Disc Drop** (`drop-shadow(0 3px 2px rgba(0, 0, 0, .45))`): player discs on the pitch.
+- **Thumb Lift** (`0 0 0 2px` strong edge, `0 6px 14px rgba(0, 0, 0, .35)`): round article thumbnails.
 
 ### Named Rules
-**The Soft Lift Rule.** Shadows are soft and blurred, only under stickers and slots; never a hard offset, never on rows or panels.
+**The Lit-Not-Lifted Rule.** Panels glow from their gradient and hairline; outer shadows belong only to discs and round thumbnails.
 
 ## Shapes
 
-Rounded, sticker-like geometry. Stickers 10px radius with a 3px white border and clipped image; tally slots are 20x27 portrait rectangles with 4px radius (dashed 1.5px when empty, solid 2px white border plus fill when stuck). Chips 10px, inputs 10px, action buttons 8px, panels 12px, concept box 14px with a 1.5px gold border, dialogs 16px. Tabs, tools and the load-more button are full pills (99px). Dots are circles with a 1.5px white ring.
+Generous, soft and round. Panels share one 22px radius; previews 18px, the pitch 16px, inset blocks 14px. A match card followed by its AI panel fuses into one shape (top corners on the card, bottom corners on the panel). Every control is a full pill (999px); icon buttons, player discs, league dots and article thumbnails are true circles. Lines are 1px hairlines; outlined controls take a 1px strong edge, icon buttons 2px.
 
 ## Components
 
 ### Buttons
-- **Shape:** 8px radius for actions, 10px in dialogs, pill for shell tools and load-more.
-- **Primary:** foil gold fill, ink text, 700 weight, 34px high (tweet row, keyword add).
-- **Action (secondary):** transparent with hairline border, muted text, 32px high; hover brightens text and border; `.on` becomes gold fill. AI and tweet-angle buttons use gold text with a translucent gold border.
-- **Focus:** 2px gold outline, 2px offset, on every focusable element.
-- **Shell tools:** 36px pills on translucent white (14%, 24% on hover); disabled at 50% opacity.
+- **Shape:** full pill.
+- **Outline (default action):** transparent, 1px strong edge, periwinkle-soft label at 700, 38 to 44px high, 16px inline padding (load-more 32px). Hover lifts the label to ice and the border to periwinkle-soft. Used for lineup, AI, analysis actions and load-more.
+- **Icon:** 40px circle, 2px strong edge, drawn SVG icon (stroke 1.9, currentColor). Disabled at 50% opacity.
+- **Focus:** 2px periwinkle-soft outline, 3px offset, on every focusable element.
 
 ### Chips (league pages)
-- **Style:** panel fill, hairline border, 10px radius, 36px high, colour dot with white ring, muted count.
-- **State:** active is solid foil gold with ink text and bold weight. The row scrolls horizontally with hidden scrollbar.
+- **Style:** outlined pill, 36px, 1px strong edge, periwinkle-soft 700 label with a 9px blue-scale dot.
+- **State:** active fills with the lit panel top tone, periwinkle-soft border and ice text.
 
 ### Cards / Containers
-Article rows are not boxed: grid with hairline bottom border. Read items drop to 78% opacity with muted titles. Title hover adds a 2px gold underline. Panels (AI, concept, dialog, tweet angle) use the panel tones with 12-16px radius and no shadow.
-
-### Inputs / Fields
-- **Style:** panel fill, hairline border, 10px radius, 40px high; placeholder in muted at 85%.
-- **Focus:** the global 2px gold ring; caret is gold.
+- **Corner Style:** 22px.
+- **Background:** lit panel gradient.
+- **Shadow Strategy:** panel edge only (see Elevation).
+- **Internal Padding:** 12 to 18px.
+- **Match card:** meta line (league, day, time, status pushed to the inline end; coral when live), then home team, 34px score, mirrored away team with 24px crests.
+- **Lesson ("מה לומדים"):** not a nested box; a 1px strong-edge rule above an 18px periwinkle-soft heading and body text.
 
 ### Navigation
-View tabs sit in the shell: pills, white at 80% text when idle, solid white with ultramarine bold text when active. League chips below are the second-level navigation (see Chips).
+A segmented control: a flat-panel pill track with 4px padding and five equal pill tabs, idle in periwinkle-muted 700, active filled ice with deep navy text, colour transitions at 0.25s on the expo ease-out. League chips are the second level.
 
-### Album Tally (signature)
-A row of 20 portrait slots under the view tabs with a Secular One count ("היום 7/20"). Empty slots are dashed white-55%. Each item read fills a slot with the league colour, a 2px white border and Slot Lift; the new slot plays a 0.5s "stick" animation (scale 1.7, rotate -16deg to rest, ease cubic-bezier(.16,1,.3,1)). When the day is complete all slots turn gold. A compact 5x15px mini-tally shows in the sticky bar after scrolling. Reduced motion disables the animation.
+### Lit Pitch (signature)
+An SVG pitch (340 by 210) on a radial night turf with a soft top highlight, 16px radius, periwinkle hairline markings at 35%. Players are 10-unit-radius discs: home ice white with navy numbers, away electric blue with a periwinkle ring and white numbers, short names beneath. On open, each disc walks out from the centre spot (scale 0.4, fade in) over 0.7s on cubic-bezier(.16, 1, .3, 1), delayed by its depth on the pitch so the shape assembles line by line. Reduced motion shows the discs in place. Substitutions follow as a hairline-ruled list led by electric minute pills.
 
-### Sticker
-The article thumbnail: 3px white border, 10px radius, soft lift, league colour as fallback fill. Tile variant shows the source name on a translucent ink plate; video variant adds a 36px round play button that turns gold on hover.
+### Round Thumbnail
+Article cards carry a 92px circle (76px on phones) with a 2px strong-edge ring and thumb lift; when there is no image, the source name sits on a translucent midnight pill plate.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** use foil gold (#f2c230) only for active, progress and primary-action states.
-- **Do** put league identity in a dot or sticker fill with a white ring.
-- **Do** keep rows flat with 1px hairlines; reserve soft shadows for stickers and tally slots.
-- **Do** set every number in tabular figures and every title in Secular One.
-- **Do** write new layout with logical properties for RTL, and keep the 2px gold focus ring.
-- **Do** test any new gold text in light theme against #7a5600.
+- **Do** build every content surface as a lit panel: the top-to-base navy gradient, 22px radius, 1px inset hairline.
+- **Do** keep electric blue for active state, the away side and substitution minutes; coral only for live.
+- **Do** draw players as discs, home ice and away electric, and keep the centre-spot walkout with its reduced-motion fallback.
+- **Do** make controls pills: segmented view tabs, outlined chips and actions, round icon buttons.
+- **Do** set every number in tabular figures and every word in Assistant.
+- **Do** take any new league or category colour from the world's blue scale.
 
 ### Don't:
-- **Don't** introduce a third typeface or a second accent colour for state.
-- **Don't** wrap rows in boxed cards or tint rows by league.
-- **Don't** use hard offset shadows, side-stripe borders, or gradient text.
-- **Don't** use emoji or glyph icons; icons are drawn SVG at stroke 1.75 in currentColor.
-- **Don't** place small headings or labels above titles as kickers.
+- **Don't** introduce a second saturated hue, a rainbow of league colours, or a second typeface.
+- **Don't** lift panels with outer drop shadows; depth on panels is gradient plus hairline.
+- **Don't** draw players as squares, shirts or plain dots without numbers.
+- **Don't** use side-stripe borders, gradient text, emoji or glyph icons; icons are drawn SVG in currentColor.
+- **Don't** place small labels above titles as kickers.
