@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-21T21:41:25Z",
+ "generated_at": "2026-11-22T12:38:30Z",
  "sources": [
   {
    "id": "coachingmanual",
@@ -9,7 +9,7 @@
    "fetched": 10,
    "kept": 3,
    "newest": "2026-11-09T09:44:31Z",
-   "checked_at": "2026-11-21T21:41:25Z"
+   "checked_at": "2026-11-22T12:38:30Z"
   },
   {
    "id": "false9",
@@ -18,8 +18,8 @@
    "ok": true,
    "fetched": 10,
    "kept": 0,
-   "newest": "2026-11-21T20:46:02Z",
-   "checked_at": "2026-11-21T21:41:25Z"
+   "newest": "2026-11-22T09:44:57Z",
+   "checked_at": "2026-11-22T12:38:30Z"
   },
   {
    "id": "goalazzo",
@@ -27,7 +27,7 @@
    "url": "https://goalazzo.substack.com/feed",
    "ok": false,
    "error": "HTTPError: HTTP Error 403: Forbidden",
-   "checked_at": "2026-11-21T21:41:25Z"
+   "checked_at": "2026-11-22T12:38:30Z"
   },
   {
    "id": "mastermind",
@@ -35,9 +35,9 @@
    "url": "https://themastermindsite.com/feed/",
    "ok": true,
    "fetched": 8,
-   "kept": 6,
-   "newest": "2026-11-21T04:22:23Z",
-   "checked_at": "2026-11-21T21:41:25Z"
+   "kept": 7,
+   "newest": "2026-11-21T23:47:09Z",
+   "checked_at": "2026-11-22T12:38:30Z"
   },
   {
    "id": "scouted",
@@ -47,7 +47,7 @@
    "fetched": 15,
    "kept": 3,
    "newest": "2026-11-19T10:10:00Z",
-   "checked_at": "2026-11-21T21:41:25Z"
+   "checked_at": "2026-11-22T12:38:30Z"
   },
   {
    "id": "spielverlagerung",
@@ -57,7 +57,7 @@
    "fetched": 25,
    "kept": 1,
    "newest": "2026-10-24T19:28:16Z",
-   "checked_at": "2026-11-21T21:41:25Z"
+   "checked_at": "2026-11-22T12:38:30Z"
   },
   {
    "id": "tfa-substack",
@@ -65,7 +65,7 @@
    "url": "https://totalfootballanalysis.substack.com/feed",
    "ok": false,
    "error": "HTTPError: HTTP Error 403: Forbidden",
-   "checked_at": "2026-11-21T21:41:25Z"
+   "checked_at": "2026-11-22T12:38:30Z"
   },
   {
    "id": "tgg",
@@ -75,7 +75,7 @@
    "fetched": 10,
    "kept": 10,
    "newest": "2026-11-20T11:35:48Z",
-   "checked_at": "2026-11-21T21:41:25Z"
+   "checked_at": "2026-11-22T12:38:30Z"
   },
   {
    "id": "theanalyst",
@@ -83,7 +83,7 @@
    "url": "https://theanalyst.com/feed",
    "ok": false,
    "error": "HTTPError: HTTP Error 403: Forbidden",
-   "checked_at": "2026-11-21T21:41:25Z"
+   "checked_at": "2026-11-22T12:38:30Z"
   }
  ]
 }
